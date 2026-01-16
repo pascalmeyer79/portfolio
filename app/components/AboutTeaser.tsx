@@ -79,17 +79,21 @@ export const AboutTeaser: React.FC = () => {
           </Link>
           <Link
             href="/about"
-            className="relative backdrop-blur-sm backdrop-filter border border-[var(--color-92)] border-solid flex items-center justify-center px-[40px] py-[8px] rounded-[40px] shrink-0"
-            style={{
-              borderColor: isSecondaryHovered ? 'var(--color-satoshi)' : 'var(--color-92)',
-              transition: 'border-color 0.3s cubic-bezier(0.22, 0.61, 0.36, 1)',
-            }}
+            className="relative flex items-center justify-center rounded-[40px] shrink-0 overflow-hidden p-[1px]"
             onMouseEnter={() => setIsSecondaryHovered(true)}
             onMouseLeave={() => setIsSecondaryHovered(false)}
+            style={{
+              background: `linear-gradient(to right, var(--color-satoshi) 0%, var(--color-satoshi) 50%, var(--color-92) 50%, var(--color-92) 100%)`,
+              backgroundSize: '250% 100%',
+              backgroundPosition: isSecondaryHovered ? 'left center' : 'right center',
+              transition: 'background-position 0.5s cubic-bezier(0.22, 0.61, 0.36, 1)',
+            }}
           >
-            <p className="font-sans text-[14px] md:text-[16px] leading-[22px] md:leading-[26px] font-medium text-[var(--color-16)] text-center tracking-[-0.24px] relative z-10">
-              More About Me
-            </p>
+            <span className="flex items-center justify-center px-[40px] py-[8px] rounded-[40px] bg-[var(--color-100)] backdrop-blur-sm backdrop-filter">
+              <p className="font-sans text-[14px] md:text-[16px] leading-[22px] md:leading-[26px] font-medium text-[var(--color-16)] text-center tracking-[-0.24px]">
+                More About Me
+              </p>
+            </span>
           </Link>
         </div>
       </div>

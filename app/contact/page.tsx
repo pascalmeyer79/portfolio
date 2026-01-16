@@ -95,6 +95,7 @@ export default function ContactPage() {
                   rel="noopener noreferrer"
                   className="font-sans text-sans-16-medium tracking-[-0.24px] leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
                   style={{
+                    width: 'fit-content',
                     background: linkGradient,
                     WebkitBackgroundClip: 'text',
                     backgroundClip: 'text',
@@ -171,19 +172,19 @@ export default function ContactPage() {
                     <motion.div
                       className="absolute inset-0 flex items-center justify-center"
                       style={{ zIndex: 0 }}
-                      initial={{ scale: 1, opacity: 0 }}
                       animate={{
-                        scale: [1, 2.5, 4],
-                        opacity: [0.4, 0.25, 0],
+                        scale: [0.3, 1, 1],
+                        opacity: [0, 0.3, 0],
                       }}
                       transition={{
                         duration: 3,
                         repeat: Infinity,
-                        ease: [0.25, 0.46, 0.45, 0.94],
+                        ease: [0.22, 1, 0.36, 1],
+                        times: [0, 0.5, 1],
                       }}
                     >
                       <div 
-                        className="w-[6px] h-[6px] rounded-full" 
+                        className="w-[20px] h-[20px] rounded-full" 
                         style={{ 
                           backgroundColor: '#32DF4C',
                         }} 
@@ -230,6 +231,7 @@ export default function ContactPage() {
                   href="mailto:hi@pascalmey.com"
                   className="font-sans text-sans-16-medium tracking-[-0.24px] leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
                   style={{
+                    width: 'fit-content',
                     background: linkGradient,
                     WebkitBackgroundClip: 'text',
                     backgroundClip: 'text',
@@ -277,6 +279,7 @@ export default function ContactPage() {
                   href="tel:+41782527919"
                   className="font-sans text-sans-16-medium tracking-[-0.24px] leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
                   style={{
+                    width: 'fit-content',
                     background: linkGradient,
                     WebkitBackgroundClip: 'text',
                     backgroundClip: 'text',
@@ -324,6 +327,7 @@ export default function ContactPage() {
                   href="tel:+4917674713378"
                   className="font-sans text-sans-16-medium tracking-[-0.24px] leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
                   style={{
+                    width: 'fit-content',
                     background: linkGradient,
                     WebkitBackgroundClip: 'text',
                     backgroundClip: 'text',
@@ -384,6 +388,7 @@ export default function ContactPage() {
                   href="#"
                   className="font-sans text-sans-16-medium tracking-[-0.24px] leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
                   style={{
+                    width: 'fit-content',
                     background: linkGradient,
                     WebkitBackgroundClip: 'text',
                     backgroundClip: 'text',
@@ -446,6 +451,7 @@ export default function ContactPage() {
                   rel="noopener noreferrer"
                   className="font-sans text-sans-16-medium tracking-[-0.24px] leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
                   style={{
+                    width: 'fit-content',
                     background: linkGradient,
                     WebkitBackgroundClip: 'text',
                     backgroundClip: 'text',
