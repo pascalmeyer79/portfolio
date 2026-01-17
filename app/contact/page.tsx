@@ -4,6 +4,7 @@ import { Footer } from "../components/Footer";
 import { FooterBackground } from "../components/FooterBackground";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { AnimatedHeadline } from "../components/AnimatedHeadline";
 
 function getLocalTime() {
   const now = new Date();
@@ -18,12 +19,12 @@ function getLocalTime() {
 }
 
 const columnVariants = {
-  hidden: { opacity: 0, y: 10 },
+  hidden: { opacity: 0, y: 20 },
   visible: (index: number) => ({
     opacity: 1,
     y: 0,
     transition: {
-      delay: 0.1 * index,
+      delay: 0.3 + (0.1 * index),
       duration: 0.4,
       ease: [0.22, 0.61, 0.36, 1],
     },
@@ -39,7 +40,61 @@ const containerVariants = {
     opacity: 1,
     y: 0,
     transition: {
+      delay: 0.4,
       duration: 0.4,
+      ease: [0.22, 0.61, 0.36, 1],
+    },
+  },
+};
+
+const headlineVariants = {
+  hidden: {
+    y: 20,
+    opacity: 0,
+    filter: "blur(10px)",
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 0.61, 0.36, 1],
+    },
+  },
+};
+
+const quoteVariants = {
+  hidden: {
+    y: 20,
+    opacity: 0,
+    filter: "blur(10px)",
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    filter: "blur(0px)",
+    transition: {
+      delay: 0.2,
+      duration: 0.6,
+      ease: [0.22, 0.61, 0.36, 1],
+    },
+  },
+};
+
+const authorVariants = {
+  hidden: {
+    y: 20,
+    opacity: 0,
+    filter: "blur(10px)",
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    filter: "blur(0px)",
+    transition: {
+      delay: 0.3,
+      duration: 0.6,
       ease: [0.22, 0.61, 0.36, 1],
     },
   },
@@ -65,37 +120,47 @@ export default function ContactPage() {
       {/* Hero Background wird im Layout gerendert */}
       
       {/* Main content container with 100vh - 82px and space-between */}
-      <div className="h-[calc(100vh-82px)] flex flex-col justify-between px-[60px] max-w-[1920px] mx-auto w-full">
+      <div className="h-[calc(100vh-82px)] flex flex-col justify-between px-[16px] sm:px-[40px] lg:px-[60px] max-w-[1920px] mx-auto w-full">
         {/* Spacer ganz oben */}
         <div style={{ height: 0 }} />
         
         {/* Upper section with headline and quote */}
-        <div className="grid grid-cols-6 gap-[40px] px-[40px] min-h-[250px]">
+        <div className="grid grid-cols-1 lg:grid-cols-6 gap-x-[20px] gap-y-[20px] px-0 md:px-[40px] py-[40px] h-fit">
             {/* Headline - 3 columns with 40px padding-right */}
-            <div className="col-span-3 pr-[40px]">
-              <h1 className="font-serif text-serif-72 text-[var(--color-8)] tracking-[-0.72px] leading-[88px]">
-                Let&apos;s bring great ideas
-                <br />
-                <span className="italic">into reality</span>
-              </h1>
+            <div className="col-span-1 lg:col-span-3 lg:pr-[40px] w-full flex items-start" style={{ height: '250px' }}>
+              <AnimatedHeadline
+                className="font-serif text-[40px] md:text-[56px] lg:text-[72px] text-[var(--color-8)] tracking-[-0.2px] md:tracking-[-0.56px] lg:tracking-[-0.72px] leading-[50px] md:leading-[70px] lg:leading-[88px]"
+                delay={0}
+              >
+                Let&apos;s bring <span className="whitespace-nowrap">great ideas</span>{" "}
+                <br className="hidden lg:block" />
+                <span className="italic whitespace-nowrap">into reality</span>
+              </AnimatedHeadline>
             </div>
             
             {/* Quote - 3 columns */}
-            <div className="col-span-3 flex flex-col gap-[24px] max-w-[650px]">
-              <p className="font-sans text-sans-22 text-[var(--color-8)] font-medium tracking-[-0.44px] leading-[36px]">
+            <div className="col-span-1 lg:col-span-3 flex flex-col gap-[24px] w-full lg:max-w-[650px]">
+              <motion.p
+                className="font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.44px] leading-[26px] md:leading-[30px] lg:leading-[36px]"
+                variants={quoteVariants}
+                initial="hidden"
+                animate="visible"
+              >
                 &ldquo;Pascal has turned our vision of a clean and modern app into reality. If you are looking for high-quality design and good cooperation between designers, programmers, and customers, you have come to the right place.&rdquo;
-              </p>
-              <div className="flex items-center gap-[5px]">
-                <p className="font-sans text-sans-16-regular text-[var(--color-56)] tracking-[-0.24px] leading-[26px]">
-                  Emre Aydin and René Schröder, Founder of{" "}
-                </p>
+              </motion.p>
+              <motion.p
+                className="font-sans text-[14px] md:text-[16px] text-[var(--color-56)] font-normal tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px]"
+                variants={authorVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                Emre Aydin and René Schröder, Founder of{" "}
                 <a
                   href="https://www.muvn.de/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-sans text-sans-16-medium tracking-[-0.24px] leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
+                  className="font-sans text-[14px] md:text-[16px] font-medium tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px] inline relative transition-colors duration-200 ease-in-out"
                   style={{
-                    width: 'fit-content',
                     background: linkGradient,
                     WebkitBackgroundClip: 'text',
                     backgroundClip: 'text',
@@ -139,27 +204,27 @@ export default function ContactPage() {
                     }}
                   />
                 </a>
-              </div>
+              </motion.p>
             </div>
         </div>
         
         {/* Contact info section - white background */}
         <motion.div 
-          className="bg-[var(--color-100)] rounded-tl-[10px] rounded-tr-[10px] px-[40px] pt-[48px] pb-[80px] h-[256px]"
+          className="bg-[var(--color-100)] rounded-tl-[10px] rounded-tr-[10px] px-[16px] md:px-[40px] pt-[40px] md:pt-[48px] pb-[40px] md:pb-[80px] h-fit"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-            <div className="grid grid-cols-6 gap-[40px]">
+            <div className="grid grid-cols-2 xl:grid-cols-6 gap-[40px] gap-y-[40px]">
               {/* Status - 1 column */}
               <motion.div 
-                className="flex flex-col gap-[8px]"
+                className="flex flex-col gap-[8px] col-span-1 xl:col-span-1"
                 variants={columnVariants}
                 initial="hidden"
                 animate="visible"
                 custom={0}
               >
-                <p className="font-sans text-sans-16-semibold text-[var(--color-8)] tracking-[-0.24px] leading-[26px]">
+                <p className="font-sans text-[14px] md:text-[16px] font-semibold text-[var(--color-8)] tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px]">
                   Status
                 </p>
                 <div className="flex items-center gap-[8px]">
@@ -199,7 +264,7 @@ export default function ContactPage() {
               
               {/* Local Time - 1 column */}
               <motion.div 
-                className="flex flex-col gap-[8px]"
+                className="flex flex-col gap-[8px] col-span-1 xl:col-span-1"
                 variants={columnVariants}
                 initial="hidden"
                 animate="visible"
@@ -214,15 +279,15 @@ export default function ContactPage() {
               </motion.div>
               
               {/* Empty column - 1 column */}
-              <div />
+              <div className="hidden xl:block col-span-1" />
               
               {/* Contact - 1 column */}
               <motion.div 
-                className="flex flex-col gap-[2px]"
+                className="flex flex-col gap-[2px] col-span-1 xl:col-span-1"
                 variants={columnVariants}
                 initial="hidden"
                 animate="visible"
-                custom={3}
+                custom={2}
               >
                 <p className="font-sans text-sans-16-semibold text-[var(--color-8)] tracking-[-0.24px] leading-[26px] mb-[4px]">
                   Contact
@@ -371,15 +436,65 @@ export default function ContactPage() {
                     }}
                   />
                 </a>
+                <a
+                  href="https://www.linkedin.com/in/pascalmeyer79/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="xl:hidden font-sans text-sans-16-medium tracking-[-0.24px] leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
+                  style={{
+                    width: 'fit-content',
+                    background: linkGradient,
+                    WebkitBackgroundClip: 'text',
+                    backgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    color: 'transparent',
+                  }}
+                  onMouseEnter={(e) => {
+                    setHoveredLink('linkedin-mobile');
+                    setLinkAnimationState(prev => ({ ...prev, 'linkedin-mobile': 'going-out' }));
+                    setTimeout(() => {
+                      setLinkAnimationState(prev => ({ ...prev, 'linkedin-mobile': 'coming-in' }));
+                    }, 300);
+                    (e.currentTarget.style as any).WebkitTextFillColor = 'var(--color-44)';
+                    e.currentTarget.style.color = 'var(--color-44)';
+                    e.currentTarget.style.background = 'none';
+                    (e.currentTarget.style as any).WebkitBackgroundClip = '';
+                    e.currentTarget.style.backgroundClip = '';
+                    e.currentTarget.style.textDecorationColor = 'var(--color-44)';
+                  }}
+                  onMouseLeave={(e) => {
+                    setHoveredLink(null);
+                    setLinkAnimationState(prev => ({ ...prev, 'linkedin-mobile': 'idle' }));
+                    e.currentTarget.style.background = linkGradient;
+                    (e.currentTarget.style as any).WebkitBackgroundClip = 'text';
+                    e.currentTarget.style.backgroundClip = 'text';
+                    (e.currentTarget.style as any).WebkitTextFillColor = 'transparent';
+                    e.currentTarget.style.color = 'transparent';
+                    e.currentTarget.style.textDecorationColor = 'transparent';
+                  }}
+                >
+                  Linked In
+                  <span
+                    className={`absolute h-[1px] transition-all duration-[300ms] ease-out ${linkAnimationState['linkedin-mobile'] === 'coming-in' ? 'left-0' : (hoveredLink === 'linkedin-mobile' || linkAnimationState['linkedin-mobile'] === 'going-out') ? 'right-0' : 'left-0'}`}
+                    style={{
+                      bottom: '2px',
+                      width: hoveredLink === 'linkedin-mobile' 
+                        ? (linkAnimationState['linkedin-mobile'] === 'going-out' ? '0%' : '100%')
+                        : linkAnimationState['linkedin-mobile'] === 'going-out' ? '0%' : '100%',
+                      background: linkAnimationState['linkedin-mobile'] === 'coming-in' ? 'var(--color-56)' : 'linear-gradient(to right, var(--color-64), var(--color-80))',
+                      transformOrigin: linkAnimationState['linkedin-mobile'] === 'coming-in' ? 'left' : 'right',
+                    }}
+                  />
+                </a>
               </motion.div>
               
               {/* Calendar - 1 column */}
               <motion.div 
-                className="flex flex-col gap-[8px]"
+                className="flex flex-col gap-[8px] col-span-1 xl:col-span-1"
                 variants={columnVariants}
                 initial="hidden"
                 animate="visible"
-                custom={4}
+                custom={3}
               >
                 <p className="font-sans text-sans-16-semibold text-[var(--color-8)] tracking-[-0.24px] leading-[26px]">
                   Calendar
@@ -436,11 +551,11 @@ export default function ContactPage() {
               
               {/* Social - 1 column */}
               <motion.div 
-                className="flex flex-col gap-[8px]"
+                className="hidden xl:flex flex-col gap-[8px] col-span-1 xl:col-span-1"
                 variants={columnVariants}
                 initial="hidden"
                 animate="visible"
-                custom={5}
+                custom={4}
               >
                 <p className="font-sans text-sans-16-semibold text-[var(--color-8)] tracking-[-0.24px] leading-[26px]">
                   Social

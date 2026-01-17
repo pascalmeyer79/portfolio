@@ -15,7 +15,7 @@ const columnVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      delay: 0.1 * index,
+      delay: 0.1 + 0.1 * index,
       duration: 0.4,
       ease: [0.22, 0.61, 0.36, 1],
     },
@@ -29,10 +29,50 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
   const [linkAnimationState, setLinkAnimationState] = useState<Record<string, 'idle' | 'going-out' | 'coming-in'>>({});
   const textColor = "var(--color-8)";
   const linkGradient = "linear-gradient(to top right, var(--color-44), var(--color-64))";
+  
+  // Responsive border radius styles
+  const footerBorderRadiusStyle = `
+    .footer-container {
+      border-radius: 6px;
+    }
+    @media (min-width: 768px) {
+      .footer-container {
+        border-radius: 8px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .footer-container {
+        border-radius: 10px;
+      }
+    }
+  `;
+  
+  // Border radius for Contact versions (only bottom rounded)
+  const footerBorderRadiusBottomOnlyStyle = `
+    .footer-container-bottom-only {
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+    @media (min-width: 768px) {
+      .footer-container-bottom-only {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .footer-container-bottom-only {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+    }
+  `;
+  
   const firstRow = (
-    <div className="grid grid-cols-1 md:grid-cols-6 gap-[32px] md:gap-[40px] items-start relative shrink-0 w-full">
+    <div className="grid grid-cols-2 xl:grid-cols-6 gap-x-[16px] md:gap-x-[40px] gap-y-[40px] md:gap-y-[20px] items-start relative shrink-0 w-full">
       <motion.div 
-        className="md:col-span-2 flex flex-col gap-[8px] items-start py-0 relative shrink-0 whitespace-pre" 
+        className="col-span-2 xl:col-span-2 flex flex-col gap-[8px] items-start py-0 relative shrink-0 whitespace-pre" 
         style={{ color: textColor }}
         variants={columnVariants}
         initial="hidden"
@@ -63,7 +103,7 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
         </Link>
       </motion.div>
       <motion.div 
-        className="md:col-span-1 flex flex-col items-start relative text-[14px] md:text-[16px] gap-[2px]"
+        className="col-span-1 xl:col-span-1 flex flex-col items-start relative text-[14px] md:text-[16px] gap-[2px]"
         variants={columnVariants}
         initial="hidden"
         whileInView="visible"
@@ -210,7 +250,7 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
             </Link>
       </motion.div>
       <motion.div 
-        className="md:col-span-1 flex flex-col font-sans text-[14px] md:text-[16px] leading-[26px] font-medium relative tracking-[-0.21px] md:tracking-[-0.16px] gap-[2px]" 
+        className="col-span-1 xl:col-span-1 flex flex-col font-sans text-[14px] md:text-[16px] leading-[26px] font-medium relative tracking-[-0.21px] md:tracking-[-0.16px] gap-[2px]" 
         style={{ color: textColor }}
         variants={columnVariants}
         initial="hidden"
@@ -232,7 +272,7 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
             </p>
       </motion.div>
       <motion.div 
-        className="md:col-span-1 flex flex-col gap-[2px] relative text-[14px] md:text-[16px] tracking-[-0.21px] md:tracking-[-0.24px]" 
+        className="col-span-1 xl:col-span-1 flex flex-col gap-[2px] relative text-[14px] md:text-[16px] tracking-[-0.21px] md:tracking-[-0.24px]" 
         style={{ color: textColor }}
         variants={columnVariants}
         initial="hidden"
@@ -254,7 +294,7 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
             </p>
       </motion.div>
       <motion.div 
-        className="md:col-span-1 flex flex-col gap-[2px] relative text-[14px] md:text-[16px] tracking-[-0.21px] md:tracking-[-0.24px]" 
+        className="col-span-1 xl:col-span-1 flex flex-col gap-[2px] relative text-[14px] md:text-[16px] tracking-[-0.21px] md:tracking-[-0.24px]" 
         style={{ color: textColor }}
         variants={columnVariants}
         initial="hidden"
@@ -279,76 +319,140 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
   );
 
   const secondaryRow = (
-    <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-[8px] md:gap-0 relative shrink-0 w-full">
-      <p className="font-sans text-[12px] leading-[20px] font-normal relative shrink-0 tracking-[-0.12px] whitespace-pre" style={{
-        background: linkGradient,
-        WebkitBackgroundClip: 'text',
-        backgroundClip: 'text',
-        WebkitTextFillColor: 'transparent',
-        color: 'transparent',
-      }}>
-        © Copyright {new Date().getFullYear()}. All Rights reserved.
-      </p>
-      <p className="font-sans text-[12px] leading-[20px] font-normal relative shrink-0 text-center tracking-[-0.12px] whitespace-pre" style={{
-        color: 'var(--color-64)',
-      }}>
-        Handcrafted with love, Figma & Cursor
-      </p>
-      <div className="flex items-center justify-center pl-0 md:pl-[195px] pr-0 py-0 relative shrink-0">
-        <Link
-          href="#"
-          className="font-sans text-[12px] leading-[20px] font-medium relative shrink-0 text-right tracking-[-0.12px] inline-block whitespace-pre transition-colors duration-200 ease-in-out"
-            style={{
+    <>
+      {/* Mobile/Tablet Layout (unter lg) */}
+      <div className="flex flex-col lg:hidden items-start justify-between gap-[16px] relative shrink-0 w-full h-fit">
+        <div className="flex items-center justify-between gap-0 w-full">
+          <p className="font-sans text-[12px] leading-[20px] font-normal relative shrink-0 tracking-[-0.12px] whitespace-pre" style={{
             background: linkGradient,
             WebkitBackgroundClip: 'text',
             backgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             color: 'transparent',
-          }}
-          onMouseEnter={(e) => {
-            setHoveredLink('imprint');
-            setLinkAnimationState(prev => ({ ...prev, imprint: 'going-out' }));
-            setTimeout(() => {
-              setLinkAnimationState(prev => ({ ...prev, imprint: 'coming-in' }));
-            }, 250);
-            (e.currentTarget.style as any).WebkitTextFillColor = 'var(--color-44)';
-            e.currentTarget.style.color = 'var(--color-44)';
-            e.currentTarget.style.background = 'none';
-            (e.currentTarget.style as any).WebkitBackgroundClip = '';
-            e.currentTarget.style.backgroundClip = '';
-          }}
-          onMouseLeave={(e) => {
-            setHoveredLink(null);
-            setLinkAnimationState(prev => ({ ...prev, imprint: 'idle' }));
-            e.currentTarget.style.background = linkGradient;
-            (e.currentTarget.style as any).WebkitBackgroundClip = 'text';
-            e.currentTarget.style.backgroundClip = 'text';
-            (e.currentTarget.style as any).WebkitTextFillColor = 'transparent';
-            e.currentTarget.style.color = 'transparent';
-          }}
-        >
-          Imprint
-          <span
-            className={`absolute h-[1px] transition-all duration-[250ms] ease-out ${linkAnimationState.imprint === 'coming-in' ? 'left-0' : (hoveredLink === 'imprint' || linkAnimationState.imprint === 'going-out') ? 'right-0' : 'left-0'}`}
+          }}>
+            © Copyright {new Date().getFullYear()}. All Rights reserved.
+          </p>
+          <Link
+            href="#"
+            className="font-sans text-[12px] leading-[20px] font-medium relative shrink-0 text-right tracking-[-0.12px] inline-block whitespace-pre transition-colors duration-200 ease-in-out"
             style={{
-              bottom: '0px',
-              width: hoveredLink === 'imprint' 
-                ? (linkAnimationState.imprint === 'going-out' ? '0%' : '100%')
-                : linkAnimationState.imprint === 'going-out' ? '0%' : '100%',
-              background: linkAnimationState.imprint === 'coming-in' ? 'var(--color-56)' : 'linear-gradient(to right, var(--color-56), var(--color-64))',
-              transformOrigin: linkAnimationState.imprint === 'coming-in' ? 'left' : 'right',
+              background: linkGradient,
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              color: 'transparent',
             }}
-          />
-        </Link>
+            onMouseEnter={(e) => {
+              setHoveredLink('imprint');
+              setLinkAnimationState(prev => ({ ...prev, imprint: 'going-out' }));
+              setTimeout(() => {
+                setLinkAnimationState(prev => ({ ...prev, imprint: 'coming-in' }));
+              }, 250);
+              (e.currentTarget.style as any).WebkitTextFillColor = 'var(--color-44)';
+              e.currentTarget.style.color = 'var(--color-44)';
+              e.currentTarget.style.background = 'none';
+              (e.currentTarget.style as any).WebkitBackgroundClip = '';
+              e.currentTarget.style.backgroundClip = '';
+            }}
+            onMouseLeave={(e) => {
+              setHoveredLink(null);
+              setLinkAnimationState(prev => ({ ...prev, imprint: 'idle' }));
+              e.currentTarget.style.background = linkGradient;
+              (e.currentTarget.style as any).WebkitBackgroundClip = 'text';
+              e.currentTarget.style.backgroundClip = 'text';
+              (e.currentTarget.style as any).WebkitTextFillColor = 'transparent';
+              e.currentTarget.style.color = 'transparent';
+            }}
+          >
+            Imprint
+            <span
+              className={`absolute h-[1px] transition-all duration-[250ms] ease-out ${linkAnimationState.imprint === 'coming-in' ? 'left-0' : (hoveredLink === 'imprint' || linkAnimationState.imprint === 'going-out') ? 'right-0' : 'left-0'}`}
+              style={{
+                bottom: '0px',
+                width: hoveredLink === 'imprint' 
+                  ? (linkAnimationState.imprint === 'going-out' ? '0%' : '100%')
+                  : linkAnimationState.imprint === 'going-out' ? '0%' : '100%',
+                background: linkAnimationState.imprint === 'coming-in' ? 'var(--color-56)' : 'linear-gradient(to right, var(--color-56), var(--color-64))',
+                transformOrigin: linkAnimationState.imprint === 'coming-in' ? 'left' : 'right',
+              }}
+            />
+          </Link>
+        </div>
       </div>
-    </div>
+      
+      {/* Desktop Layout (ab lg) */}
+      <div className="hidden lg:grid grid-cols-3 items-center gap-0 relative shrink-0 w-full h-fit">
+        <p className="font-sans text-[12px] leading-[20px] font-normal relative shrink-0 tracking-[-0.12px] whitespace-pre text-left" style={{
+          background: linkGradient,
+          WebkitBackgroundClip: 'text',
+          backgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          color: 'transparent',
+        }}>
+          © Copyright {new Date().getFullYear()}. All Rights reserved.
+        </p>
+        <p className="font-sans text-[12px] leading-[20px] font-normal relative shrink-0 text-center tracking-[-0.12px] whitespace-pre" style={{
+          color: 'var(--color-64)',
+        }}>
+          Handcrafted with love, Figma & Cursor
+        </p>
+        <div className="flex justify-end">
+          <Link
+            href="#"
+            className="font-sans text-[12px] leading-[20px] font-medium relative shrink-0 text-right tracking-[-0.12px] inline-block whitespace-pre transition-colors duration-200 ease-in-out"
+            style={{
+              background: linkGradient,
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              color: 'transparent',
+            }}
+            onMouseEnter={(e) => {
+              setHoveredLink('imprint');
+              setLinkAnimationState(prev => ({ ...prev, imprint: 'going-out' }));
+              setTimeout(() => {
+                setLinkAnimationState(prev => ({ ...prev, imprint: 'coming-in' }));
+              }, 250);
+              (e.currentTarget.style as any).WebkitTextFillColor = 'var(--color-44)';
+              e.currentTarget.style.color = 'var(--color-44)';
+              e.currentTarget.style.background = 'none';
+              (e.currentTarget.style as any).WebkitBackgroundClip = '';
+              e.currentTarget.style.backgroundClip = '';
+            }}
+            onMouseLeave={(e) => {
+              setHoveredLink(null);
+              setLinkAnimationState(prev => ({ ...prev, imprint: 'idle' }));
+              e.currentTarget.style.background = linkGradient;
+              (e.currentTarget.style as any).WebkitBackgroundClip = 'text';
+              e.currentTarget.style.backgroundClip = 'text';
+              (e.currentTarget.style as any).WebkitTextFillColor = 'transparent';
+              e.currentTarget.style.color = 'transparent';
+            }}
+          >
+            Imprint
+            <span
+              className={`absolute h-[1px] transition-all duration-[250ms] ease-out ${linkAnimationState.imprint === 'coming-in' ? 'left-0' : (hoveredLink === 'imprint' || linkAnimationState.imprint === 'going-out') ? 'right-0' : 'left-0'}`}
+              style={{
+                bottom: '0px',
+                width: hoveredLink === 'imprint' 
+                  ? (linkAnimationState.imprint === 'going-out' ? '0%' : '100%')
+                  : linkAnimationState.imprint === 'going-out' ? '0%' : '100%',
+                background: linkAnimationState.imprint === 'coming-in' ? 'var(--color-56)' : 'linear-gradient(to right, var(--color-56), var(--color-64))',
+                transformOrigin: linkAnimationState.imprint === 'coming-in' ? 'left' : 'right',
+              }}
+            />
+          </Link>
+        </div>
+      </div>
+    </>
   );
 
   if (version === "Contact") {
     return (
       <div className="relative flex flex-col items-start justify-end w-full z-[2]">
-        <div className="flex flex-col items-start pt-0 px-[16px] md:px-[60px] relative shrink-0 w-full border-t border-[var(--color-96)]">
-          <div className="bg-[var(--color-100)] flex flex-col gap-[60px] md:gap-[80px] items-start pb-[24px] pt-[60px] px-[40px] relative shrink-0 w-full rounded-bl-[10px] rounded-br-[10px] mb-[60px]">
+        <style dangerouslySetInnerHTML={{ __html: footerBorderRadiusBottomOnlyStyle }} />
+        <div className="flex flex-col items-start pt-0 px-[16px] sm:px-[40px] lg:px-[60px] relative shrink-0 w-full border-t border-[var(--color-96)]">
+          <div className="footer-container-bottom-only bg-[var(--color-100)] flex flex-col gap-[40px] md:gap-[80px] items-start pb-[16px] md:pb-[24px] pt-[40px] md:pt-[60px] px-[20px] md:px-[32px] lg:px-[40px] relative shrink-0 w-full mb-[16px] md:mb-[40px] lg:mb-[60px]">
             {firstRow}
             {secondaryRow}
           </div>
@@ -360,8 +464,9 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
   if (version === "Portfolio") {
     return (
       <div className="relative flex flex-col items-start justify-end w-full z-[2]">
-        <div className="flex flex-col items-start pt-[60px] px-[16px] md:px-[60px] relative shrink-0 w-full border-t border-[var(--color-96)]">
-          <div className="bg-[var(--color-100)] flex flex-col gap-[60px] md:gap-[80px] items-start pb-[24px] pt-[60px] px-[40px] relative shrink-0 w-full rounded-tl-[10px] rounded-tr-[10px] rounded-bl-[10px] rounded-br-[10px] mb-[60px]">
+        <style dangerouslySetInnerHTML={{ __html: footerBorderRadiusStyle }} />
+        <div className="flex flex-col items-start pt-[60px] px-[16px] sm:px-[40px] lg:px-[60px] relative shrink-0 w-full border-t border-[var(--color-96)]">
+          <div className="footer-container bg-[var(--color-100)] flex flex-col gap-[40px] md:gap-[80px] items-start pb-[16px] md:pb-[24px] pt-[40px] md:pt-[60px] px-[20px] md:px-[32px] lg:px-[40px] relative shrink-0 w-full mb-[16px] md:mb-[40px] lg:mb-[60px]">
             {firstRow}
             {secondaryRow}
           </div>
@@ -373,8 +478,9 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
   if (version === "PortfolioContact") {
     return (
       <div className="relative flex flex-col items-start justify-end w-full z-[2]">
-        <div className="flex flex-col items-start pt-0 px-[16px] md:px-[60px] relative shrink-0 w-full border-t border-[var(--color-96)]">
-          <div className="bg-[var(--color-100)] flex flex-col gap-[60px] md:gap-[80px] items-start pb-[24px] pt-[60px] px-[40px] relative shrink-0 w-full rounded-bl-[10px] rounded-br-[10px] mb-[60px]">
+        <style dangerouslySetInnerHTML={{ __html: footerBorderRadiusBottomOnlyStyle }} />
+        <div className="flex flex-col items-start pt-0 px-[16px] sm:px-[40px] lg:px-[60px] relative shrink-0 w-full border-t border-[var(--color-96)]">
+          <div className="footer-container-bottom-only bg-[var(--color-100)] flex flex-col gap-[40px] md:gap-[80px] items-start pb-[16px] md:pb-[24px] pt-[40px] md:pt-[60px] px-[20px] md:px-[32px] lg:px-[40px] relative shrink-0 w-full mb-[16px] md:mb-[40px] lg:mb-[60px]">
             {firstRow}
             {secondaryRow}
           </div>
@@ -386,8 +492,9 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
   // Default version (Homepage)
   return (
     <div className="relative flex flex-col items-start justify-end w-full z-[2]">
-      <div className="flex flex-col items-start pt-[60px] px-[16px] md:px-[60px] relative shrink-0 w-full">
-        <div className="bg-[var(--color-96)] flex flex-col gap-[60px] md:gap-[80px] items-start pb-[24px] pt-[60px] px-[40px] relative shrink-0 w-full rounded-tl-[10px] rounded-tr-[10px] rounded-bl-[10px] rounded-br-[10px] mb-[60px]">
+      <style dangerouslySetInnerHTML={{ __html: footerBorderRadiusStyle }} />
+      <div className="flex flex-col items-start pt-[60px] px-[16px] sm:px-[40px] lg:px-[60px] relative shrink-0 w-full">
+        <div className="footer-container bg-[var(--color-98)] flex flex-col gap-[40px] md:gap-[80px] items-start pb-[16px] md:pb-[24px] pt-[40px] md:pt-[60px] px-[20px] md:px-[32px] lg:px-[40px] relative shrink-0 w-full mb-[16px] md:mb-[40px] lg:mb-[60px]">
           {firstRow}
           {secondaryRow}
         </div>

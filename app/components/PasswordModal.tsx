@@ -24,7 +24,8 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({
   const [error, setError] = useState(false);
   const [errorCount, setErrorCount] = useState(0);
   const [isButtonHovered, setIsButtonHovered] = useState(false);
-  const [isButtonScaled, setIsButtonScaled] = useState(false);
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const [linkAnimationState, setLinkAnimationState] = useState<'idle' | 'going-out' | 'coming-in'>('idle');
   const router = useRouter();
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -140,7 +141,7 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({
                   animate={error ? { x: [-6, 6, -4, 4, 0] } : { x: 0 }}
                   transition={{ duration: 0.28 }}
                 >
-                  <div className="bg-[var(--color-98)] border border-[var(--color-96)] focus-within:border-2 focus-within:border-[var(--color-92)] flex h-[48px] items-center justify-between pl-[16px] pr-[8px] py-0 rounded-[5px] transition-all box-border">
+                  <div className="bg-[var(--color-98)] border-2 border-[var(--color-96)] focus-within:border-[var(--color-92)] flex h-[48px] items-center justify-between pl-[16px] pr-[8px] py-0 rounded-[5px] transition-all box-border">
                     <input
                       type={showPassword ? "text" : "password"}
                       value={password}
@@ -179,21 +180,79 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({
                   </div>
 
                   {/* Error Message */}
-                  <div className="mt-[10px] min-h-[22px] w-full">
+                  <div className="mt-[8px] min-h-[22px] w-full">
                     {error && (
-                      <p className="font-sans text-sans-14 text-[#f71a1a] tracking-[-0.12px] w-full font-medium">
+                      <p className="font-sans text-sans-14 text-[#f71a1a] tracking-[-0.12px] w-full font-normal">
                         {errorCount >= 7 ? (
                           <>
                             You've entered the incorrect password too often.{" "}
-                            <a href="mailto:hi@pascalmey.com" className="underline">
+                            <a 
+                              href="mailto:hi@pascalmey.com" 
+                              className="inline-block relative font-medium transition-colors duration-200 ease-in-out"
+                              style={{
+                                color: '#f71a1a',
+                              }}
+                              onMouseEnter={(e) => {
+                                setHoveredLink('error-link');
+                                setLinkAnimationState('going-out');
+                                setTimeout(() => {
+                                  setLinkAnimationState('coming-in');
+                                }, 300);
+                              }}
+                              onMouseLeave={(e) => {
+                                setHoveredLink(null);
+                                setLinkAnimationState('idle');
+                              }}
+                            >
                               Send me a mail
+                              <span
+                                className={`absolute h-[1px] transition-all duration-[300ms] ease-out ${linkAnimationState === 'coming-in' ? 'left-0' : (hoveredLink === 'error-link' || linkAnimationState === 'going-out') ? 'right-0' : 'left-0'}`}
+                                style={{
+                                  bottom: '2px',
+                                  height: '1px',
+                                  width: hoveredLink === 'error-link'
+                                    ? (linkAnimationState === 'going-out' ? '0%' : '100%')
+                                    : linkAnimationState === 'going-out' ? '0%' : '100%',
+                                  background: '#f71a1a',
+                                  transformOrigin: linkAnimationState === 'coming-in' ? 'left' : 'right',
+                                }}
+                              />
                             </a>
                           </>
                         ) : (
                           <>
                             The password you've entered is not correct.{" "}
-                            <a href="mailto:hi@pascalmey.com" className="underline">
+                            <a 
+                              href="mailto:hi@pascalmey.com" 
+                              className="inline-block relative font-medium transition-colors duration-200 ease-in-out"
+                              style={{
+                                color: '#f71a1a',
+                              }}
+                              onMouseEnter={(e) => {
+                                setHoveredLink('error-link');
+                                setLinkAnimationState('going-out');
+                                setTimeout(() => {
+                                  setLinkAnimationState('coming-in');
+                                }, 300);
+                              }}
+                              onMouseLeave={(e) => {
+                                setHoveredLink(null);
+                                setLinkAnimationState('idle');
+                              }}
+                            >
                               Send me a mail
+                              <span
+                                className={`absolute h-[1px] transition-all duration-[300ms] ease-out ${linkAnimationState === 'coming-in' ? 'left-0' : (hoveredLink === 'error-link' || linkAnimationState === 'going-out') ? 'right-0' : 'left-0'}`}
+                                style={{
+                                  bottom: '2px',
+                                  height: '1px',
+                                  width: hoveredLink === 'error-link'
+                                    ? (linkAnimationState === 'going-out' ? '0%' : '100%')
+                                    : linkAnimationState === 'going-out' ? '0%' : '100%',
+                                  background: '#f71a1a',
+                                  transformOrigin: linkAnimationState === 'coming-in' ? 'left' : 'right',
+                                }}
+                              />
                             </a>
                           </>
                         )}
@@ -202,29 +261,25 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({
                   </div>
 
                   {/* Submit Button */}
-                  <button
-                    type="submit"
-                    className="relative mt-[16px] inline-flex items-center justify-center rounded-[40px] bg-transparent px-[40px] py-[8px] font-sans text-sans-16-medium text-[var(--color-100)] shadow-sm overflow-hidden w-full"
-                    onMouseEnter={() => {
-                      setIsButtonHovered(true);
-                      setIsButtonScaled(true);
-                    }}
-                    onMouseLeave={() => {
-                      setIsButtonHovered(false);
-                      setIsButtonScaled(false);
-                    }}
-                  >
-                    <span className="relative z-10">Continue</span>
-                    <span 
-                      className="absolute inset-0"
-                      style={{
-                        background: `linear-gradient(108deg, var(--color-satoshi) 0%, var(--color-satoshi) 50%, var(--color-8) 50%, var(--color-8) 100%)`,
-                        backgroundSize: '250% 200%',
-                        backgroundPosition: isButtonHovered ? 'left center' : 'right center',
-                        transition: 'background-position 0.5s cubic-bezier(0.22, 0.61, 0.36, 1)',
-                      }}
-                    />
-                  </button>
+                  <div className="mt-[20px] w-full">
+                    <button
+                      type="submit"
+                      className="relative inline-flex items-center justify-center rounded-[40px] bg-transparent px-[40px] py-[8px] font-sans text-sans-16-medium text-[var(--color-100)] shadow-sm overflow-visible w-full"
+                      onMouseEnter={() => setIsButtonHovered(true)}
+                      onMouseLeave={() => setIsButtonHovered(false)}
+                    >
+                      <span className="relative z-10">Continue</span>
+                      <span 
+                        className="absolute inset-0 rounded-[40px]"
+                        style={{
+                          background: `linear-gradient(108deg, var(--color-satoshi) 0%, var(--color-satoshi) 50%, var(--color-8) 50%, var(--color-8) 100%)`,
+                          backgroundSize: '250% 200%',
+                          backgroundPosition: isButtonHovered ? 'left center' : 'right center',
+                          transition: 'background-position 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
+                        }}
+                      />
+                    </button>
+                  </div>
                 </motion.form>
               </div>
             </motion.div>

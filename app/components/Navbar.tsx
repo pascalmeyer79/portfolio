@@ -54,8 +54,8 @@ export const Navbar = ({ selection }: NavbarProps = {}) => {
           const activeRect = activeElement.getBoundingClientRect();
           
           const newStyle = {
-            left: activeRect.left - navRect.left,
-            width: activeRect.width,
+            left: Math.round(activeRect.left - navRect.left - 2),
+            width: Math.round(activeRect.width),
             opacity: 1,
           };
           
@@ -119,7 +119,8 @@ export const Navbar = ({ selection }: NavbarProps = {}) => {
       {/* Center: Toggle Navigation */}
       <nav
         ref={navRef}
-        className="backdrop-blur-xl bg-[var(--color-96-50)] border-2 border-[var(--color-56-04)] flex items-center justify-end p-[2px] rounded-[50px] shrink-0 relative"
+        className="backdrop-blur-xl bg-[var(--color-96-50)] border-2 border-[var(--color-56-04)] flex items-center justify-end rounded-[50px] shrink-0 relative"
+        style={{ padding: '2px' }}
       >
         <div
           className={`absolute rounded-[45px] bg-[var(--color-100)] ${shouldAnimate ? 'transition-all duration-300 ease-out' : ''}`}
@@ -131,14 +132,14 @@ export const Navbar = ({ selection }: NavbarProps = {}) => {
             top: "2px",
           }}
         />
-        <ul className="flex items-center gap-0 relative z-10">
+        <ul className="flex items-center gap-0 relative z-10 m-0">
           {NAV_ITEMS.map((item) => {
             const isActive = item.href === activeItem.href;
             return (
-              <li key={item.href} className="relative">
+              <li key={item.href} className="relative m-0">
                 <Link
                   href={item.href}
-                  className={`relative block rounded-[45px] px-[24px] py-[6px] text-center font-sans text-[16px] tracking-[-0.24px] leading-[26px] transition-colors duration-150 ${
+                  className={`relative block rounded-[45px] px-[16px] md:px-[24px] py-[6px] text-center font-sans transition-colors duration-150 ${
                     isActive
                       ? "text-[var(--color-8)] font-sans text-[14px] md:text-[16px] leading-[22px] md:leading-[28px] font-semibold tracking-[-0.21px] md:tracking-[-0.24px]"
                       : "text-[var(--color-8-64)] font-sans text-[14px] md:text-[16px] leading-[22px] md:leading-[26px] font-medium tracking-[-0.21px] md:tracking-[-0.24px]"
