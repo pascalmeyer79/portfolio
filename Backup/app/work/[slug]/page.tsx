@@ -3,6 +3,10 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import {
+  AnimatedHeadlineFadeInBottom,
+  AnimatedParagraphFadeInBottom,
+} from "@/app/components/AnimatedText";
+import {
   motion,
   useScroll,
   useTransform,
@@ -108,7 +112,7 @@ export default function WorkPage({
     <>
       <div className="min-h-screen bg-[var(--color-96)] pb-24">
         <div className="max-w-[1920px] mx-auto">
-        <div className="mx-auto max-w-6xl px-4 pt-28 md:px-8">
+        <div className="mx-auto max-w-6xl px-[16px] sm:px-[40px] lg:px-[60px] pt-28">
           <motion.div
             ref={heroRef}
             style={{
@@ -149,13 +153,13 @@ export default function WorkPage({
             >
               <motion.p
                 variants={contentVariants}
-                className="font-sans text-sans-14 uppercase tracking-[0.18em] text-[var(--color-56)]"
+                className="font-sans text-[12px] md:text-[14px] uppercase tracking-[0.18em] text-[var(--color-56)]"
               >
                 {config.overline}
               </motion.p>
               <motion.h1
                 variants={contentVariants}
-                className="mt-4 font-serif text-serif-40 text-[var(--color-8)] md:text-serif-48"
+                className="mt-4 font-serif text-[32px] md:text-[40px] lg:text-[48px] text-[var(--color-8)] tracking-[-0.16px] md:tracking-[-0.20px] lg:tracking-[-0.24px] leading-[40px] md:leading-[50px] lg:leading-[60px]"
               >
                 {config.title}
               </motion.h1>
@@ -167,7 +171,7 @@ export default function WorkPage({
                 {config.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full bg-[var(--color-98)] px-3 py-1 font-sans text-sans-12-medium text-[var(--color-44)]"
+                    className="rounded-full bg-[var(--color-98)] px-3 py-1 font-sans text-[12px] md:text-[14px] font-medium text-[var(--color-44)] leading-[20px] tracking-[-0.12px] md:tracking-[-0.14px]"
                   >
                     {tag}
                   </span>
@@ -178,13 +182,13 @@ export default function WorkPage({
                 variants={contentVariants}
                 className="mt-10 grid gap-6 md:grid-cols-[minmax(0,_3fr)_minmax(0,_2fr)]"
               >
-                <p className="font-sans text-sans-16-regular text-[var(--color-44)]">
+                <p className="font-sans text-[14px] md:text-[16px] font-normal text-[var(--color-44)] tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px]">
                   This is a placeholder case study layout. The final content will
                   cover the problem space, design process, and outcomes in depth,
                   including research insights, key decisions, and measurable
                   impact.
                 </p>
-                <p className="font-sans text-sans-14 text-[var(--color-56)]">
+                <p className="font-sans text-[12px] md:text-[14px] text-[var(--color-56)] tracking-[-0.12px] md:tracking-[-0.14px] leading-[20px] md:leading-[22px]">
                   For the protected projects, details are intentionally kept
                   high-level. If you&apos;d like to learn more, I&apos;m happy to
                   walk you through the full story in a live session.
@@ -197,14 +201,14 @@ export default function WorkPage({
       </div>
 
       {/* About / Contact Section */}
-      <section className="bg-[var(--color-100)] flex flex-col items-center justify-center px-0 py-[120px] relative w-full z-[2]">
+      <section className="bg-[var(--color-100)] flex flex-col items-center justify-center px-0 py-[80px] md:py-[120px] relative w-full z-[2]">
         <div className="max-w-[1920px] mx-auto w-full">
-        <div className="flex flex-col gap-[40px] items-center max-w-[880px] px-[40px] py-0 relative w-full">
-          <h2 className="font-serif text-serif-72 text-[var(--color-8)] text-center tracking-[-0.72px] leading-[88px]">
+        <div className="flex flex-col gap-[40px] items-center max-w-[880px] px-[16px] sm:px-[40px] lg:px-[60px] py-0 relative w-full">
+          <AnimatedHeadlineFadeInBottom className="font-serif text-[40px] md:text-[56px] lg:text-[72px] text-[var(--color-8)] text-center tracking-[-0.2px] md:tracking-[-0.56px] lg:tracking-[-0.72px] leading-[50px] md:leading-[70px] lg:leading-[88px]">
             Pioneering the uncharted
-          </h2>
+          </AnimatedHeadlineFadeInBottom>
           <div 
-            className="group h-[666px] max-h-[666px] max-w-[480px] relative rounded-[1000px] shrink-0 w-[480px] overflow-hidden"
+            className="group h-[360px] md:h-[666px] max-h-[360px] md:max-h-[666px] max-w-[260px] md:max-w-[480px] relative rounded-[1000px] shrink-0 w-[260px] md:w-[480px] overflow-hidden"
             style={{ 
               backgroundColor: theme === "dark" ? "var(--color-100)" : "var(--color-8)" 
             }}
@@ -214,26 +218,33 @@ export default function WorkPage({
               alt="Pascal Meyer"
               fill
               className="object-cover transition-opacity duration-500 ease-out group-hover:opacity-0"
+              quality={100}
+              unoptimized={true}
             />
             <Image
               src={theme === "dark" ? "/images/home/pascalmeyer_day_front.jpg" : "/images/home/pascalmeyer_night_front.jpg"}
               alt="Pascal Meyer"
               fill
               className="absolute inset-0 object-cover opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
+              quality={100}
+              unoptimized={true}
             />
           </div>
-          <div className="flex flex-col gap-[20px] items-start text-[22px] text-[var(--color-8)] text-center tracking-[-0.44px] leading-[36px] w-full">
-            <p className="font-sans text-sans-22 text-[var(--color-8)] font-normal w-full">
+          <div className="flex flex-col gap-[20px] items-start text-[var(--color-8)] text-center w-full">
+            <AnimatedParagraphFadeInBottom 
+              as="p"
+              className="font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-normal tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.44px] leading-[26px] md:leading-[30px] lg:leading-[36px] w-full"
+            >
               My passion lies in turning complexity into simplicity. With a background in design, code, business, and strategy, I help teams build products that define their category. For the past 3 years, I have dedicated my time, energy, and research to AI.
-            </p>
-            <p className="font-sans text-sans-22 text-[var(--color-8)] font-medium w-full">
+            </AnimatedParagraphFadeInBottom>
+            <p className="font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.44px] leading-[26px] md:leading-[30px] lg:leading-[36px] w-full">
               Let&apos;s build what&apos;s next.
             </p>
           </div>
           <div className="flex gap-[12px] items-start justify-center relative w-full">
             <Link
               href="/contact"
-              className="relative inline-flex items-center justify-center rounded-[40px] bg-transparent px-[40px] py-[8px] font-sans text-sans-16-medium text-[var(--color-100)] shadow-sm overflow-hidden"
+              className="relative inline-flex items-center justify-center rounded-[40px] bg-transparent px-[40px] py-[8px] font-sans text-[14px] md:text-[16px] font-medium text-[var(--color-100)] shadow-sm overflow-hidden tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px]"
               onMouseEnter={() => {
                 setIsButtonHovered(true);
                 setIsPrimaryScaled(true);
@@ -264,8 +275,9 @@ export default function WorkPage({
               onMouseEnter={() => setIsSecondaryHovered(true)}
               onMouseLeave={() => setIsSecondaryHovered(false)}
             >
-              <p className="font-sans text-sans-16-medium text-[var(--color-16)] text-center tracking-[-0.24px] relative z-10">
-                More About Me
+              <p className="font-sans text-[14px] md:text-[16px] font-medium text-[var(--color-16)] text-center tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px] relative z-10">
+                <span className="md:hidden">About Me</span>
+                <span className="hidden md:inline">More About Me</span>
               </p>
             </Link>
           </div>

@@ -3,12 +3,13 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { useTheme } from "../theme-provider";
+import { PrimaryButton } from "./PrimaryButton";
+import { AnimatedHeadlineFadeInBottom, AnimatedParagraphFadeInBottom } from "./AnimatedText";
 
 export const AboutTeaser: React.FC = () => {
   const { theme } = useTheme();
-  const [isHovered, setIsHovered] = useState(false);
-  const [isPrimaryHovered, setIsPrimaryHovered] = useState(false);
   const [isSecondaryHovered, setIsSecondaryHovered] = useState(false);
 
   const sideSrc = theme === "dark"
@@ -22,75 +23,95 @@ export const AboutTeaser: React.FC = () => {
   return (
     <section className="bg-[var(--color-100)] flex flex-col items-center justify-center px-0 py-[80px] md:py-[120px] relative w-full z-[2]">
       <div className="max-w-[1920px] mx-auto w-full flex justify-center">
-      <div className="flex flex-col gap-[40px] items-center max-w-[880px] px-[20px] md:px-[40px] py-0 relative w-full">
-        <h2 className="font-serif text-[40px] md:text-[72px] text-[var(--color-8)] text-center tracking-[-0.2px] md:tracking-[-0.72px] leading-[50px] md:leading-[88px]">
-          Pioneering the uncharted
-        </h2>
-        <div 
-          className="group h-[360px] md:h-[666px] max-h-[360px] md:max-h-[666px] max-w-[260px] md:max-w-[480px] relative rounded-[1000px] shrink-0 w-[260px] md:w-[480px] overflow-hidden"
-          style={{ 
-            backgroundColor: theme === "dark" ? "var(--color-100)" : "var(--color-8)" 
-          }}
+      <div className="flex flex-col gap-[40px] items-center max-w-[880px] px-[16px] sm:px-[40px] lg:px-[60px] py-0 relative w-full">
+        <AnimatedHeadlineFadeInBottom 
+          as="h2"
+          className="font-serif text-[40px] md:text-[72px] text-[var(--color-8)] text-center tracking-[-0.2px] md:tracking-[-0.72px] leading-[50px] md:leading-[88px]"
         >
-          <Image
-            src={sideSrc}
-            alt="Pascal Meyer"
-            fill
-            className="object-cover group-hover:opacity-0"
-          />
-          <Image
-            src={frontSrc}
-            alt="Pascal Meyer"
-            fill
-            className="absolute inset-0 object-cover opacity-0 group-hover:opacity-100"
-          />
-        </div>
+          Pioneering the uncharted
+        </AnimatedHeadlineFadeInBottom>
+        <Link href="/about" className="block">
+          <motion.div 
+            className="group h-[360px] md:h-[666px] max-h-[360px] md:max-h-[666px] max-w-[260px] md:max-w-[480px] relative rounded-[1000px] shrink-0 w-[260px] md:w-[480px] overflow-hidden cursor-pointer"
+            style={{ 
+              backgroundColor: theme === "dark" ? "var(--color-100)" : "var(--color-8)" 
+            }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1], delay: 0.2 }}
+          >
+            <Image
+              src={sideSrc}
+              alt="Pascal Meyer"
+              fill
+              className="object-cover transition-opacity duration-500 ease-out group-hover:opacity-0"
+              quality={100}
+              unoptimized={true}
+            />
+            <Image
+              src={frontSrc}
+              alt="Pascal Meyer"
+              fill
+              className="absolute inset-0 object-cover opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
+              quality={100}
+              unoptimized={true}
+            />
+          </motion.div>
+        </Link>
         <div className="flex flex-col gap-[20px] items-start text-[16px] md:text-[22px] text-[var(--color-8)] text-center tracking-[-0.24px] md:tracking-[-0.44px] leading-[26px] md:leading-[36px] w-full">
-          <p className="font-sans text-[16px] md:text-[22px] text-[var(--color-8)] font-normal w-full">
+          <motion.p 
+            className="font-sans text-[16px] md:text-[22px] text-[var(--color-8)] font-normal w-full"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1], delay: 0.3 }}
+          >
             My passion lies in turning complexity into simplicity. With a background in design, code, business, and strategy, I help teams build products that define their category. For the past 3 years, I have dedicated my time, energy, and research to AI.
-          </p>
-          <p className="font-sans text-[16px] md:text-[22px] text-[var(--color-8)] font-medium w-full">
+          </motion.p>
+          <motion.p 
+            className="font-sans text-[16px] md:text-[22px] text-[var(--color-8)] font-medium w-full"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1], delay: 0.4 }}
+          >
             Let&apos;s build what&apos;s next.
-          </p>
+          </motion.p>
         </div>
         <div className="flex gap-[12px] items-start justify-center relative w-full">
-          <Link
-            href="/contact"
-            className="relative inline-flex items-center justify-center rounded-[40px] bg-transparent px-[40px] py-[8px] font-sans text-[14px] md:text-[16px] leading-[22px] md:leading-[26px] font-medium text-[var(--color-100)] shadow-sm overflow-hidden"
-            onMouseEnter={() => {
-              setIsHovered(true);
-              setIsPrimaryHovered(true);
-            }}
-            onMouseLeave={() => {
-              setIsHovered(false);
-              setIsPrimaryHovered(false);
-            }}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1], delay: 0.4 }}
           >
-            <span className="relative z-10">Get in Touch</span>
-            <span 
-              className="absolute inset-0"
+            <PrimaryButton href="/contact">Get in Touch</PrimaryButton>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1], delay: 0.5 }}
+          >
+            <Link
+              href="/about"
+              className="relative inline-flex items-center justify-center rounded-[40px] p-[1px]"
+              onMouseEnter={() => setIsSecondaryHovered(true)}
+              onMouseLeave={() => setIsSecondaryHovered(false)}
               style={{
-                background: `linear-gradient(108deg, var(--color-satoshi) 0%, var(--color-satoshi) 50%, var(--color-8) 50%, var(--color-8) 100%)`,
-                backgroundSize: '250% 200%',
-                backgroundPosition: isHovered ? 'left center' : 'right center',
+                background: `linear-gradient(to right, var(--color-satoshi) 0%, var(--color-satoshi) 50%, var(--color-92) 50%, var(--color-92) 100%)`,
+                backgroundSize: '250% 100%',
+                backgroundPosition: isSecondaryHovered ? 'left center' : 'right center',
                 transition: 'background-position 0.5s cubic-bezier(0.22, 0.61, 0.36, 1)',
               }}
-            />
-          </Link>
-          <Link
-            href="/about"
-            className="relative backdrop-blur-sm backdrop-filter border border-[var(--color-92)] border-solid flex items-center justify-center px-[40px] py-[8px] rounded-[40px] shrink-0"
-            style={{
-              borderColor: isSecondaryHovered ? 'var(--color-satoshi)' : 'var(--color-92)',
-              transition: 'border-color 0.3s cubic-bezier(0.22, 0.61, 0.36, 1)',
-            }}
-            onMouseEnter={() => setIsSecondaryHovered(true)}
-            onMouseLeave={() => setIsSecondaryHovered(false)}
-          >
-            <p className="font-sans text-[14px] md:text-[16px] leading-[22px] md:leading-[26px] font-medium text-[var(--color-16)] text-center tracking-[-0.24px] relative z-10">
-              More About Me
-            </p>
-          </Link>
+            >
+              <span className="flex items-center justify-center px-[40px] py-[8px] rounded-[40px] bg-[var(--color-100)] backdrop-blur-sm backdrop-filter font-sans text-[14px] md:text-[16px] leading-[22px] md:leading-[26px] font-medium text-[var(--color-16)]">
+                <span className="md:hidden">About Me</span>
+                <span className="hidden md:inline">More About Me</span>
+              </span>
+            </Link>
+          </motion.div>
         </div>
       </div>
       </div>

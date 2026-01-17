@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Footer } from "../components/Footer";
 import { FooterBackground } from "../components/FooterBackground";
 import { useTheme } from "../theme-provider";
+import { AnimatedHeadline } from "../components/AnimatedHeadline";
 
 type Experience = {
   id: string;
@@ -130,55 +131,133 @@ export default function AboutPage() {
     ? "/images/home/pascalmeyer_day_front.jpg"
     : "/images/home/pascalmeyer_night_front.jpg";
 
+  const imageVariants = {
+    hidden: {
+      y: 20,
+      opacity: 0,
+      filter: "grayscale(100%)",
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      filter: "grayscale(0%)",
+      transition: {
+        delay: 0.2,
+        duration: 0.8,
+        ease: [0.22, 0.61, 0.36, 1],
+      },
+    },
+  };
+
+  const headlineVariants = {
+    hidden: {
+      y: 20,
+      opacity: 0,
+      filter: "blur(10px)",
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      filter: "blur(0px)",
+      transition: {
+        delay: 0.1,
+        duration: 0.6,
+        ease: [0.22, 0.61, 0.36, 1],
+      },
+    },
+  };
+
+  const textVariants = {
+    hidden: {
+      y: 20,
+      opacity: 0,
+      filter: "blur(10px)",
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      filter: "blur(0px)",
+      transition: {
+        delay: 0.4,
+        duration: 0.6,
+        ease: [0.22, 0.61, 0.36, 1],
+      },
+    },
+  };
+
   return (
     <main className="relative min-h-screen">
       <div className="max-w-[1920px] mx-auto">
 
       {/* Hero Section */}
-      <section className="relative z-[5] flex flex-col md:flex-row h-auto md:h-[966px] items-start justify-center gap-[40px] md:gap-[80px] px-[20px] md:px-[100px] pb-[40px] md:pb-[90px] pt-[40px] md:pt-[70px]">
-        <div className="flex flex-1 flex-col items-center justify-center py-[40px] md:py-[160px]">
-          <h1 className="font-serif text-[40px] md:text-[72px] text-[var(--color-8)] tracking-[-0.2px] md:tracking-[-0.72px] leading-[50px] md:leading-[88px] text-center">
-            In pursuit of{" "}
-            <span className="font-serif italic">excellence</span>
-          </h1>
+      <section className="relative z-[5] flex flex-col md:flex-row items-center justify-center gap-[40px] md:gap-[80px] px-[20px] md:px-[100px] pb-[40px] md:pb-[90px] pt-[40px] md:pt-[70px]" style={{ height: 'calc(100vh - 82px)' }}>
+        <div className="flex flex-1 flex-col items-center justify-start" style={{ height: '506px' }}>
+          <AnimatedHeadline
+            className="font-serif text-[40px] md:text-[56px] lg:text-[72px] text-[var(--color-8)] tracking-[-0.2px] md:tracking-[-0.56px] lg:tracking-[-0.72px] leading-[50px] md:leading-[70px] lg:leading-[88px] text-left"
+            style={{ height: '506px' }}
+          >
+            In pursuit of <span className="font-serif italic">excellence</span>
+          </AnimatedHeadline>
         </div>
 
-        <div className="group relative shrink-0 aspect-[260/360] md:aspect-[480/666] w-full md:w-auto h-[360px] md:h-full rounded-[10px] overflow-hidden">
+        <motion.div
+          className="group relative shrink-0 aspect-[3/4] w-auto rounded-[10px] overflow-hidden"
+          style={{ 
+            height: 'min(calc(100vh - 82px - 80px - 90px), 960px)',
+            maxHeight: '960px',
+            backgroundColor: theme === 'dark' ? '#FCFFFE' : '#000000'
+          }}
+          variants={imageVariants}
+          initial="hidden"
+          animate="visible"
+        >
           <Image
             src={portraitSideImage}
             alt="Portrait Pascal Meyer"
             fill
-            className="object-cover group-hover:opacity-0"
+            className="object-cover transition-opacity duration-500 ease-out group-hover:opacity-0"
             priority
+            quality={100}
+            unoptimized={true}
           />
           <Image
             src={portraitFrontImage}
             alt="Portrait Pascal Meyer"
             fill
-            className="object-cover opacity-0 group-hover:opacity-100"
+            className="object-cover opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
             priority
+            quality={100}
+            unoptimized={true}
           />
-        </div>
+        </motion.div>
 
-        <div className="flex flex-1 flex-col items-start justify-end">
-          <p className="font-sans text-[16px] md:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] md:tracking-[-0.44px] leading-[26px] md:leading-[36px]">
+        <div className="flex flex-1 flex-col items-start justify-end" style={{ 
+          height: 'min(calc(100vh - 82px - 80px - 90px), 960px)',
+          maxHeight: '960px'
+        }}>
+          <motion.p
+            className="font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.44px] leading-[26px] md:leading-[30px] lg:leading-[36px]"
+            variants={textVariants}
+            initial="hidden"
+            animate="visible"
+          >
             True excellence is the synthesis of diverse disciplines. My 16-year
             journey covers product ownership, frontend, consulting, marketing,
             mentoring, and entrepreneurship. This foundation allows me to bridge
             strategy, design, and execution for complex, end-to-end products.
-          </p>
+          </motion.p>
         </div>
       </section>
 
       {/* Journey Section */}
-      <section className="relative z-[4] px-[16px] md:px-[60px] py-[80px] md:py-[160px]" style={{ background: 'linear-gradient(to bottom, var(--color-98) 0%, var(--color-98) 90%, var(--color-96) 100%)' }}>
+      <section className="relative z-[4] px-[16px] sm:px-[40px] lg:px-[60px] py-[80px] md:py-[160px]" style={{ background: 'linear-gradient(to bottom, var(--color-96) 0%, var(--color-98) 100%)' }}>
         <div className="flex flex-col md:flex-row gap-[40px] md:gap-[120px] px-[24px] md:px-[40px] py-0 rounded-[10px]">
-          <div className="flex flex-1 items-center">
-            <h2 className="font-serif text-[32px] md:text-[48px] text-[var(--color-8)] tracking-[-0.16px] md:tracking-[-0.24px] max-w-[560px] leading-[40px] md:leading-[60px]">
+          <div className="flex flex-1 items-center" style={{ verticalAlign: 'top' }}>
+            <h2 className="font-serif text-[32px] md:text-[40px] lg:text-[48px] text-[var(--color-8)] tracking-[-0.16px] md:tracking-[-0.20px] lg:tracking-[-0.24px] max-w-[560px] leading-[40px] md:leading-[50px] lg:leading-[60px]" style={{ verticalAlign: 'middle' }}>
               A designer, who is obsessed with the digital world since day one
             </h2>
           </div>
-          <div className="flex flex-1 flex-col gap-[24px] font-sans text-[16px] md:text-[22px] text-[var(--color-8)] font-normal tracking-[-0.24px] md:tracking-[-0.44px] leading-[26px] md:leading-[36px]">
+          <div className="flex flex-1 flex-col gap-[24px] font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-normal tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.44px] leading-[26px] md:leading-[30px] lg:leading-[36px]">
             <p>
               At the age of 13, I started learning Photoshop and landed my first
               freelance gigs shortly after. I studied communication design before
@@ -204,12 +283,12 @@ export default function AboutPage() {
 
       {/* CV Section */}
       <section className="relative z-[3] inline-grid w-full">
-        <div className="px-[16px] md:px-[60px] py-0" style={{ background: 'linear-gradient(to bottom, var(--color-98) 0%, var(--color-98) 90%, var(--color-96) 100%)' }}>
+        <div className="px-[16px] sm:px-[40px] lg:px-[60px] py-0" style={{ background: 'linear-gradient(to bottom, var(--color-98) 0%, var(--color-98) 90%, var(--color-96) 100%)' }}>
           <div className="bg-[var(--color-100)] rounded-[10px] flex flex-col gap-[32px] md:gap-[40px] px-0 py-[32px] md:py-[40px]">
             {/* Work Experience */}
             <div className="px-[24px] md:px-[40px] py-0">
               <div className="border-b border-[var(--color-92)] flex items-center justify-center px-0 py-[24px]">
-                <h3 className="flex-1 font-sans text-[16px] md:text-[22px] text-[var(--color-8)] font-semibold tracking-[-0.24px] md:tracking-[-0.44px] leading-[26px] md:leading-[36px]">
+                <h3 className="flex-1 font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-semibold tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.44px] leading-[26px] md:leading-[30px] lg:leading-[36px]">
                   Work experience
                 </h3>
               </div>
@@ -226,7 +305,7 @@ export default function AboutPage() {
                   onMouseMove={handleRowMove(exp)}
                   onMouseLeave={handleRowLeave}
                 >
-                  <p className="font-sans text-[16px] md:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] md:tracking-[-0.44px] leading-[26px] md:leading-[36px] mb-0">
+                  <p className="font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.44px] leading-[26px] md:leading-[30px] lg:leading-[36px] mb-0">
                     {exp.company}
                   </p>
                   <div className="flex items-start justify-between w-full font-sans text-[14px] md:text-[16px] leading-[22px] md:leading-[26px] font-normal tracking-[-0.21px] md:tracking-[-0.24px]">
@@ -240,7 +319,7 @@ export default function AboutPage() {
             {/* Education */}
             <div className="px-[24px] md:px-[40px] py-0">
               <div className="border-b border-[var(--color-92)] flex items-center justify-center px-0 py-[24px]">
-                <h3 className="flex-1 font-sans text-[16px] md:text-[22px] text-[var(--color-8)] font-semibold tracking-[-0.24px] md:tracking-[-0.44px] leading-[26px] md:leading-[36px]">
+                <h3 className="flex-1 font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-semibold tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.44px] leading-[26px] md:leading-[30px] lg:leading-[36px]">
                   Education
                 </h3>
               </div>
@@ -254,7 +333,7 @@ export default function AboutPage() {
                       : "border-[var(--color-96)]"
                   } flex flex-col items-start px-0 py-[24px]`}
                 >
-                  <p className="font-sans text-[16px] md:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] md:tracking-[-0.44px] leading-[26px] md:leading-[36px] mb-0">
+                  <p className="font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.44px] leading-[26px] md:leading-[30px] lg:leading-[36px] mb-0">
                     {edu.title}
                   </p>
                   <div className="flex items-start justify-between w-full font-sans text-[14px] md:text-[16px] leading-[22px] md:leading-[26px] font-normal tracking-[-0.21px] md:tracking-[-0.24px]">
@@ -269,14 +348,14 @@ export default function AboutPage() {
       </section>
 
       {/* Personal Section */}
-      <section className="relative z-[2] pb-[80px] md:pb-[120px] pt-[80px] md:pt-[160px] px-[16px] md:px-[60px]" style={{ background: 'linear-gradient(to bottom, var(--color-98) 0%, var(--color-100) 50%, var(--color-96) 100%)' }}>
+      <section className="relative z-[2] pb-[80px] md:pb-[120px] pt-[80px] md:pt-[160px] px-[16px] sm:px-[40px] lg:px-[60px]" style={{ background: 'linear-gradient(to bottom, var(--color-98) 0%, var(--color-100) 50%, var(--color-96) 100%)' }}>
         <div className="flex flex-col md:flex-row gap-[40px] md:gap-[120px] px-[24px] md:px-[40px] py-0 rounded-[10px]">
           <div className="flex flex-1 items-center">
-            <h2 className="flex-1 font-serif text-[32px] md:text-[48px] text-[var(--color-8)] tracking-[-0.16px] md:tracking-[-0.24px] max-w-[560px] leading-[40px] md:leading-[60px]">
+            <h2 className="flex-1 font-serif text-[32px] md:text-[40px] lg:text-[48px] text-[var(--color-8)] tracking-[-0.16px] md:tracking-[-0.20px] lg:tracking-[-0.24px] max-w-[560px] leading-[40px] md:leading-[50px] lg:leading-[60px]">
               Bridging emotion & logic of digital products
             </h2>
           </div>
-          <div className="flex flex-1 flex-col gap-[24px] items-start justify-center font-sans text-[16px] md:text-[22px] text-[var(--color-8)] font-normal tracking-[-0.24px] md:tracking-[-0.44px] leading-[26px] md:leading-[36px]">
+          <div className="flex flex-1 flex-col gap-[24px] items-start justify-center font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-normal tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.44px] leading-[26px] md:leading-[30px] lg:leading-[36px]">
             <p>
               My strength lies in bridging disciplines. I speak the language of
               developers, understand business strategy, prototype rapidly, and

@@ -19,6 +19,17 @@
     padding: 0;
     background-color: transparent;
   }
+
+  /* Text selection color */
+  ::selection {
+    background-color: var(--color-satoshi);
+    color: var(--color-100);
+  }
+  
+  ::-moz-selection {
+    background-color: var(--color-satoshi);
+    color: var(--color-100);
+  }
 }
 
 :root {

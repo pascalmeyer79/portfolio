@@ -132,6 +132,8 @@ export default function WorkPage({
                 height={900}
                 className="h-auto w-full object-cover transition-opacity duration-500 ease-out group-hover:opacity-0"
                 priority
+                quality={100}
+                unoptimized={true}
               />
               <Image
                 src={theme === "dark" ? config.heroImage : config.heroImageAlt}
@@ -140,6 +142,8 @@ export default function WorkPage({
                 height={900}
                 className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
                 priority
+                quality={100}
+                unoptimized={true}
               />
             </motion.div>
           </motion.div>

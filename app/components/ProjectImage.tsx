@@ -111,6 +111,8 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
                       fill
                       className={`object-cover ${imageClassName}`}
                       draggable={false}
+                      quality={100}
+                      unoptimized={true}
                     />
                   </div>
                 </React.Fragment>
@@ -156,6 +158,8 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
               fill
               className={`object-contain ${imageClassName}`}
               draggable={false}
+              quality={100}
+              unoptimized={true}
             />
           </div>
         </>

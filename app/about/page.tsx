@@ -409,6 +409,8 @@ export default function AboutPage() {
               alt={preview.experience.company}
               fill
               className="h-full w-full object-cover"
+              quality={100}
+              unoptimized={true}
             />
           </motion.div>
         )}

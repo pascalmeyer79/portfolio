@@ -5,12 +5,18 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { PasswordModal } from "./PasswordModal";
+import { ProjectImage } from "./ProjectImage";
+
+type StackedImage = {
+  src: string;
+  heightOffset?: number;
+};
 
 type Project = {
   id: string;
   title: string;
   description: string;
-  image: string;
+  image: string | StackedImage[];
   tags: string[];
   protected?: boolean;
 };
@@ -24,7 +30,7 @@ const cardVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      delay: 0.1 * index,
+      delay: 0.3 + 0.1 * index,
       duration: 0.4,
       ease: [0.22, 0.61, 0.36, 1],
     },
@@ -36,6 +42,7 @@ const containerVariants = {
   visible: {
     transition: {
       staggerChildren: 0.1,
+      delayChildren: 0.3,
     },
   },
 };
@@ -64,7 +71,11 @@ const PROJECTS: Project[] = [
     title: "Vario",
     description:
       "Simplifying investing in stocks and crypto through gamification and AI",
-    image: "/images/home/teaser_vario_01.png",
+    image: [
+      { src: "/images/home/teaser_vario_01.png", heightOffset: 0 },
+      { src: "/images/home/teaser_vario_02.png", heightOffset: 20 },
+      { src: "/images/home/teaser_vario_03.png", heightOffset: 40 },
+    ],
     tags: ["Product Concept"],
   },
   {
@@ -84,7 +95,23 @@ export const ProjectsPeek: React.FC = () => {
   const cardRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [targetSlug, setTargetSlug] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
+  const [isDragging, setIsDragging] = useState(false);
+  const isMouseDown = useRef(false);
+  const dragStartX = useRef(0);
+  const scrollStartX = useRef(0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    handleResize(); // Initial check
+    window.addEventListener('resize', handleResize);
+    
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const container = scrollRef.current;
@@ -129,6 +156,11 @@ export const ProjectsPeek: React.FC = () => {
   }, []);
 
   const handleCardClick = (project: Project) => {
+    // Verhindere Navigation wenn gerade gedraggt wird
+    if (isDragging) {
+      return;
+    }
+    
     if (project.protected) {
       setTargetSlug(project.id);
       setModalOpen(true);
@@ -145,24 +177,85 @@ export const ProjectsPeek: React.FC = () => {
       const cardRect = card.getBoundingClientRect();
       const scrollLeft = card.offsetLeft - container.offsetLeft - (containerRect.width / 2) + (cardRect.width / 2);
       
+      // Smooth scroll nur für Indicator Clicks
+      const originalBehavior = container.style.scrollBehavior;
+      container.style.scrollBehavior = 'smooth';
+      
       container.scrollTo({
         left: scrollLeft,
         behavior: 'smooth',
       });
+      
+      // Zurücksetzen nach Animation
+      setTimeout(() => {
+        container.style.scrollBehavior = originalBehavior;
+      }, 500);
     }
+  };
+
+  // Drag-Handler
+  const handleDragStart = (e: MouseEvent | TouchEvent | PointerEvent) => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    isMouseDown.current = true;
+    setIsDragging(false);
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    dragStartX.current = clientX;
+    scrollStartX.current = container.scrollLeft;
+  };
+
+  const handleDragMove = (e: MouseEvent | TouchEvent | PointerEvent) => {
+    // Nur bewegen wenn Maus/Touch gedrückt ist
+    if (!isMouseDown.current) return;
+    
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const deltaX = dragStartX.current - clientX;
+    
+    // Markiere als dragging wenn mehr als 5px bewegt wurde
+    if (Math.abs(deltaX) > 5) {
+      setIsDragging(true);
+    }
+
+    container.scrollLeft = scrollStartX.current + deltaX;
+  };
+
+  const handleDragEnd = () => {
+    isMouseDown.current = false;
+    // Warte kurz bevor isDragging zurückgesetzt wird, damit Click nicht ausgelöst wird
+    setTimeout(() => {
+      setIsDragging(false);
+    }, 100);
   };
 
   return (
     <>
       <section className="relative z-[5] w-full">
-        <div className="flex flex-col gap-[40px] items-start pr-0 pt-0 pb-[60px] w-full">
+        <div className="max-w-[1920px] mx-auto overflow-visible">
+        <div className="flex flex-col gap-[32px] md:gap-[40px] items-start pr-0 pt-0 pb-[20px] md:pb-[40px] lg:pb-[60px] w-full">
         <motion.div
           ref={scrollRef}
-          className="flex gap-[24px] items-start relative w-full overflow-x-auto scroll-smooth"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          className="flex gap-[16px] md:gap-[24px] items-start relative w-full overflow-x-auto cursor-grab active:cursor-grabbing"
+          style={{ 
+            scrollbarWidth: "none", 
+            msOverflowStyle: "none", 
+            userSelect: "none",
+            scrollBehavior: "auto"
+          }}
           variants={containerVariants}
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          onMouseDown={handleDragStart}
+          onMouseMove={handleDragMove}
+          onMouseUp={handleDragEnd}
+          onMouseLeave={handleDragEnd}
+          onTouchStart={handleDragStart}
+          onTouchMove={handleDragMove}
+          onTouchEnd={handleDragEnd}
         >
           {/* Spacer left */}
           <div className="shrink-0 w-0 md:w-[16px] lg:w-[36px]" />
@@ -174,16 +267,49 @@ export const ProjectsPeek: React.FC = () => {
                 ? "w-[778px]"
                 : "w-[600px]";
 
+            const cardId = `project-card-${project.id}`;
+            
             return (
-              <motion.button
-                key={project.id}
-                ref={(el) => { cardRefs.current[index] = el; }}
-                type="button"
-                onClick={() => handleCardClick(project)}
-                className="bg-[var(--color-100)] flex flex-col gap-[40px] md:gap-[48px] items-start overflow-clip px-[24px] md:px-[40px] py-[32px] md:py-[48px] relative rounded-[10px] shrink-0 w-[320px] md:w-[560px] snap-start text-left"
-                variants={cardVariants}
-                custom={index}
-              >
+              <React.Fragment key={project.id}>
+                <style dangerouslySetInnerHTML={{
+                  __html: `
+                    .${cardId} {
+                      border-radius: 6px;
+                      width: 320px;
+                    }
+                    @media (min-width: 768px) {
+                      .${cardId} {
+                        border-radius: 8px;
+                        width: 420px;
+                      }
+                    }
+                    @media (min-width: 1024px) {
+                      .${cardId} {
+                        border-radius: 10px;
+                        width: 490px;
+                      }
+                    }
+                    @media (min-width: 1280px) {
+                      .${cardId} {
+                        width: 560px;
+                      }
+                    }
+                  `
+                }} />
+                <motion.button
+                  ref={(el) => { cardRefs.current[index] = el; }}
+                  type="button"
+                  onClick={() => handleCardClick(project)}
+                  className={`${cardId} bg-[var(--color-100)] flex flex-col gap-[40px] md:gap-[48px] items-start overflow-hidden px-[24px] md:px-[40px] py-[32px] md:py-[48px] relative shrink-0 text-left`}
+                  style={{
+                    backdropFilter: 'blur(10px)',
+                    WebkitBackdropFilter: 'blur(10px)',
+                    userSelect: 'none',
+                    WebkitUserDrag: 'none',
+                  }}
+                  variants={cardVariants}
+                  custom={index}
+                >
               {/* Project Info */}
               <div className="flex flex-col gap-[8px] items-start relative w-full">
                 <div className="flex gap-[4px] md:gap-[8px] items-start relative w-full">
@@ -202,7 +328,7 @@ export const ProjectsPeek: React.FC = () => {
                     {project.title}
                   </p>
                 </div>
-                <p className="font-sans text-[16px] md:text-[18px] text-[var(--color-8)] font-medium tracking-[-0.24px] md:tracking-[-0.27px] leading-[26px] md:leading-[30px] w-full">
+                <p className="font-sans text-[16px] md:text-[18px] text-[var(--color-8)] font-medium tracking-[-0.24px] md:tracking-[-0.27px] leading-[26px] md:leading-[30px] w-full h-[78px] md:h-[90px]">
                   {(() => {
                     const words = project.description.split(" ");
                     
@@ -283,33 +409,45 @@ export const ProjectsPeek: React.FC = () => {
               </div>
 
               {/* Project Image */}
-              <div className="flex flex-col items-start p-[4px] relative w-full overflow-hidden">
-                <div
-                  className={`border-4 border-[var(--color-0-80)] h-[240px] md:h-[480px] relative rounded-[4px] md:rounded-[5px] overflow-hidden ${imageWidthClass}`}
-                >
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover object-right rounded-[4px] md:rounded-[5px] backdrop-blur-[5px]"
-                  />
-                </div>
+              <div className="relative w-full">
+                <ProjectImage
+                  src={project.image}
+                  alt={project.title}
+                  aspectRatio="852/480"
+                  imageClassName="object-left"
+                  allowOverflow={project.id === "vario"}
+                  containerBorderRadius={
+                    project.id === "vario" ? "20px" : "12px"
+                  }
+                  containerWidth={project.id === "vario" ? undefined : undefined}
+                />
               </div>
 
               {/* Tags */}
               <div className="flex gap-[6px] items-center relative">
-                {project.tags.map((tag) => (
-                  <div
-                    key={tag}
-                    className="border border-[var(--color-94)] flex h-[28px] items-center px-[12px] py-[6px] rounded-[40px] shrink-0"
-                  >
-                    <p className="font-sans text-sans-12-medium text-[var(--color-8)] text-center tracking-[-0.12px] leading-[20px] whitespace-pre">
-                      {tag}
-                    </p>
-                  </div>
-                ))}
+                {project.tags.map((tag) => {
+                  // Remove " Design" from tags on mobile
+                  const mobileTag = tag.replace(/ Design$/, '');
+                  
+                  return (
+                    <div
+                      key={tag}
+                      className="border border-[var(--color-94)] flex h-[28px] items-center px-[12px] py-[6px] rounded-[40px] shrink-0"
+                    >
+                      {/* Mobile version - without "Design" */}
+                      <p className="block md:hidden font-sans text-sans-12-medium text-[var(--color-8)] text-center tracking-[-0.12px] leading-[20px] whitespace-pre">
+                        {mobileTag}
+                      </p>
+                      {/* Desktop version - full tag */}
+                      <p className="hidden md:block font-sans text-sans-12-medium text-[var(--color-8)] text-center tracking-[-0.12px] leading-[20px] whitespace-pre">
+                        {tag}
+                      </p>
+                    </div>
+                  );
+                })}
               </div>
               </motion.button>
+              </React.Fragment>
             );
           })}
           {/* Spacer right */}
@@ -326,7 +464,7 @@ export const ProjectsPeek: React.FC = () => {
                 key={index}
                 type="button"
                 onClick={() => handleIndicatorClick(index)}
-                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseEnter={() => !isActive && setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 className="cursor-pointer focus:outline-none relative flex items-center justify-center flex-shrink-0"
                 style={{
@@ -337,26 +475,32 @@ export const ProjectsPeek: React.FC = () => {
                 <motion.div
                   className="w-[2px] rounded-full"
                   style={{
-                    transform: 'rotate(18deg)',
                     transformOrigin: 'center center',
                   }}
+                  initial={{ scaleY: 0, opacity: 0, rotate: 18 }}
+                  whileInView={{ scaleY: 1, opacity: 1, rotate: 18 }}
+                  viewport={{ once: true, amount: 0.5 }}
+                  transition={{
+                    scaleY: { duration: 0.4, ease: [0.22, 0.61, 0.36, 1], delay: index * 0.05 },
+                    opacity: { duration: 0.3, ease: [0.22, 0.61, 0.36, 1], delay: index * 0.05 },
+                    rotate: { duration: 0 },
+                  }}
                   animate={{
-                    height: isActive ? 32 : 16,
-                    backgroundColor: isHovered
+                    height: isActive 
+                      ? (isMobile ? 24 : 32)
+                      : 16,
+                    backgroundColor: (isHovered && !isActive)
                       ? "var(--color-64)"
                       : isActive
                       ? "var(--color-32)"
                       : "var(--color-80)",
+                    rotate: 18,
                   }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 260,
-                      damping: 26,
-                    }}
                   />
               </button>
             );
           })}
+        </div>
         </div>
         </div>
       </section>
