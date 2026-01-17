@@ -34,10 +34,7 @@ export const AboutTeaser: React.FC = () => {
           <motion.div 
             className="group h-[360px] md:h-[666px] max-h-[360px] md:max-h-[666px] max-w-[260px] md:max-w-[480px] relative rounded-[1000px] shrink-0 w-[260px] md:w-[480px] overflow-hidden cursor-pointer"
             style={{ 
-              backgroundColor: theme === "dark" ? "var(--color-100)" : "var(--color-8)",
-              transform: 'translateZ(0)',
-              backfaceVisibility: 'hidden',
-              WebkitFontSmoothing: 'subpixel-antialiased',
+              backgroundColor: theme === "dark" ? "var(--color-100)" : "var(--color-8)" 
             }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -51,10 +48,6 @@ export const AboutTeaser: React.FC = () => {
               className="object-cover transition-opacity duration-500 ease-out group-hover:opacity-0"
               quality={100}
               unoptimized={true}
-              priority
-              style={{
-                imageRendering: '-webkit-optimize-contrast',
-              }}
             />
             <Image
               src={frontSrc}
@@ -63,10 +56,6 @@ export const AboutTeaser: React.FC = () => {
               className="absolute inset-0 object-cover opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
               quality={100}
               unoptimized={true}
-              priority
-              style={{
-                imageRendering: '-webkit-optimize-contrast',
-              }}
             />
           </motion.div>
         </Link>

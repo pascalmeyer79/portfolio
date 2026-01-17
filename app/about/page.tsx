@@ -219,9 +219,6 @@ export default function AboutPage() {
             priority
             quality={100}
             unoptimized={true}
-            style={{
-              imageRendering: '-webkit-optimize-contrast',
-            }}
           />
           <Image
             src={portraitFrontImage}
@@ -231,9 +228,6 @@ export default function AboutPage() {
             priority
             quality={100}
             unoptimized={true}
-            style={{
-              imageRendering: '-webkit-optimize-contrast',
-            }}
           />
         </motion.div>
 

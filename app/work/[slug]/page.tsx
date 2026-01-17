@@ -224,9 +224,6 @@ export default function WorkPage({
               className="object-cover transition-opacity duration-500 ease-out group-hover:opacity-0"
               quality={100}
               unoptimized={true}
-              style={{
-                imageRendering: '-webkit-optimize-contrast',
-              }}
             />
             <Image
               src={theme === "dark" ? "/images/home/pascalmeyer_day_front.jpg" : "/images/home/pascalmeyer_night_front.jpg"}
@@ -235,9 +232,6 @@ export default function WorkPage({
               className="absolute inset-0 object-cover opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
               quality={100}
               unoptimized={true}
-              style={{
-                imageRendering: '-webkit-optimize-contrast',
-              }}
             />
           </div>
           <div className="flex flex-col gap-[20px] items-start text-[var(--color-8)] text-center w-full">
