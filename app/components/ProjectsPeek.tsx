@@ -194,7 +194,7 @@ export const ProjectsPeek: React.FC = () => {
   };
 
   // Drag-Handler
-  const handleDragStart = (e: MouseEvent | TouchEvent | PointerEvent) => {
+  const handleDragStart = (e: React.MouseEvent | React.TouchEvent) => {
     const container = scrollRef.current;
     if (!container) return;
 
@@ -205,7 +205,7 @@ export const ProjectsPeek: React.FC = () => {
     scrollStartX.current = container.scrollLeft;
   };
 
-  const handleDragMove = (e: MouseEvent | TouchEvent | PointerEvent) => {
+  const handleDragMove = (e: React.MouseEvent | React.TouchEvent) => {
     // Nur bewegen wenn Maus/Touch gedrückt ist
     if (!isMouseDown.current) return;
     
@@ -306,7 +306,7 @@ export const ProjectsPeek: React.FC = () => {
                     WebkitBackdropFilter: 'blur(10px)',
                     userSelect: 'none',
                     WebkitUserDrag: 'none',
-                  }}
+                  } as any}
                   variants={cardVariants}
                   custom={index}
                 >

@@ -51,7 +51,7 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
   const borderRadiusValues = getResponsiveBorderRadius(containerBorderRadius);
   
   return (
-    <div className={`relative w-full p-[2px] ${className}`} style={{ userSelect: 'none', WebkitUserDrag: 'none' }}>
+    <div className={`relative w-full p-[2px] ${className}`} style={{ userSelect: 'none', WebkitUserDrag: 'none' } as React.CSSProperties}>
       {isStacked ? (
         // Stacked images layout - each image has its own border
         <div className={`relative w-full ${allowOverflow ? 'overflow-visible' : 'overflow-hidden'} h-[240px] md:h-[320px] lg:h-[400px] xl:h-[480px]`}>
@@ -96,11 +96,12 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
                     `
                   }} />
                   <div
-                    className={`relative border-4 border-[var(--color-0-80)] overflow-hidden shrink-0 ${uniqueId}`}
+                    className={`relative overflow-hidden shrink-0 border-4 ${uniqueId}`}
                     style={{
                       backdropFilter: "blur(10px)",
                       WebkitBackdropFilter: "blur(10px)",
                       boxSizing: "content-box",
+                      borderColor: "var(--color-0-80)",
                       marginLeft: index === 0 ? '0' : '-20px',
                       zIndex: src.length - index,
                     }}
@@ -141,7 +142,7 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
             `
           }} />
           <div
-            className={`project-image-container relative border-4 border-[var(--color-0-80)] h-[240px] md:h-[320px] lg:h-[400px] xl:h-[480px] ${
+            className={`project-image-container relative border-4 h-[240px] md:h-[320px] lg:h-[400px] xl:h-[480px] ${
               allowOverflow ? "overflow-visible" : "overflow-hidden"
             }`}
             style={{
@@ -149,6 +150,7 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
               backdropFilter: "blur(10px)",
               WebkitBackdropFilter: "blur(10px)",
               boxSizing: "content-box",
+              borderColor: "var(--color-0-80)",
               ...(containerWidth && { width: containerWidth }),
             }}
           >
