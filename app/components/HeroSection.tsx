@@ -44,9 +44,9 @@ const buttonVariants = {
 
 export const HeroSection = () => {
   return (
-    <section className="relative z-[5] flex flex-col items-center justify-center px-[16px] sm:px-[40px] lg:px-[60px] pt-0" style={{ height: 'calc(100vh - 82px - 256px)', minHeight: 'calc(100vh - 82px - 256px)' }}>
+    <section className="relative z-[5] flex flex-col items-center justify-center px-[16px] sm:px-[40px] lg:px-[60px]" style={{ minHeight: 'calc(100vh - 338px)' }}>
       <div className="max-w-[1920px] mx-auto w-full">
-      <div className="mx-auto flex max-w-[880px] flex-col items-center gap-[32px] md:gap-[40px] text-center">
+      <div className="mx-auto flex max-w-[880px] flex-col items-center gap-[32px] md:gap-[40px] text-center h-fit py-[120px]">
         <div className="flex flex-col gap-[8px] items-center text-[var(--color-8)]">
           <AnimatedHeadline
             className="font-serif text-[40px] md:text-[72px] leading-[50px] md:leading-[88px] tracking-[-0.2px] md:tracking-[-0.72px]"

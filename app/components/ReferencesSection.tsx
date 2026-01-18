@@ -179,7 +179,7 @@ export const ReferencesSection: React.FC = () => {
   const totalHeightMobile = rowHeightMobile * 2 + horizontalDividerHeight + horizontalDividerMargin * 2;
 
   return (
-    <section className="bg-gradient-to-b from-[var(--color-96)] to-[var(--color-100)] flex flex-col gap-[40px] md:gap-[80px] items-start px-0 md:px-[40px] py-[80px] md:py-[120px] relative w-full">
+    <section className="bg-gradient-to-b from-[var(--color-96)] to-[var(--color-100)] flex flex-col gap-[40px] md:gap-[80px] items-start px-0 py-[80px] md:py-[120px] relative w-full">
       <div className="max-w-[1920px] mx-auto w-full flex flex-col gap-[40px] md:gap-[80px] px-[60px]">
       {/* Text */}
       <div className="flex flex-col md:flex-row md:items-start md:justify-between px-[16px] sm:px-[40px] py-0 relative w-full gap-[8px] md:gap-[80px]">

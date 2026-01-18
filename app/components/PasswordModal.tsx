@@ -12,7 +12,7 @@ type PasswordModalProps = {
   onClose: () => void;
 };
 
-const CORRECT_PASSWORD = "pm_portfolio_2026";
+const CORRECT_PASSWORD = "portfolio_2026";
 
 export const PasswordModal: React.FC<PasswordModalProps> = ({
   open,
@@ -152,7 +152,7 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({
                       className="flex-1 bg-transparent font-sans text-[var(--color-8)] outline-none placeholder:text-[var(--color-56)]"
                       style={{
                         fontSize: showPassword || password.length === 0 ? "18px" : "22px",
-                        letterSpacing: password.length > 0 && !showPassword ? "0.1em" : "normal",
+                        letterSpacing: password.length > 0 && !showPassword ? "0.5px" : "normal",
                         lineHeight: "1",
                       }}
                       placeholder="Enter password"

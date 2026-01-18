@@ -125,23 +125,23 @@ export default function ContactPage() {
         <div style={{ height: 0 }} />
         
         {/* Upper section with headline and quote */}
-        <div className="grid grid-cols-1 lg:grid-cols-6 gap-x-[20px] gap-y-[20px] px-0 md:px-[40px] py-[40px] h-fit">
+        <div className="grid grid-cols-1 lg:grid-cols-6 gap-x-[20px] gap-y-[20px] px-0 md:px-[40px] py-[120px] h-fit">
             {/* Headline - 3 columns with 40px padding-right */}
-            <div className="col-span-1 lg:col-span-3 lg:pr-[40px] w-full flex items-start" style={{ height: '250px' }}>
+            <div className="col-span-1 lg:col-span-3 lg:pr-[40px] w-full flex items-start justify-center lg:justify-start h-auto lg:h-[250px]">
               <AnimatedHeadline
-                className="font-serif text-[40px] md:text-[56px] lg:text-[72px] text-[var(--color-8)] tracking-[-0.2px] md:tracking-[-0.56px] lg:tracking-[-0.72px] leading-[50px] md:leading-[70px] lg:leading-[88px]"
+                className="font-serif text-[40px] md:text-[56px] lg:text-[72px] text-[var(--color-8)] tracking-[-0.2px] md:tracking-[-0.56px] lg:tracking-[-0.72px] leading-[50px] md:leading-[70px] lg:leading-[88px] text-center lg:text-left"
                 delay={0}
               >
-                Let&apos;s bring <span className="whitespace-nowrap">great ideas</span>{" "}
+                Let&apos;s bring <span className="whitespace-nowrap">great&nbsp;ideas</span>{" "}
                 <br className="hidden lg:block" />
                 <span className="italic whitespace-nowrap">into reality</span>
               </AnimatedHeadline>
             </div>
             
             {/* Quote - 3 columns */}
-            <div className="col-span-1 lg:col-span-3 flex flex-col gap-[24px] w-full lg:max-w-[650px]">
+            <div className="col-span-1 lg:col-span-3 flex flex-col gap-[24px] w-full lg:max-w-[650px] items-center lg:items-start">
               <motion.p
-                className="font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.44px] leading-[26px] md:leading-[30px] lg:leading-[36px]"
+                className="font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.44px] leading-[26px] md:leading-[30px] lg:leading-[36px] text-center lg:text-left"
                 variants={quoteVariants}
                 initial="hidden"
                 animate="visible"
@@ -149,12 +149,12 @@ export default function ContactPage() {
                 &ldquo;Pascal has turned our vision of a clean and modern app into reality. If you are looking for high-quality design and good cooperation between designers, programmers, and customers, you have come to the right place.&rdquo;
               </motion.p>
               <motion.p
-                className="font-sans text-[14px] md:text-[16px] text-[var(--color-56)] font-normal tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px]"
+                className="font-sans text-[14px] md:text-[16px] text-[var(--color-56)] font-normal tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px] text-center lg:text-left"
                 variants={authorVariants}
                 initial="hidden"
                 animate="visible"
               >
-                Emre Aydin and René Schröder, Founder of{" "}
+                Emre Aydin and René Schröder,<br className="lg:hidden" /> Founder of{" "}
                 <a
                   href="https://www.muvn.de/"
                   target="_blank"
@@ -210,7 +210,7 @@ export default function ContactPage() {
         
         {/* Contact info section - white background */}
         <motion.div 
-          className="bg-[var(--color-100)] rounded-tl-[10px] rounded-tr-[10px] px-[16px] md:px-[40px] pt-[40px] md:pt-[48px] pb-[40px] md:pb-[80px] h-fit"
+          className="bg-[var(--color-100)] rounded-tl-[10px] rounded-tr-[10px] px-[20px] md:px-[24px] xl:px-[40px] pt-[32px] md:pt-[48px] pb-[40px] xl:pb-[80px] h-[278px] md:h-fit xl:h-auto min-h-[256px] xl:min-h-[256px] max-h-[278px] md:max-h-[330px] xl:max-h-none"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -256,7 +256,7 @@ export default function ContactPage() {
                       />
                     </motion.div>
                   </div>
-                  <p className="font-sans text-sans-16-regular text-[var(--color-8)] tracking-[-0.24px] leading-[26px]">
+                  <p className="font-sans text-[14px] md:text-[16px] text-[var(--color-8)] tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px]">
                     Available
                   </p>
                 </div>
@@ -270,10 +270,10 @@ export default function ContactPage() {
                 animate="visible"
                 custom={1}
               >
-                <p className="font-sans text-sans-16-semibold text-[var(--color-8)] tracking-[-0.24px] leading-[26px]">
+                <p className="font-sans text-[14px] md:text-[16px] font-semibold text-[var(--color-8)] tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px]">
                   Local Time
                 </p>
-                <p className="font-sans text-sans-16-regular text-[var(--color-8)] tracking-[-0.24px] leading-[26px]">
+                <p className="font-sans text-[14px] md:text-[16px] text-[var(--color-8)] tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px]">
                   {localTime}
                 </p>
               </motion.div>
@@ -283,18 +283,18 @@ export default function ContactPage() {
               
               {/* Contact - 1 column */}
               <motion.div 
-                className="flex flex-col gap-[2px] col-span-1 xl:col-span-1"
+                className="flex flex-col gap-[0px] col-span-1 xl:col-span-1"
                 variants={columnVariants}
                 initial="hidden"
                 animate="visible"
                 custom={2}
               >
-                <p className="font-sans text-sans-16-semibold text-[var(--color-8)] tracking-[-0.24px] leading-[26px] mb-[4px]">
+                <p className="font-sans text-[14px] md:text-[16px] font-semibold text-[var(--color-8)] tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px] mb-[4px]">
                   Contact
                 </p>
                 <a
                   href="mailto:hi@pascalmey.com"
-                  className="font-sans text-sans-16-medium tracking-[-0.24px] leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
+                  className="font-sans text-[14px] md:text-[16px] font-medium tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
                   style={{
                     width: 'fit-content',
                     background: linkGradient,
@@ -342,7 +342,7 @@ export default function ContactPage() {
                 </a>
                 <a
                   href="tel:+41782527919"
-                  className="font-sans text-sans-16-medium tracking-[-0.24px] leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
+                  className="font-sans text-[14px] md:text-[16px] font-medium tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
                   style={{
                     width: 'fit-content',
                     background: linkGradient,
@@ -390,7 +390,7 @@ export default function ContactPage() {
                 </a>
                 <a
                   href="tel:+4917674713378"
-                  className="font-sans text-sans-16-medium tracking-[-0.24px] leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
+                  className="font-sans text-[14px] md:text-[16px] font-medium tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
                   style={{
                     width: 'fit-content',
                     background: linkGradient,
@@ -440,7 +440,7 @@ export default function ContactPage() {
                   href="https://www.linkedin.com/in/pascalmeyer79/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="xl:hidden font-sans text-sans-16-medium tracking-[-0.24px] leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
+                  className="xl:hidden font-sans text-[14px] md:text-[16px] font-medium tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
                   style={{
                     width: 'fit-content',
                     background: linkGradient,
@@ -496,12 +496,12 @@ export default function ContactPage() {
                 animate="visible"
                 custom={3}
               >
-                <p className="font-sans text-sans-16-semibold text-[var(--color-8)] tracking-[-0.24px] leading-[26px]">
+                <p className="font-sans text-[14px] md:text-[16px] font-semibold text-[var(--color-8)] tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px]">
                   Calendar
                 </p>
                 <a
                   href="#"
-                  className="font-sans text-sans-16-medium tracking-[-0.24px] leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
+                  className="font-sans text-[14px] md:text-[16px] font-medium tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
                   style={{
                     width: 'fit-content',
                     background: linkGradient,
@@ -557,14 +557,14 @@ export default function ContactPage() {
                 animate="visible"
                 custom={4}
               >
-                <p className="font-sans text-sans-16-semibold text-[var(--color-8)] tracking-[-0.24px] leading-[26px]">
+                <p className="font-sans text-[14px] md:text-[16px] font-semibold text-[var(--color-8)] tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px]">
                   Social
                 </p>
                 <a
                   href="https://www.linkedin.com/in/pascalmeyer79/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-sans text-sans-16-medium tracking-[-0.24px] leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
+                  className="font-sans text-[14px] md:text-[16px] font-medium tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
                   style={{
                     width: 'fit-content',
                     background: linkGradient,
