@@ -129,7 +129,7 @@ export default function ContactPage() {
             {/* Headline - 3 columns with 40px padding-right */}
             <div className="col-span-1 lg:col-span-3 lg:pr-[40px] w-full flex items-start justify-center lg:justify-start h-auto lg:h-[250px]">
               <AnimatedHeadline
-                className="font-serif text-[40px] md:text-[56px] lg:text-[72px] text-[var(--color-8)] tracking-[-0.2px] md:tracking-[-0.56px] lg:tracking-[-0.72px] leading-[50px] md:leading-[70px] lg:leading-[88px] text-center lg:text-left"
+                className="font-serif text-[40px] sm:text-[48px] md:text-[56px] lg:text-[64px] xl:text-[72px] text-[var(--color-8)] tracking-[-0.2px] sm:tracking-[-0.48px] md:tracking-[-0.56px] lg:tracking-[-0.64px] xl:tracking-[-0.72px] leading-[50px] sm:leading-[60px] md:leading-[70px] lg:leading-[80px] xl:leading-[88px] text-center lg:text-left"
                 delay={0}
               >
                 Let&apos;s bring <span className="whitespace-nowrap">great&nbsp;ideas</span>{" "}
@@ -141,7 +141,7 @@ export default function ContactPage() {
             {/* Quote - 3 columns */}
             <div className="col-span-1 lg:col-span-3 flex flex-col gap-[24px] w-full lg:max-w-[650px] items-center lg:items-start">
               <motion.p
-                className="font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.44px] leading-[26px] md:leading-[30px] lg:leading-[36px] text-center lg:text-left"
+                className="font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px] text-center lg:text-left"
                 variants={quoteVariants}
                 initial="hidden"
                 animate="visible"
@@ -149,7 +149,7 @@ export default function ContactPage() {
                 &ldquo;Pascal has turned our vision of a clean and modern app into reality. If you are looking for high-quality design and good cooperation between designers, programmers, and customers, you have come to the right place.&rdquo;
               </motion.p>
               <motion.p
-                className="font-sans text-[14px] md:text-[16px] text-[var(--color-56)] font-normal tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px] text-center lg:text-left"
+                className="font-sans text-[14px] sm:text-[15px] md:text-[16px] text-[var(--color-56)] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] leading-[22px] sm:leading-[24px] md:leading-[26px] text-center lg:text-left"
                 variants={authorVariants}
                 initial="hidden"
                 animate="visible"
@@ -159,7 +159,7 @@ export default function ContactPage() {
                   href="https://www.muvn.de/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-sans text-[14px] md:text-[16px] font-medium tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px] inline relative transition-colors duration-200 ease-in-out"
+                  className="font-sans text-[14px] sm:text-[15px] md:text-[16px] font-medium tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] leading-[22px] sm:leading-[24px] md:leading-[26px] inline relative transition-colors duration-200 ease-in-out"
                   style={{
                     background: linkGradient,
                     WebkitBackgroundClip: 'text',
@@ -224,7 +224,7 @@ export default function ContactPage() {
                 animate="visible"
                 custom={0}
               >
-                <p className="font-sans text-[14px] md:text-[16px] font-semibold text-[var(--color-8)] tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px]">
+                <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] font-semibold text-[var(--color-8)] tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] leading-[22px] sm:leading-[24px] md:leading-[26px]">
                   Status
                 </p>
                 <div className="flex items-center gap-[8px]">
@@ -256,7 +256,7 @@ export default function ContactPage() {
                       />
                     </motion.div>
                   </div>
-                  <p className="font-sans text-[14px] md:text-[16px] text-[var(--color-8)] tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px]">
+                  <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] text-[var(--color-8)] tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] leading-[22px] sm:leading-[24px] md:leading-[26px]">
                     Available
                   </p>
                 </div>
@@ -270,7 +270,7 @@ export default function ContactPage() {
                 animate="visible"
                 custom={1}
               >
-                <p className="font-sans text-[14px] md:text-[16px] font-semibold text-[var(--color-8)] tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px]">
+                <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] font-semibold text-[var(--color-8)] tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] leading-[22px] sm:leading-[24px] md:leading-[26px]">
                   Local Time
                 </p>
                 <p className="font-sans text-[14px] md:text-[16px] text-[var(--color-8)] tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px]">
@@ -289,12 +289,12 @@ export default function ContactPage() {
                 animate="visible"
                 custom={2}
               >
-                <p className="font-sans text-[14px] md:text-[16px] font-semibold text-[var(--color-8)] tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px] mb-[4px]">
+                <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] font-semibold text-[var(--color-8)] tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] leading-[22px] sm:leading-[24px] md:leading-[26px] mb-[4px]">
                   Contact
                 </p>
                 <a
                   href="mailto:hi@pascalmey.com"
-                  className="font-sans text-[14px] md:text-[16px] font-medium tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
+                  className="font-sans text-[14px] sm:text-[15px] md:text-[16px] font-medium tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] leading-[22px] sm:leading-[24px] md:leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
                   style={{
                     width: 'fit-content',
                     background: linkGradient,
@@ -342,7 +342,7 @@ export default function ContactPage() {
                 </a>
                 <a
                   href="tel:+41782527919"
-                  className="font-sans text-[14px] md:text-[16px] font-medium tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
+                  className="font-sans text-[14px] sm:text-[15px] md:text-[16px] font-medium tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] leading-[22px] sm:leading-[24px] md:leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
                   style={{
                     width: 'fit-content',
                     background: linkGradient,
@@ -390,7 +390,7 @@ export default function ContactPage() {
                 </a>
                 <a
                   href="tel:+4917674713378"
-                  className="font-sans text-[14px] md:text-[16px] font-medium tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
+                  className="font-sans text-[14px] sm:text-[15px] md:text-[16px] font-medium tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] leading-[22px] sm:leading-[24px] md:leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
                   style={{
                     width: 'fit-content',
                     background: linkGradient,
@@ -496,12 +496,12 @@ export default function ContactPage() {
                 animate="visible"
                 custom={3}
               >
-                <p className="font-sans text-[14px] md:text-[16px] font-semibold text-[var(--color-8)] tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px]">
+                <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] font-semibold text-[var(--color-8)] tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] leading-[22px] sm:leading-[24px] md:leading-[26px]">
                   Calendar
                 </p>
                 <a
                   href="#"
-                  className="font-sans text-[14px] md:text-[16px] font-medium tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
+                  className="font-sans text-[14px] sm:text-[15px] md:text-[16px] font-medium tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] leading-[22px] sm:leading-[24px] md:leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
                   style={{
                     width: 'fit-content',
                     background: linkGradient,
@@ -557,14 +557,14 @@ export default function ContactPage() {
                 animate="visible"
                 custom={4}
               >
-                <p className="font-sans text-[14px] md:text-[16px] font-semibold text-[var(--color-8)] tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px]">
+                <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] font-semibold text-[var(--color-8)] tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] leading-[22px] sm:leading-[24px] md:leading-[26px]">
                   Social
                 </p>
                 <a
                   href="https://www.linkedin.com/in/pascalmeyer79/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-sans text-[14px] md:text-[16px] font-medium tracking-[-0.21px] md:tracking-[-0.24px] leading-[22px] md:leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
+                  className="font-sans text-[14px] sm:text-[15px] md:text-[16px] font-medium tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] leading-[22px] sm:leading-[24px] md:leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
                   style={{
                     width: 'fit-content',
                     background: linkGradient,

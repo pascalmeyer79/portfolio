@@ -208,7 +208,7 @@ export default function AboutPage() {
             }}
           >
             <AnimatedHeadline
-              className="font-serif text-[40px] md:text-[56px] lg:text-[72px] text-[var(--color-8)] tracking-[-0.2px] md:tracking-[-0.56px] lg:tracking-[-0.72px] leading-[50px] md:leading-[70px] lg:leading-[88px] text-center xl:text-left xl:h-[506px] w-full"
+              className="font-serif text-[40px] sm:text-[48px] md:text-[56px] lg:text-[64px] xl:text-[72px] text-[var(--color-8)] tracking-[-0.2px] sm:tracking-[-0.48px] md:tracking-[-0.56px] lg:tracking-[-0.64px] xl:tracking-[-0.72px] leading-[50px] sm:leading-[60px] md:leading-[70px] lg:leading-[80px] xl:leading-[88px] text-center xl:text-left xl:h-[506px] w-full"
             >
               <span className="xl:hidden inline">In pursuit of <span className="font-serif italic">excellence</span></span>
               <span className="hidden xl:block">In pursuit of<br /><span className="font-serif italic">excellence</span></span>
@@ -217,7 +217,7 @@ export default function AboutPage() {
 
           {/* Description - under xl: below headline, centered */}
           <motion.p
-            className="xl:hidden font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.44px] leading-[26px] md:leading-[30px] lg:leading-[36px] text-center w-full mb-[60px] md:mb-[80px]"
+            className="xl:hidden font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px] text-center w-full mb-[60px] md:mb-[80px]"
             style={{ maxWidth: '800px' }}
             variants={textVariants}
             initial="hidden"
@@ -305,7 +305,7 @@ export default function AboutPage() {
             maxHeight: '960px'
           }}>
             <motion.p
-              className="font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.44px] leading-[26px] md:leading-[30px] lg:leading-[36px]"
+              className="font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px]"
               variants={textVariants}
               initial="hidden"
               animate="visible"
@@ -325,12 +325,12 @@ export default function AboutPage() {
           <div className="flex flex-1 items-start">
             <AnimatedHeadlineFadeInBottom
               as="h2"
-              className="font-serif text-[32px] md:text-[40px] lg:text-[48px] text-[var(--color-8)] tracking-[-0.16px] md:tracking-[-0.20px] lg:tracking-[-0.24px] w-full xl:max-w-[560px] leading-[40px] md:leading-[50px] lg:leading-[60px]"
+              className="font-serif text-[32px] sm:text-[36px] md:text-[40px] lg:text-[44px] xl:text-[48px] text-[var(--color-8)] tracking-[-0.16px] sm:tracking-[-0.18px] md:tracking-[-0.20px] lg:tracking-[-0.22px] xl:tracking-[-0.24px] w-full xl:max-w-[560px] leading-[40px] sm:leading-[45px] md:leading-[50px] lg:leading-[55px] xl:leading-[60px]"
             >
               A designer, who is obsessed with the digital world since day one
             </AnimatedHeadlineFadeInBottom>
           </div>
-          <div className="flex flex-1 flex-col gap-[24px] font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-normal tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.44px] leading-[26px] md:leading-[30px] lg:leading-[36px]">
+          <div className="flex flex-1 flex-col gap-[24px] font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-normal tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px]">
             <AnimatedParagraphFadeInBottom delay={0.3}>
               At the age of 13, I started learning Photoshop and landed my first
               freelance gigs shortly after. I studied communication design before
@@ -374,7 +374,7 @@ export default function AboutPage() {
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 0.61, 0.36, 1] }}
               >
-                <h3 className="flex-1 font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-semibold tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.44px] leading-[26px] md:leading-[30px] lg:leading-[36px]">
+                <h3 className="flex-1 font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-semibold tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px]">
                   Work experience
                 </h3>
               </motion.div>
@@ -396,10 +396,10 @@ export default function AboutPage() {
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.6, delay: 0.2 + (idx * 0.1), ease: [0.22, 0.61, 0.36, 1] }}
                 >
-                  <p className="font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.44px] leading-[26px] md:leading-[30px] lg:leading-[36px] mb-0">
+                  <p className="font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px] mb-0">
                     {exp.company}
                   </p>
-                  <div className="flex items-start justify-between w-full font-sans text-[14px] md:text-[16px] leading-[22px] md:leading-[26px] font-normal tracking-[-0.21px] md:tracking-[-0.24px]">
+                  <div className="flex items-start justify-between w-full font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[22px] sm:leading-[24px] md:leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
                     <p className="text-[var(--color-8)]">{exp.role}</p>
                     <p className="text-[var(--color-64)]">{exp.period}</p>
                   </div>
@@ -417,7 +417,7 @@ export default function AboutPage() {
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.6, delay: 1.0, ease: [0.22, 0.61, 0.36, 1] }}
               >
-                <h3 className="flex-1 font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-semibold tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.44px] leading-[26px] md:leading-[30px] lg:leading-[36px]">
+                <h3 className="flex-1 font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-semibold tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px]">
                   Education
                 </h3>
               </motion.div>
@@ -436,10 +436,10 @@ export default function AboutPage() {
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.6, delay: 1.1 + (idx * 0.1), ease: [0.22, 0.61, 0.36, 1] }}
                 >
-                  <p className="font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.44px] leading-[26px] md:leading-[30px] lg:leading-[36px] mb-0">
+                  <p className="font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px] mb-0">
                     {edu.title}
                   </p>
-                  <div className="flex items-start justify-between w-full font-sans text-[14px] md:text-[16px] leading-[22px] md:leading-[26px] font-normal tracking-[-0.21px] md:tracking-[-0.24px]">
+                  <div className="flex items-start justify-between w-full font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[22px] sm:leading-[24px] md:leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
                     <p className="text-[var(--color-8)]">{edu.description}</p>
                     <p className="text-[var(--color-64)]">{edu.period}</p>
                   </div>
@@ -456,12 +456,12 @@ export default function AboutPage() {
           <div className="flex flex-1 items-start">
             <AnimatedHeadlineFadeInBottom
               as="h2"
-              className="flex-1 font-serif text-[32px] md:text-[40px] lg:text-[48px] text-[var(--color-8)] tracking-[-0.16px] md:tracking-[-0.20px] lg:tracking-[-0.24px] w-full xl:max-w-[560px] leading-[40px] md:leading-[50px] lg:leading-[60px]"
+              className="flex-1 font-serif text-[32px] sm:text-[36px] md:text-[40px] lg:text-[44px] xl:text-[48px] text-[var(--color-8)] tracking-[-0.16px] sm:tracking-[-0.18px] md:tracking-[-0.20px] lg:tracking-[-0.22px] xl:tracking-[-0.24px] w-full xl:max-w-[560px] leading-[40px] sm:leading-[45px] md:leading-[50px] lg:leading-[55px] xl:leading-[60px]"
             >
               Bridging emotion & logic of digital products
             </AnimatedHeadlineFadeInBottom>
           </div>
-          <div className="flex flex-1 flex-col gap-[24px] items-start justify-center font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-normal tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.44px] leading-[26px] md:leading-[30px] lg:leading-[36px]">
+          <div className="flex flex-1 flex-col gap-[24px] items-start justify-center font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-normal tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px]">
             <AnimatedParagraphFadeInBottom delay={0.3}>
               My strength lies in bridging disciplines. I speak the language of
               developers, understand business strategy, prototype rapidly, and

@@ -185,7 +185,7 @@ export const ReferencesSection: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-start md:justify-between px-[16px] sm:px-[40px] py-0 relative w-full gap-[8px] md:gap-[80px]">
         <div className="flex items-center justify-center w-full md:w-auto pl-0 py-0 relative shrink-0">
           <motion.h2 
-            className="font-serif text-[32px] md:text-[48px] text-[var(--color-8)] tracking-[-0.16px] md:tracking-[-0.24px] leading-[40px] md:leading-[60px] whitespace-nowrap md:whitespace-normal text-center md:text-left"
+            className="font-serif text-[32px] sm:text-[36px] md:text-[40px] lg:text-[44px] xl:text-[48px] text-[var(--color-8)] tracking-[-0.16px] sm:tracking-[-0.18px] md:tracking-[-0.20px] lg:tracking-[-0.22px] xl:tracking-[-0.24px] leading-[40px] sm:leading-[45px] md:leading-[50px] lg:leading-[55px] xl:leading-[60px] whitespace-nowrap md:whitespace-normal text-center md:text-left"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
@@ -210,7 +210,7 @@ export const ReferencesSection: React.FC = () => {
           </motion.h2>
         </div>
         <motion.p 
-          className="flex-1 font-sans text-[16px] md:text-[18px] max-w-[480px] text-[var(--color-8)] font-normal tracking-[-0.24px] md:tracking-[-0.27px] leading-[26px] md:leading-[30px] text-center md:text-left w-full mx-auto md:mx-0"
+          className="flex-1 font-sans text-[16px] sm:text-[17px] md:text-[18px] max-w-[480px] text-[var(--color-8)] font-normal tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] leading-[26px] sm:leading-[28px] md:leading-[30px] text-center md:text-left w-full mx-auto md:mx-0"
           variants={paragraphVariants}
           initial="hidden"
           whileInView="visible"

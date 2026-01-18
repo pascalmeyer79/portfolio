@@ -80,7 +80,7 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
         viewport={{ once: true, margin: "-100px" }}
         custom={0}
       >
-        <p className="font-sans text-[14px] md:text-[16px] leading-[22px] md:leading-[26px] relative shrink-0 tracking-[-0.21px] md:tracking-[-0.24px] font-semibold">
+        <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[22px] sm:leading-[24px] md:leading-[26px] relative shrink-0 tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] font-semibold">
           Say hi!
         </p>
         <Link
@@ -103,19 +103,19 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
         </Link>
       </motion.div>
       <motion.div 
-        className="col-span-1 xl:col-span-1 flex flex-col items-start relative text-[14px] md:text-[16px] gap-[2px]"
+        className="col-span-1 xl:col-span-1 flex flex-col items-start relative text-[14px] sm:text-[15px] md:text-[16px] gap-[2px]"
         variants={columnVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         custom={1}
       >
-            <p className="font-sans text-[14px] md:text-[16px] leading-[26px] font-semibold tracking-[-0.21px] md:tracking-[-0.24px] relative shrink-0 mb-[4px]" style={{ color: textColor }}>
+            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-semibold tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] relative shrink-0 mb-[4px]" style={{ color: textColor }}>
               Links
             </p>
             <Link
               href="/"
-              className="font-sans text-[14px] md:text-[16px] leading-[26px] font-medium tracking-[-0.21px] md:tracking-[-0.24px] relative shrink-0 inline-block transition-colors duration-200 ease-in-out"
+              className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-medium tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] relative shrink-0 inline-block transition-colors duration-200 ease-in-out"
               style={{
                 background: linkGradient,
                 WebkitBackgroundClip: 'text',
@@ -160,7 +160,7 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
             </Link>
             <Link
               href="/about"
-              className="font-sans text-[14px] md:text-[16px] leading-[26px] font-medium tracking-[-0.21px] md:tracking-[-0.24px] relative shrink-0 inline-block transition-colors duration-200 ease-in-out"
+              className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-medium tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] relative shrink-0 inline-block transition-colors duration-200 ease-in-out"
               style={{
                 background: linkGradient,
                 WebkitBackgroundClip: 'text',
@@ -205,7 +205,7 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
             </Link>
             <Link
               href="/contact"
-              className="font-sans text-[14px] md:text-[16px] leading-[26px] font-medium tracking-[-0.21px] md:tracking-[-0.24px] relative shrink-0 inline-block transition-colors duration-200 ease-in-out"
+              className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-medium tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] relative shrink-0 inline-block transition-colors duration-200 ease-in-out"
               style={{
                 background: linkGradient,
                 WebkitBackgroundClip: 'text',
@@ -250,7 +250,7 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
             </Link>
       </motion.div>
       <motion.div 
-        className="col-span-1 xl:col-span-1 flex flex-col font-sans text-[14px] md:text-[16px] leading-[26px] font-medium relative tracking-[-0.21px] md:tracking-[-0.16px] gap-[2px]" 
+        className="col-span-1 xl:col-span-1 flex flex-col font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-medium relative tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.16px] gap-[2px]" 
         style={{ color: textColor }}
         variants={columnVariants}
         initial="hidden"
@@ -258,21 +258,21 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
         viewport={{ once: true, margin: "-100px" }}
         custom={2}
       >
-            <p className="font-sans text-[14px] md:text-[16px] leading-[26px] font-semibold tracking-[-0.21px] md:tracking-[-0.24px] mb-[4px]">
+            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-semibold tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] mb-[4px]">
               Pascal Meyer GmbH
             </p>
-            <p className="font-sans text-[14px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] md:tracking-[-0.24px]">
+            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
               HRB 213189
             </p>
-            <p className="font-sans text-[14px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] md:tracking-[-0.24px]">
+            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
               DE359124851
             </p>
-            <p className="font-sans text-[14px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] md:tracking-[-0.24px]">
+            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
               CHE-231.531.352
             </p>
       </motion.div>
       <motion.div 
-        className="col-span-1 xl:col-span-1 flex flex-col gap-[2px] relative text-[14px] md:text-[16px] tracking-[-0.21px] md:tracking-[-0.24px]" 
+        className="col-span-1 xl:col-span-1 flex flex-col gap-[2px] relative text-[14px] sm:text-[15px] md:text-[16px] tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]" 
         style={{ color: textColor }}
         variants={columnVariants}
         initial="hidden"
@@ -280,21 +280,21 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
         viewport={{ once: true, margin: "-100px" }}
         custom={3}
       >
-            <p className="font-sans text-[14px] md:text-[16px] leading-[26px] font-semibold tracking-[-0.21px] md:tracking-[-0.24px] mb-[4px]">
+            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-semibold tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] mb-[4px]">
               🇨🇭 Switzerland
             </p>
-            <p className="font-sans text-[14px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] md:tracking-[-0.24px]">
+            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
               Gerbestrasse 17
             </p>
-            <p className="font-sans text-[14px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] md:tracking-[-0.24px]">
+            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
               8805 Richterswil
             </p>
-            <p className="font-sans text-[14px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] md:tracking-[-0.24px]">
+            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
               +41 78 252 7919
             </p>
       </motion.div>
       <motion.div 
-        className="col-span-1 xl:col-span-1 flex flex-col gap-[2px] relative text-[14px] md:text-[16px] tracking-[-0.21px] md:tracking-[-0.24px]" 
+        className="col-span-1 xl:col-span-1 flex flex-col gap-[2px] relative text-[14px] sm:text-[15px] md:text-[16px] tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]" 
         style={{ color: textColor }}
         variants={columnVariants}
         initial="hidden"
@@ -302,16 +302,16 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
         viewport={{ once: true, margin: "-100px" }}
         custom={4}
       >
-            <p className="font-sans text-[14px] md:text-[16px] leading-[26px] font-semibold tracking-[-0.21px] md:tracking-[-0.24px] mb-[4px]">
+            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-semibold tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] mb-[4px]">
               🇩🇪 Germany
             </p>
-            <p className="font-sans text-[14px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] md:tracking-[-0.24px]">
+            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
               Mohnblumenweg 26
             </p>
-            <p className="font-sans text-[14px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] md:tracking-[-0.24px]">
+            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
               28832 Achim
             </p>
-            <p className="font-sans text-[14px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] md:tracking-[-0.24px]">
+            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
               +49 176 747 1337 8
             </p>
       </motion.div>

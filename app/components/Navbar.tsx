@@ -141,8 +141,8 @@ export const Navbar = ({ selection }: NavbarProps = {}) => {
                   href={item.href}
                   className={`relative block rounded-[45px] px-[16px] md:px-[24px] py-[6px] text-center font-sans transition-colors duration-150 ${
                     isActive
-                      ? "text-[var(--color-8)] font-sans text-[14px] md:text-[16px] leading-[22px] md:leading-[28px] font-semibold tracking-[-0.21px] md:tracking-[-0.24px]"
-                      : "text-[var(--color-8-64)] font-sans text-[14px] md:text-[16px] leading-[22px] md:leading-[26px] font-medium tracking-[-0.21px] md:tracking-[-0.24px]"
+                      ? "text-[var(--color-8)] font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[22px] sm:leading-[24px] md:leading-[28px] font-semibold tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]"
+                      : "text-[var(--color-8-64)] font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[22px] sm:leading-[24px] md:leading-[26px] font-medium tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]"
                   }`}
                 >
                   <span className="relative z-10">{item.label}</span>
