@@ -120,12 +120,12 @@ export default function ContactPage() {
       {/* Hero Background wird im Layout gerendert */}
       
       {/* Main content container with 100vh - 82px and space-between */}
-      <div className="h-[calc(100vh-82px)] flex flex-col justify-between px-0 lg:px-[60px] 2xl:px-[60px] max-w-[1920px] mx-auto w-full">
+      <div className="min-h-[calc(100vh-82px)] md:h-[calc(100vh-82px)] flex flex-col md:justify-between px-0 lg:px-[60px] 2xl:px-[60px] max-w-[1920px] mx-auto w-full">
         {/* Spacer ganz oben */}
         <div style={{ height: 0 }} />
         
         {/* Upper section with headline and quote */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-[12px] lg:gap-[40px] px-[16px] md:px-[40px] lg:px-0 2xl:px-[40px] py-[120px] h-fit max-w-full mx-auto w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-[12px] lg:gap-[40px] px-[16px] md:px-[40px] lg:px-0 2xl:px-[40px] py-[60px] md:py-[120px] h-fit max-w-full mx-auto w-full">
             {/* Headline - 3 columns with 40px padding-right */}
             <div className="col-span-1 lg:pr-[40px] w-full flex items-start justify-center lg:justify-start h-auto lg:h-[250px]">
               <AnimatedHeadline
