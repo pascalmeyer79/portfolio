@@ -992,7 +992,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                           `
                             }} />
                             <motion.div
-                              className={`relative overflow-hidden ${slugString === 'vario' ? 'border-responsive' : 'border-4'} ${uniqueId}`}
+                              className={`relative overflow-hidden border-responsive ${uniqueId}`}
                               style={{
                                 backdropFilter: "blur(10px)",
                                 WebkitBackdropFilter: "blur(10px)",
@@ -1130,7 +1130,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
 
             return (
               <div className="hidden lg:block lg:mt-[100px]">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-[40px]">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-[40px]" style={{ containerType: 'inline-size' }}>
                   <style dangerouslySetInnerHTML={{
                     __html: `
                       .summary-image {
@@ -1195,7 +1195,8 @@ function WorkPageClient({ slug }: WorkPageProps) {
                   className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[40px]"
                   style={{
                     gridTemplateRows: 'repeat(2, 1fr)',
-                    gridAutoFlow: 'row'
+                    gridAutoFlow: 'row',
+                    containerType: 'inline-size'
                   }}
                 >
                   <style dangerouslySetInnerHTML={{
@@ -1221,7 +1222,8 @@ function WorkPageClient({ slug }: WorkPageProps) {
                           gridColumn: `${img.colIdx + 1}`,
                           gridRow: isSpanning ? '1 / 3' : `${img.rowIdx + 1}`,
                           display: 'flex',
-                          alignItems: isSpanning ? 'flex-end' : 'stretch'
+                          alignItems: isSpanning ? 'flex-end' : 'stretch',
+                          containerType: 'inline-size'
                         }}
                         initial="hidden"
                         whileInView="visible"
@@ -1280,7 +1282,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                   {summaryImages.map((img, idx) => (
                     <motion.div
                       key={idx}
-                      className={`summary-row-image relative overflow-hidden ${slugString === 'vario' ? 'border-responsive' : 'border-4'}`}
+                      className={`summary-row-image relative overflow-hidden border-responsive`}
                       style={{
                         backgroundColor: 'transparent',
                         borderColor: 'var(--color-0-80)',
@@ -1443,7 +1445,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                               }}
                             >
                               <motion.div
-                                className={`row-image relative overflow-hidden ${shouldHaveBorder ? ((slugString as string) === 'vario' ? 'border-responsive' : 'border-4') : ''}`}
+                                className={`row-image relative overflow-hidden ${shouldHaveBorder ? 'border-responsive' : ''}`}
                                 style={{
                                   ...(shouldHaveBorder ? {
                                     backgroundColor: 'transparent',
@@ -1710,7 +1712,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                           }}
                         >
                           <motion.div
-                            className={`row-image relative overflow-hidden ${shouldHaveBorder ? (slugString === 'vario' ? 'border-responsive' : 'border-4') : ''} ${img.spanRows ? 'lg:row-span-2' : ''}`}
+                            className={`row-image relative overflow-hidden ${shouldHaveBorder ? 'border-responsive' : ''} ${img.spanRows ? 'lg:row-span-2' : ''}`}
                             style={shouldHaveBorder ? {
                               backgroundColor: 'transparent',
                               borderColor: 'var(--color-0-80)',
@@ -1928,7 +1930,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                                   }}
                                 >
                                   <motion.div
-                                    className={`row-image relative overflow-hidden ${shouldHaveBorder ? (slugString === 'vario' ? 'border-responsive' : 'border-4') : ''} ${img.spanRows ? 'lg:row-span-2' : ''}`}
+                                    className={`row-image relative overflow-hidden ${shouldHaveBorder ? 'border-responsive' : ''} ${img.spanRows ? 'lg:row-span-2' : ''}`}
                                     style={shouldHaveBorder ? {
                                       backgroundColor: 'transparent',
                                       borderColor: 'var(--color-0-80)',
@@ -2050,7 +2052,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                                 {section.images?.map((img, imgIndex) => (
                                   <motion.div
                                     key={imgIndex}
-                                    className={`text-image-app-screen relative overflow-hidden ${slugString === 'vario' ? 'border-responsive' : 'border-4'}`}
+                                    className={`text-image-app-screen relative overflow-hidden border-responsive`}
                                     style={{
                                       backgroundColor: 'transparent',
                                       borderColor: 'var(--color-0-80)',
@@ -2181,7 +2183,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                                     }}
                                   >
                                     <motion.div
-                                      className={`row-image relative overflow-hidden ${shouldHaveBorder ? (slugString === 'vario' ? 'border-responsive' : 'border-4') : ''} ${img.spanRows ? 'lg:row-span-2' : ''}`}
+                                      className={`row-image relative overflow-hidden ${shouldHaveBorder ? 'border-responsive' : ''} ${img.spanRows ? 'lg:row-span-2' : ''}`}
                                       style={shouldHaveBorder ? {
                                         backgroundColor: 'transparent',
                                         borderColor: 'var(--color-0-80)',
@@ -2468,7 +2470,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                               style={img.noBorder ? { borderRadius: 'clamp(12px, 0.8vw, 24px)' } : {}}
                             >
                               <motion.div
-                                className={`row-image relative overflow-hidden ${shouldHaveBorder ? (slugString === 'vario' ? 'border-responsive' : 'border-4') : ''} ${img.spanRows ? 'lg:row-span-2' : ''}`}
+                                className={`row-image relative overflow-hidden ${shouldHaveBorder ? 'border-responsive' : ''} ${img.spanRows ? 'lg:row-span-2' : ''}`}
                                 style={shouldHaveBorder ? {
                                   backgroundColor: 'transparent',
                                   borderColor: 'var(--color-0-80)',
@@ -2745,7 +2747,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                               return (
                                 <motion.div
                                   key={globalIdx}
-                                  className={`row-image relative overflow-hidden ${shouldHaveBorder ? (slugString === 'vario' ? 'border-responsive' : 'border-4') : ''} ${img.spanRows ? 'lg:row-span-2' : ''}`}
+                                  className={`row-image relative overflow-hidden ${shouldHaveBorder ? 'border-responsive' : ''} ${img.spanRows ? 'lg:row-span-2' : ''}`}
                                   style={shouldHaveBorder ? {
                                     backgroundColor: 'transparent',
                                     borderColor: 'var(--color-0-80)',

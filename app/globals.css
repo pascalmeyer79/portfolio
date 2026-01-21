@@ -5,10 +5,15 @@
 @layer utilities {
   .border-responsive {
     border-width: 3px;
-    border-radius: clamp(22px, 4vw, 48px);
   }
   
   @media (min-width: 600px) {
+    .border-responsive {
+      border-width: 4px;
+    }
+  }
+  
+  @container (min-width: 600px) {
     .border-responsive {
       border-width: 4px;
     }
