@@ -225,7 +225,7 @@ export const ReferencesSection: React.FC = () => {
         {/* Logos Grid */}
         <div className="flex flex-col items-start relative w-full h-[273px] md:h-[353px]">
           {/* Upper Row */}
-          {renderLogoRow(LOGOS.slice(0, 5), "pl-[16px] md:pl-[20px]", "pr-0", 0)}
+          {renderLogoRow(LOGOS.slice(0, 5), "pl-[40px] md:pl-[20px]", "pr-0", 0)}
 
           {/* Horizontal Divider */}
           <motion.div
@@ -242,7 +242,7 @@ export const ReferencesSection: React.FC = () => {
           />
 
           {/* Lower Row */}
-          {renderLogoRow(LOGOS.slice(5, 10), "pl-0", "pr-[16px] md:pr-[20px]", 1)}
+          {renderLogoRow(LOGOS.slice(5, 10), "pl-0", "pr-[40px] md:pr-[20px]", 1)}
 
           {/* Durchgängige vertikale Divider - absolut positioniert im übergeordneten Container */}
           {/* 3 Logos pro Reihe für kleinere Breakpoints (bis 1023px) */}
