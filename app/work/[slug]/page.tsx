@@ -899,7 +899,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
               }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: "0px 0px -100px 0px", amount: 0.3 }}
               transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1], delay: 0.2 }}
             >
               <style dangerouslySetInnerHTML={{
@@ -1058,7 +1058,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
               className="flex flex-col gap-[12px] lg:col-span-2 lg:pr-[80px]"
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
               variants={fadeInUpVariants}
             >
               <h2 className="font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] font-semibold text-[var(--color-8)] tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.30px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[32px]">
@@ -1074,7 +1074,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
               className="flex flex-col md:grid md:grid-cols-3 lg:flex lg:flex-col gap-[24px]"
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
               variants={{
                 ...fadeInUpVariants,
                 visible: {
@@ -1149,7 +1149,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                       }}
                       initial="hidden"
                       whileInView="visible"
-                      viewport={{ once: true, margin: "-50px" }}
+                      viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                       variants={{
                         ...fadeInUpVariants,
                         visible: {
@@ -1221,7 +1221,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                         }}
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, margin: "-50px" }}
+                        viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                         variants={{
                           ...fadeInUpVariants,
                           visible: {
@@ -1282,7 +1282,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                       }}
                       initial="hidden"
                       whileInView="visible"
-                      viewport={{ once: true, margin: "-50px" }}
+                      viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                       variants={{
                         ...fadeInUpVariants,
                         visible: {
@@ -1324,7 +1324,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
               }}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
               variants={fadeInUpVariants}
             >
               <style dangerouslySetInnerHTML={{
@@ -1359,7 +1359,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                         className="flex flex-col gap-[12px] md:gap-[16px]"
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, margin: "-50px" }}
+                        viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                         variants={fadeInUpVariants}
                       >
                         {section.overline && (
@@ -1387,7 +1387,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                             className="font-sans text-[16px] md:text-[18px] lg:text-[20px] text-[var(--color-8)] font-normal tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.3px] leading-[26px] md:leading-[30px] lg:leading-[32px]"
                             initial="hidden"
                             whileInView="visible"
-                            viewport={{ once: true, margin: "-50px" }}
+                            viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                             variants={{
                               ...fadeInUpVariants,
                               visible: {
@@ -1422,7 +1422,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                               className="flex flex-col gap-[12px] md:gap-[16px]"
                               initial="hidden"
                               whileInView="visible"
-                              viewport={{ once: true, margin: "-50px" }}
+                              viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                               variants={{
                                 ...fadeInUpVariants,
                                 visible: {
@@ -1505,7 +1505,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                   className="max-w-[800px] mx-auto text-center"
                   initial="hidden"
                   whileInView="visible"
-                  viewport={{ once: true, margin: "-50px" }}
+                  viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                   variants={fadeInUpVariants}
                 >
                   {section.title && (
@@ -1546,7 +1546,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                     }}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, margin: "-50px" }}
+                    viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                     variants={fadeInUpVariants}
                   >
                     <Image
@@ -1589,7 +1589,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                       }}
                       initial="hidden"
                       whileInView="visible"
-                      viewport={{ once: true, margin: "-50px" }}
+                      viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                       variants={{
                         ...fadeInUpVariants,
                         visible: {
@@ -1689,7 +1689,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                           }}
                           initial="hidden"
                           whileInView="visible"
-                          viewport={{ once: true, margin: "-50px" }}
+                          viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                           variants={{
                             ...fadeInUpVariants,
                             visible: {
@@ -1781,7 +1781,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                             }}
                             initial="hidden"
                             whileInView="visible"
-                            viewport={{ once: true, margin: "-50px" }}
+                            viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                             variants={{
                               ...fadeInUpVariants,
                               visible: {
@@ -1812,7 +1812,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                           className="flex flex-col gap-[12px] md:gap-[16px] text-left md:text-center mx-auto w-full max-w-[960px]"
                           initial="hidden"
                           whileInView="visible"
-                          viewport={{ once: true, margin: "-50px" }}
+                          viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                           variants={fadeInUpVariants}
                         >
                           {section.overline && (
@@ -1845,7 +1845,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                                   className={`font-sans text-[16px] md:text-[18px] lg:text-[20px] text-[var(--color-8)] font-normal tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.3px] leading-[26px] md:leading-[30px] lg:leading-[32px] ${section.imageFirst ? 'w-full text-left md:text-center' : paragraph.includes('The core value proposition of Vario was the Vario-Score') || paragraph.includes('We built a database of 450 stocks') ? 'text-left md:text-center' : ''}`}
                                   initial="hidden"
                                   whileInView="visible"
-                                  viewport={{ once: true, margin: "-50px" }}
+                                  viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                                   variants={{
                                     ...fadeInUpVariants,
                                     visible: {
@@ -1907,7 +1907,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                                   style={img.noBorder ? { borderRadius: 'clamp(12px, 0.8vw, 24px)' } : {}}
                                   initial="hidden"
                                   whileInView="visible"
-                                  viewport={{ once: true, margin: "-50px" }}
+                                  viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                                   variants={{
                                     ...fadeInUpVariants,
                                     visible: {
@@ -1980,7 +1980,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                               className={`flex flex-col ${section.title ? 'gap-[24px] md:gap-[24px] lg:gap-[40px]' : 'gap-[16px]'} max-w-[720px]`}
                               initial="hidden"
                               whileInView="visible"
-                              viewport={{ once: true, margin: "-50px" }}
+                              viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                               variants={fadeInUpVariants}
                             >
                               {/* Overline + Title Container */}
@@ -2010,7 +2010,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                                       className="font-sans text-[16px] md:text-[18px] lg:text-[20px] text-[var(--color-8)] font-normal tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.3px] leading-[26px] md:leading-[30px] lg:leading-[32px] text-left"
                                       initial="hidden"
                                       whileInView="visible"
-                                      viewport={{ once: true, margin: "-50px" }}
+                                      viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                                       variants={{
                                         ...fadeInUpVariants,
                                         visible: {
@@ -2052,7 +2052,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                                     }}
                                     initial="hidden"
                                     whileInView="visible"
-                                    viewport={{ once: true, margin: "-50px" }}
+                                    viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                                     variants={{
                                       ...fadeInUpVariants,
                                       visible: {
@@ -2160,7 +2160,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                                     style={img.noBorder ? { borderRadius: 'clamp(12px, 0.8vw, 24px)' } : {}}
                                     initial="hidden"
                                     whileInView="visible"
-                                    viewport={{ once: true, margin: "-50px" }}
+                                    viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                                     variants={{
                                       ...fadeInUpVariants,
                                       visible: {
@@ -2222,7 +2222,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                               className="flex flex-col gap-[24px] lg:ml-auto lg:text-left max-w-[720px] order-1 lg:order-2"
                               initial="hidden"
                               whileInView="visible"
-                              viewport={{ once: true, margin: "-50px" }}
+                              viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                               variants={fadeInUpVariants}
                             >
                               <div className="flex flex-col gap-[16px]">
@@ -2249,7 +2249,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                                     className="font-sans text-[16px] md:text-[18px] lg:text-[20px] text-[var(--color-8)] font-normal tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.3px] leading-[26px] md:leading-[30px] lg:leading-[32px] lg:text-left"
                                     initial="hidden"
                                     whileInView="visible"
-                                    viewport={{ once: true, margin: "-50px" }}
+                                    viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                                     variants={{
                                       ...fadeInUpVariants,
                                       visible: {
@@ -2277,7 +2277,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                               className="flex flex-col gap-[12px] md:gap-[16px]"
                               initial="hidden"
                               whileInView="visible"
-                              viewport={{ once: true, margin: "-50px" }}
+                              viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                               variants={fadeInUpVariants}
                             >
                               {section.overline && (
@@ -2305,7 +2305,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                                   className="font-sans text-[16px] md:text-[18px] lg:text-[20px] text-[var(--color-8)] font-normal tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.3px] leading-[26px] md:leading-[30px] lg:leading-[32px]"
                                   initial="hidden"
                                   whileInView="visible"
-                                  viewport={{ once: true, margin: "-50px" }}
+                                  viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                                   variants={{
                                     ...fadeInUpVariants,
                                     visible: {
@@ -2333,7 +2333,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                       className="flex flex-col gap-[16px] md:gap-[20px] lg:gap-[24px]"
                       initial="hidden"
                       whileInView="visible"
-                      viewport={{ once: true, margin: "-50px" }}
+                      viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                       variants={{
                         ...fadeInUpVariants,
                         visible: {
@@ -2372,7 +2372,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                           className="flex flex-col gap-[16px] md:gap-[20px] lg:gap-[24px]"
                           initial="hidden"
                           whileInView="visible"
-                          viewport={{ once: true, margin: "-50px" }}
+                          viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                           variants={{
                             ...fadeInUpVariants,
                             visible: {
@@ -2470,7 +2470,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                                 } : {}}
                                 initial="hidden"
                                 whileInView="visible"
-                                viewport={{ once: true, margin: "-50px" }}
+                                viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                                 variants={{
                                   ...fadeInUpVariants,
                                   visible: {
@@ -2542,7 +2542,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                           } : {}}
                           initial="hidden"
                           whileInView="visible"
-                          viewport={{ once: true, margin: "-50px" }}
+                          viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                           variants={{
                             ...fadeInUpVariants,
                             visible: {
@@ -2637,7 +2637,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                         }}
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, margin: "-50px" }}
+                        viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                         variants={{
                           ...fadeInUpVariants,
                           visible: {
@@ -2747,7 +2747,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                                   } : {}}
                                   initial="hidden"
                                   whileInView="visible"
-                                  viewport={{ once: true, margin: "-50px" }}
+                                  viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                                   variants={{
                                     ...fadeInUpVariants,
                                     visible: {
@@ -2794,7 +2794,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                         className="font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] font-semibold text-[var(--color-8)] tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.30px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[32px] text-left md:text-center"
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, margin: "-50px" }}
+                        viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                         variants={{
                           ...fadeInUpVariants,
                           visible: {
@@ -2816,7 +2816,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                         className="font-serif text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] 2xl:text-[48px] text-[var(--color-8)] tracking-[-0.14px] sm:tracking-[-0.16px] md:tracking-[-0.18px] lg:tracking-[-0.20px] xl:tracking-[-0.22px] 2xl:tracking-[-0.24px] leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[55px] 2xl:leading-[60px] text-left md:text-center"
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, margin: "-50px" }}
+                        viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                         variants={{
                           ...fadeInUpVariants,
                           visible: {
@@ -2839,7 +2839,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                       className="font-sans text-[16px] md:text-[18px] lg:text-[20px] text-[var(--color-8)] font-normal tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.3px] leading-[26px] md:leading-[30px] lg:leading-[32px] text-left md:text-center max-w-[960px] mb-[80px] md:mb-[100px] lg:mb-[120px]"
                       initial="hidden"
                       whileInView="visible"
-                      viewport={{ once: true, margin: "-50px" }}
+                      viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                       variants={{
                         ...fadeInUpVariants,
                         visible: {
@@ -2866,7 +2866,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                             className="flex flex-col items-center gap-[12px] md:gap-[14px] lg:gap-[16px]"
                             initial="hidden"
                             whileInView="visible"
-                            viewport={{ once: true, margin: "-50px" }}
+                            viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                             variants={{
                               ...fadeInUpVariants,
                               visible: {
@@ -2900,7 +2900,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                             className="hidden md:flex flex-col items-center gap-[12px] md:gap-[14px] lg:gap-[16px]"
                             initial="hidden"
                             whileInView="visible"
-                            viewport={{ once: true, margin: "-50px" }}
+                            viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                             variants={{
                               ...fadeInUpVariants,
                               visible: {
@@ -2935,7 +2935,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                           className="flex md:hidden flex-col items-center gap-[12px] md:gap-[14px] lg:gap-[16px]"
                           initial="hidden"
                           whileInView="visible"
-                          viewport={{ once: true, margin: "-50px" }}
+                          viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                           variants={{
                             ...fadeInUpVariants,
                             visible: {
@@ -2980,7 +2980,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                           className="flex flex-col gap-[12px] md:gap-[16px]"
                           initial="hidden"
                           whileInView="visible"
-                          viewport={{ once: true, margin: "-50px" }}
+                          viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                           variants={fadeInUpVariants}
                         >
                           {section.overline && (
@@ -3008,7 +3008,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                               className="font-sans text-[16px] md:text-[18px] lg:text-[20px] text-[var(--color-8)] font-normal tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.3px] leading-[26px] md:leading-[30px] lg:leading-[32px]"
                               initial="hidden"
                               whileInView="visible"
-                              viewport={{ once: true, margin: "-50px" }}
+                              viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                               variants={{
                                 ...fadeInUpVariants,
                                 visible: {
@@ -3035,7 +3035,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                               className="px-[16px] md:px-[32px] py-[12px] md:py-[20px] border border-[var(--color-92)] rounded-[60px]"
                               initial="hidden"
                               whileInView="visible"
-                              viewport={{ once: true, margin: "-50px" }}
+                              viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                               variants={{
                                 ...fadeInUpVariants,
                                 visible: {
@@ -3064,7 +3064,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                           className="font-sans text-[16px] md:text-[18px] lg:text-[20px] font-semibold text-[var(--color-8)] tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.30px] leading-[26px] md:leading-[30px] lg:leading-[32px] text-center mb-[20px] md:mb-[24px]"
                           initial="hidden"
                           whileInView="visible"
-                          viewport={{ once: true, margin: "-50px" }}
+                          viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                           variants={fadeInUpVariants}
                         >
                           {section.overline}
@@ -3077,7 +3077,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                           className="font-serif text-[32px] md:text-[40px] lg:text-[48px] xl:text-[56px] text-[var(--color-8)] tracking-[-0.16px] md:tracking-[-0.20px] lg:tracking-[-0.24px] xl:tracking-[-0.28px] leading-[40px] md:leading-[50px] lg:leading-[60px] xl:leading-[70px] text-center mb-[60px] md:mb-[80px] lg:mb-[100px] max-w-[880px] mx-auto"
                           initial="hidden"
                           whileInView="visible"
-                          viewport={{ once: true, margin: "-50px" }}
+                          viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                           variants={{
                             ...fadeInUpVariants,
                             visible: {
@@ -3107,7 +3107,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                               className="px-[16px] md:px-[32px] py-[12px] md:py-[20px] border border-[var(--color-92)] rounded-[60px]"
                               initial="hidden"
                               whileInView="visible"
-                              viewport={{ once: true, margin: "-50px" }}
+                              viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                               variants={{
                                 ...fadeInUpVariants,
                                 visible: {
@@ -3140,7 +3140,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                       className="flex flex-col gap-[20px] md:gap-[16px]"
                       initial="hidden"
                       whileInView="visible"
-                      viewport={{ once: true, margin: "-50px" }}
+                      viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                       variants={fadeInUpVariants}
                     >
                       {section.overline && (
@@ -3168,7 +3168,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                           className="font-sans text-[16px] md:text-[18px] lg:text-[20px] text-[var(--color-8)] font-normal tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.3px] leading-[26px] md:leading-[30px] lg:leading-[32px]"
                           initial="hidden"
                           whileInView="visible"
-                          viewport={{ once: true, margin: "-50px" }}
+                          viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                           variants={{
                             ...fadeInUpVariants,
                             visible: {
@@ -3209,7 +3209,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                             }}
                             initial="hidden"
                             whileInView="visible"
-                            viewport={{ once: true, margin: "-50px" }}
+                            viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                             variants={{
                               ...fadeInUpVariants,
                               visible: {
@@ -3238,7 +3238,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                               className="flex-shrink-0"
                               initial="hidden"
                               whileInView="visible"
-                              viewport={{ once: true, margin: "-50px" }}
+                              viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                               variants={{
                                 ...fadeInUpVariants,
                                 visible: {
@@ -3275,7 +3275,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                       className="flex flex-col gap-[20px] md:gap-[16px]"
                       initial="hidden"
                       whileInView="visible"
-                      viewport={{ once: true, margin: "-50px" }}
+                      viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                       variants={fadeInUpVariants}
                     >
                       {section.overline && (
@@ -3303,7 +3303,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                           className="font-sans text-[16px] md:text-[18px] lg:text-[20px] text-[var(--color-8)] font-normal tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.3px] leading-[26px] md:leading-[30px] lg:leading-[32px]"
                           initial="hidden"
                           whileInView="visible"
-                          viewport={{ once: true, margin: "-50px" }}
+                          viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                           variants={{
                             ...fadeInUpVariants,
                             visible: {
@@ -3354,7 +3354,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                           }}
                           initial="hidden"
                           whileInView="visible"
-                          viewport={{ once: true, margin: "-50px" }}
+                          viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                           variants={{
                             ...fadeInUpVariants,
                             visible: {
@@ -3450,7 +3450,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                                     }}
                                     initial="hidden"
                                     whileInView="visible"
-                                    viewport={{ once: true, margin: "-50px" }}
+                                    viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                                     variants={{
                                       ...fadeInUpVariants,
                                       visible: {
@@ -3486,7 +3486,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                                     style={{ flex: '1 1 0', aspectRatio: '1 / 1', minWidth: 0 }}
                                     initial="hidden"
                                     whileInView="visible"
-                                    viewport={{ once: true, margin: "-50px" }}
+                                    viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                                     variants={{
                                       ...fadeInUpVariants,
                                       visible: {
@@ -3526,7 +3526,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                                     }}
                                     initial="hidden"
                                     whileInView="visible"
-                                    viewport={{ once: true, margin: "-50px" }}
+                                    viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                                     variants={{
                                       ...fadeInUpVariants,
                                       visible: {
@@ -3569,7 +3569,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                       className={`flex flex-col ${section.title ? 'gap-[24px] md:gap-[24px] lg:gap-[40px]' : 'gap-[16px]'} max-w-[720px]`}
                       initial="hidden"
                       whileInView="visible"
-                      viewport={{ once: true, margin: "-50px" }}
+                      viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                       variants={fadeInUpVariants}
                     >
                       {/* Overline + Title Container */}
@@ -3599,7 +3599,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                               className="font-sans text-[16px] md:text-[18px] lg:text-[20px] text-[var(--color-8)] font-normal tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.3px] leading-[26px] md:leading-[30px] lg:leading-[32px] text-left"
                               initial="hidden"
                               whileInView="visible"
-                              viewport={{ once: true, margin: "-50px" }}
+                              viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                               variants={{
                                 ...fadeInUpVariants,
                                 visible: {
@@ -3628,7 +3628,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                         }}
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, margin: "-50px" }}
+                        viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                         variants={{
                           ...fadeInUpVariants,
                           visible: {
@@ -3673,7 +3673,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
               className="font-sans text-[16px] md:text-[18px] lg:text-[22px] text-[var(--color-8)] font-semibold tracking-[-0.24px] md:tracking-[-0.27px] lg:tracking-[-0.3px] leading-[26px] md:leading-[30px] lg:leading-[32px] text-center"
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
               variants={fadeInUpVariants}
             >
               You've reached the end. Thanks for watching!
@@ -3682,7 +3682,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
               <motion.div
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                 variants={{
                   ...fadeInUpVariants,
                   visible: {
