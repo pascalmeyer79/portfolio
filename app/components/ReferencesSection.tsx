@@ -121,7 +121,7 @@ export const ReferencesSection: React.FC = () => {
 
   const renderLogoRow = (logos: Logo[], paddingLeft: string, paddingRight: string, rowIndex: number) => {
     return (
-      <div className={`flex items-center gap-[16px] md:gap-0 ${paddingLeft} ${paddingRight} py-0 relative w-full h-[120px] md:h-[160px]`}>
+      <div className={`flex items-center gap-[16px] md:gap-0 ${paddingLeft} ${paddingRight} py-0 relative w-full h-[100px] md:h-[160px]`}>
         {logos.map((logo, index) => {
           const animationOrder = getLogoAnimationOrder(logo.id);
           const baseDelay = 0.2; // Start delay
@@ -175,7 +175,7 @@ export const ReferencesSection: React.FC = () => {
   const numLogosPerRow = 5;
   const numDividers = numLogosPerRow - 1;
   const rowHeight = 160;
-  const rowHeightMobile = 120;
+  const rowHeightMobile = 100;
   const horizontalDividerHeight = 1;
   const horizontalDividerMargin = 16; // my-4 = 16px oben und unten
   const totalHeight = rowHeight * 2 + horizontalDividerHeight + horizontalDividerMargin * 2;
@@ -226,13 +226,13 @@ export const ReferencesSection: React.FC = () => {
         </div>
 
         {/* Logos Grid */}
-        <div className="flex flex-col items-start relative w-full h-[273px] md:h-[353px]">
+        <div className="flex flex-col items-start relative w-full h-[200px] md:h-[353px]">
           {/* Upper Row */}
           {renderLogoRow(LOGOS.slice(0, 5), "pl-0 md:pl-[20px]", "pr-0", 0)}
 
           {/* Horizontal Divider */}
           <motion.div
-            className="relative w-full"
+            className="hidden md:block relative w-full"
             style={{
               height: "1px",
               background: "linear-gradient(to right, var(--color-100) 0%, var(--color-92) 50%, var(--color-100) 100%)",
