@@ -116,10 +116,10 @@ export const Navbar = ({ selection }: NavbarProps = {}) => {
         />
       </Link>
 
-      {/* Center: Toggle Navigation */}
+      {/* Center: Toggle Navigation - absolutely centered */}
       <nav
         ref={navRef}
-        className="backdrop-blur-xl bg-[var(--color-96-50)] border-2 border-[var(--color-56-04)] flex items-center justify-end rounded-[50px] shrink-0 relative"
+        className="absolute left-1/2 transform -translate-x-1/2 backdrop-blur-xl bg-[var(--color-96-50)] border-2 border-[var(--color-56-04)] flex items-center justify-center rounded-[50px] shrink-0 relative"
         style={{ padding: '2px' }}
       >
         <div
