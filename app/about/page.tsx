@@ -11,6 +11,7 @@ import {
   AnimatedHeadlineFadeInBottom,
   AnimatedParagraphFadeInBottom,
 } from "../components/AnimatedText";
+import { useViewport } from "../utils/useViewport";
 
 type Experience = {
   id: string;
@@ -107,6 +108,7 @@ type CursorPreview = {
 };
 
 export default function AboutPage() {
+  const { getViewport } = useViewport();
   const [preview, setPreview] = useState<CursorPreview | null>(null);
   const { theme } = useTheme();
   
@@ -364,7 +366,7 @@ export default function AboutPage() {
             className="bg-[var(--color-100)] rounded-[10px] flex flex-col gap-[32px] md:gap-[40px] px-[16px] md:px-0 py-[16px] md:py-[40px]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={getViewport()}
             transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1] }}
           >
             {/* Work Experience */}
@@ -374,7 +376,7 @@ export default function AboutPage() {
                 style={{ borderBottomColor: theme === 'dark' ? 'var(--color-98)' : 'var(--color-92)' }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={getViewport()}
                 transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 0.61, 0.36, 1] }}
               >
                 <h3 className="flex-1 font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-semibold tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px]">
@@ -396,7 +398,7 @@ export default function AboutPage() {
                   onMouseLeave={handleRowLeave}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
+                  viewport={getViewport()}
                   transition={{ duration: 0.6, delay: 0.2 + (idx * 0.1), ease: [0.22, 0.61, 0.36, 1] }}
                 >
                   <p className="font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px] mb-0">
@@ -417,7 +419,7 @@ export default function AboutPage() {
                 style={{ borderBottomColor: theme === 'dark' ? 'var(--color-98)' : 'var(--color-92)' }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={getViewport()}
                 transition={{ duration: 0.6, delay: 1.0, ease: [0.22, 0.61, 0.36, 1] }}
               >
                 <h3 className="flex-1 font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-semibold tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px]">
@@ -436,7 +438,7 @@ export default function AboutPage() {
                   style={idx === EDUCATION.length - 1 ? {} : { borderBottomColor: theme === 'dark' ? 'var(--color-94-50)' : 'var(--color-96)' }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
+                  viewport={getViewport()}
                   transition={{ duration: 0.6, delay: 1.1 + (idx * 0.1), ease: [0.22, 0.61, 0.36, 1] }}
                 >
                   <p className="font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px] mb-0">

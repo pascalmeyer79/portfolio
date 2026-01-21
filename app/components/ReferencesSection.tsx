@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useViewport } from "../utils/useViewport";
 
 type Logo = {
   id: string;
@@ -111,6 +112,7 @@ const horizontalDividerVariants = {
 };
 
 export const ReferencesSection: React.FC = () => {
+  const { getViewport } = useViewport();
   // Berechne Logo-Animationsreihenfolge: Sony(0), VW(5), Logitech(1), Bleeding(6), etc.
   const getLogoAnimationOrder = (logoId: string): number => {
     const order = ['sony', 'vw', 'logitech', 'bleeding', 'porsche', 'avid', 'loys', 'rhodes', 'brp', 'metro'];
@@ -188,7 +190,7 @@ export const ReferencesSection: React.FC = () => {
               className="font-serif text-[32px] sm:text-[36px] md:text-[40px] lg:text-[44px] xl:text-[48px] text-[var(--color-8)] tracking-[-0.16px] sm:tracking-[-0.18px] md:tracking-[-0.20px] lg:tracking-[-0.22px] xl:tracking-[-0.24px] leading-[40px] sm:leading-[45px] md:leading-[50px] lg:leading-[55px] xl:leading-[60px] whitespace-nowrap md:whitespace-normal text-center md:text-left"
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "0px 0px -100px 0px", amount: 0.3 }}
+              viewport={getViewport()}
               transition={{ staggerChildren: 0.06 }}
             >
               <motion.span variants={headlineWordVariants} className="inline-block">
@@ -214,7 +216,7 @@ export const ReferencesSection: React.FC = () => {
             variants={paragraphVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={getViewport()}
           >
             Versatility is at my core. Over the last decade, I have helped 40+
             companies across 20+ industries launch successful digital products.

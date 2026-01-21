@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useTheme } from "../theme-provider";
 import { FOOTER_LINKS, COMPANY_DETAILS, ADDRESSES } from "../data";
+import { useViewport } from "../utils/useViewport";
 
 type FooterProps = {
   version?: "Default" | "Contact" | "Portfolio" | "PortfolioContact";
@@ -25,6 +26,7 @@ const columnVariants = {
 
 export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
   const { theme } = useTheme();
+  const { getViewport } = useViewport();
   const [isEmailHovered, setIsEmailHovered] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [linkAnimationState, setLinkAnimationState] = useState<Record<string, 'idle' | 'going-out' | 'coming-in'>>({});
@@ -57,7 +59,7 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
         variants={columnVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "0px 0px -100px 0px", amount: 0.3 }}
+        viewport={getViewport()}
         custom={0}
       >
         <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[22px] sm:leading-[24px] md:leading-[26px] relative shrink-0 tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] font-semibold">
@@ -89,7 +91,7 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
         variants={columnVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "0px 0px -100px 0px", amount: 0.3 }}
+        viewport={getViewport()}
         custom={1}
       >
         <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-semibold tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] relative shrink-0 mb-[4px]" style={{ color: textColor }}>
@@ -152,7 +154,7 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
         variants={columnVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "0px 0px -100px 0px", amount: 0.3 }}
+        viewport={getViewport()}
         custom={2}
       >
         <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-semibold tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] mb-[4px]">
@@ -174,7 +176,7 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
           variants={columnVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "0px 0px -100px 0px", amount: 0.3 }}
+          viewport={getViewport()}
           custom={3 + index}
         >
           <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-semibold tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] mb-[4px]">

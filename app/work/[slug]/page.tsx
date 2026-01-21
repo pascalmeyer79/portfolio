@@ -12,6 +12,7 @@ import { ImageComparison } from "../../components/ImageComparison";
 import { CounterAnimation } from "../../components/CounterAnimation";
 import { PrimaryButton } from "../../components/PrimaryButton";
 import { AnimatedHeadline } from "../../components/AnimatedHeadline";
+import { useViewport } from "../../utils/useViewport";
 
 const AnimatedScrollImage = ({ src, alt }: { src: string; alt: string }) => {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -686,6 +687,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
   const slugString: string = slug;
   const config = WORKS[slugString];
   const { theme } = useTheme();
+  const { getViewport } = useViewport();
   const heroContainerRef = useRef<HTMLDivElement>(null);
 
   // Helper function to get border radius (avoids TypeScript type narrowing issues)
@@ -899,7 +901,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
               }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "0px 0px -100px 0px", amount: 0.3 }}
+              viewport={getViewport()}
               transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1], delay: 0.2 }}
             >
               <style dangerouslySetInnerHTML={{

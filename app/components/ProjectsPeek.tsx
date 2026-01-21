@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { PasswordModal, checkAuth } from "./PasswordModal";
 import { ProjectImage } from "./ProjectImage";
+import { useViewport } from "../utils/useViewport";
 
 import { PROJECTS } from "../data";
 import type { Project } from "../data";
@@ -126,6 +127,7 @@ const containerVariants = {
 
 export const ProjectsPeek: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const { getViewport } = useViewport();
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const cardRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -290,7 +292,7 @@ export const ProjectsPeek: React.FC = () => {
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "0px 0px -100px 0px", amount: 0.3 }}
+              viewport={getViewport()}
               onMouseDown={handleDragStart}
               onMouseMove={handleDragMove}
               onMouseUp={handleDragEnd}

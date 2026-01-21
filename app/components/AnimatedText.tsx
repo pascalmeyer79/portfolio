@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import { useViewport } from "../utils/useViewport";
 
 // Headline word-by-word fade in from bottom
 const headlineWordVariants = {
@@ -41,6 +42,7 @@ export const AnimatedHeadlineFadeInBottom = ({
   as = "h2",
 }: AnimatedHeadlineProps) => {
   const Component = motion[as];
+  const { getViewport } = useViewport();
   
   // Convert children to string if it's a string, otherwise extract text
   const text = typeof children === "string" ? children : "";
@@ -57,7 +59,7 @@ export const AnimatedHeadlineFadeInBottom = ({
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "0px 0px -100px 0px", amount: 0.3 }}
+      viewport={getViewport()}
       transition={{ staggerChildren: staggerDelay, delayChildren: delay }}
     >
       {words.map((word, index) => (
@@ -88,6 +90,7 @@ export const AnimatedParagraphFadeInBottom = ({
   as = "p",
 }: AnimatedParagraphProps) => {
   const Component = motion[as];
+  const { getViewport } = useViewport();
   
   return (
     <Component
@@ -95,7 +98,7 @@ export const AnimatedParagraphFadeInBottom = ({
       variants={paragraphVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "0px 0px -100px 0px", amount: 0.3 }}
+      viewport={getViewport()}
       transition={{ delay }}
     >
       {children}
