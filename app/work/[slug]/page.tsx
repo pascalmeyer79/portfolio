@@ -678,13 +678,14 @@ const fadeInUpVariants = {
   },
 };
 
-export default function WorkPage({
+export default async function WorkPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slugString: string }>;
 }) {
-  const slug: string = params.slug;
-  const config = WORKS[slug];
+  const { slugString } = await params;
+  const slugStringString: string = slugString;
+  const config = WORKS[slugStringString];
   const { theme } = useTheme();
   const heroContainerRef = useRef<HTMLDivElement>(null);
 
@@ -696,7 +697,7 @@ export default function WorkPage({
   };
 
   // Base border radius for Vario: 32px
-  const baseBorderRadius = slug === 'vario' ? 32 : 16;
+  const baseBorderRadius = slugStringString === 'vario' ? 32 : 16;
 
   // Bei Screens über 1920px soll der border-radius bei 20px bleiben
   const [isLargeScreen, setIsLargeScreen] = useState(false);
@@ -754,7 +755,7 @@ export default function WorkPage({
   const getInitialPaddingY = () => {
     if (screenSize === 'mobile') {
       // For Porsche and Tenzir, use 32px on mobile
-      if (slug === 'porsche' || slug === 'tenzir') return 32;
+      if (slugString === 'porsche' || slugString === 'tenzir') return 32;
       return 16;
     }
     if (screenSize === 'tablet') return 24;
@@ -774,7 +775,7 @@ export default function WorkPage({
   const getFinalPaddingY = () => {
     if (screenSize === 'mobile') {
       // For Porsche and Tenzir, use 32px on mobile
-      if (slug === 'porsche' || slug === 'tenzir') return 32;
+      if (slugString === 'porsche' || slugString === 'tenzir') return 32;
       return 16;
     }
     if (screenSize === 'tablet') return 40;
@@ -909,12 +910,12 @@ export default function WorkPage({
                 }
                 @media (min-width: 1920px) {
                   .hero-container {
-                    border-bottom-left-radius: ${slug === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slug === 'vw' ? '8px' : 'clamp(16px, 1.5vw, 16px)'};
-                    border-bottom-right-radius: ${slug === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slug === 'vw' ? '8px' : 'clamp(16px, 1.5vw, 16px)'};
+                    border-bottom-left-radius: ${slugString === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(16px, 1.5vw, 16px)'};
+                    border-bottom-right-radius: ${slugString === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(16px, 1.5vw, 16px)'};
                   }
                 }
                 .hero-image {
-                  border-radius: ${slug === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slug === 'vw' ? '8px' : 'clamp(16px, 1.5vw, 16px)'};
+                  border-radius: ${slugString === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(16px, 1.5vw, 16px)'};
                 }
               `
               }} />
@@ -979,7 +980,7 @@ export default function WorkPage({
                             <style dangerouslySetInnerHTML={{
                               __html: `
                             .${uniqueId} {
-                              border-radius: ${slug === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slug === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                              border-radius: ${slugString === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                               aspect-ratio: ${widthRatio};
                               height: auto;
                               width: calc(((100% + ${totalOverlap}px) / ${totalScaleSum}) * ${sizeScale});
@@ -990,7 +991,7 @@ export default function WorkPage({
                           `
                             }} />
                             <motion.div
-                              className={`relative overflow-hidden ${slug === 'vario' ? 'border-responsive' : 'border-4'} ${uniqueId}`}
+                              className={`relative overflow-hidden ${slugString === 'vario' ? 'border-responsive' : 'border-4'} ${uniqueId}`}
                               style={{
                                 backdropFilter: "blur(10px)",
                                 WebkitBackdropFilter: "blur(10px)",
@@ -1052,7 +1053,7 @@ export default function WorkPage({
       {/* Overview Section */}
       <section className={`relative bg-[var(--color-96)] ${config.noBorder ? 'pt-[60px] md:pt-[80px] lg:pt-[140px] xl:pt-[160px] 2xl:pt-[200px] pb-[60px] md:pb-[80px] lg:pb-[100px] xl:pb-[120px] 2xl:pb-[160px]' : 'pt-[60px] md:pt-[80px] lg:pt-[140px] xl:pt-[160px] 2xl:pt-[200px] pb-[60px] md:pb-[80px] lg:pb-[100px] xl:pb-[120px] 2xl:pb-[160px]'}`}>
         <div className="max-w-[1920px] mx-auto px-[16px] sm:px-[40px] lg:px-[60px] 2xl:px-[100px]">
-          <div className={`grid grid-cols-1 lg:grid-cols-3 gap-[40px] md:gap-[60px] lg:gap-[40px] 2xl:gap-[80px] ${config.noBorder ? 'mb-0' : (slug === 'tenzir' || slug === 'porsche' || slug === 'vario') ? 'mb-0 lg:mb-[120px]' : 'mb-[120px]'}`}>
+          <div className={`grid grid-cols-1 lg:grid-cols-3 gap-[40px] md:gap-[60px] lg:gap-[40px] 2xl:gap-[80px] ${config.noBorder ? 'mb-0' : (slugString === 'tenzir' || slugString === 'porsche' || slugString === 'vario') ? 'mb-0 lg:mb-[120px]' : 'mb-[120px]'}`}>
             {/* Column 1-2: Summary (spans 2 columns) */}
             <motion.div
               className="flex flex-col gap-[12px] lg:col-span-2 lg:pr-[80px]"
@@ -1116,7 +1117,7 @@ export default function WorkPage({
           </div>
 
           {/* Summary Images Row (for Tenzir) */}
-          {slug === 'tenzir' && (() => {
+          {slugString === 'tenzir' && (() => {
             const summaryImages = [
               { src: "/images/tenzir/Tenzir_07.jpg" },
               { src: "/images/tenzir/Tenzir_06.jpg" },
@@ -1178,7 +1179,7 @@ export default function WorkPage({
           })()}
 
           {/* Summary Images Row (for Porsche) */}
-          {slug === 'porsche' && (() => {
+          {slugString === 'porsche' && (() => {
             const summaryImages = [
               { src: "/images/porsche/Porsche_02.jpg", colIdx: 0, rowIdx: 0 },
               { src: "/images/porsche/Porsche_01_Overview.jpg", spanRows: true, colIdx: 1, rowIdx: 0 },
@@ -1251,7 +1252,7 @@ export default function WorkPage({
           })()}
 
           {/* Summary Images Row (for Vario) */}
-          {slug === 'vario' && (() => {
+          {slugString === 'vario' && (() => {
             const summaryImages = [
               { src: "/images/vario/Vario_01.png", noBorder: false },
               { src: "/images/vario/Vario_06.png", noBorder: false },
@@ -1265,14 +1266,14 @@ export default function WorkPage({
                   <style dangerouslySetInnerHTML={{
                     __html: `
                       .summary-row-image {
-                        border-radius: ${slug === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slug === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                        border-radius: ${slugString === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                       }
                     `
                   }} />
                   {summaryImages.map((img, idx) => (
                     <motion.div
                       key={idx}
-                      className={`summary-row-image relative overflow-hidden ${slug === 'vario' ? 'border-responsive' : 'border-4'}`}
+                      className={`summary-row-image relative overflow-hidden ${slugString === 'vario' ? 'border-responsive' : 'border-4'}`}
                       style={{
                         backgroundColor: 'transparent',
                         borderColor: 'var(--color-0-80)',
@@ -1330,7 +1331,7 @@ export default function WorkPage({
               <style dangerouslySetInnerHTML={{
                 __html: `
                   .summary-image {
-                    border-radius: ${slug === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slug === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                    border-radius: ${slugString === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                   }
                 `
               }} />
@@ -1347,7 +1348,7 @@ export default function WorkPage({
           )}
 
           {/* First Section inside Overview (for VW) */}
-          {config.sections && config.sections.length > 0 && config.sections[0] && slug === 'vw' && (() => {
+          {config.sections && config.sections.length > 0 && config.sections[0] && slugString === 'vw' && (() => {
             const section = config.sections[0];
             return (
               <div className="mt-[60px] md:mt-[80px] lg:mt-[100px]">
@@ -1435,16 +1436,16 @@ export default function WorkPage({
                               }}
                             >
                               <motion.div
-                                className={`row-image relative overflow-hidden ${shouldHaveBorder ? ((slug as string) === 'vario' ? 'border-responsive' : 'border-4') : ''}`}
+                                className={`row-image relative overflow-hidden ${shouldHaveBorder ? ((slugString as string) === 'vario' ? 'border-responsive' : 'border-4') : ''}`}
                                 style={{
                                   ...(shouldHaveBorder ? {
                                     backgroundColor: 'transparent',
                                     borderColor: 'var(--color-0-80)',
                                     backdropFilter: 'blur(10px)',
                                     WebkitBackdropFilter: 'blur(10px)',
-                                    boxSizing: (slug as string) === 'vario' ? 'border-box' : 'content-box'
+                                    boxSizing: (slugString as string) === 'vario' ? 'border-box' : 'content-box'
                                   } : {}),
-                                  borderRadius: (slug as string) === 'vario' ? 'clamp(18px, 2.2vw, 44px)' : '16px'
+                                  borderRadius: (slugString as string) === 'vario' ? 'clamp(18px, 2.2vw, 44px)' : '16px'
                                 }}
                               >
                                 <Image
@@ -1478,7 +1479,7 @@ export default function WorkPage({
       {/* Content Sections */}
       {config.sections.map((section, index) => {
         // Skip first section for VW (already rendered in Overview Section)
-        if (slug === 'vw' && index === 0) {
+        if (slugString === 'vw' && index === 0) {
           return null;
         }
 
@@ -1531,7 +1532,7 @@ export default function WorkPage({
                   <style dangerouslySetInnerHTML={{
                     __html: `
                       .content-image {
-                        border-radius: ${slug === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slug === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                        border-radius: ${slugString === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                       }
                     `
                   }} />
@@ -1542,7 +1543,7 @@ export default function WorkPage({
                       borderColor: 'var(--color-0-80)',
                       backdropFilter: 'blur(10px)',
                       WebkitBackdropFilter: 'blur(10px)',
-                      boxSizing: slug === 'vario' ? 'border-box' : 'content-box'
+                      boxSizing: slugString === 'vario' ? 'border-box' : 'content-box'
                     }}
                     initial="hidden"
                     whileInView="visible"
@@ -1572,7 +1573,7 @@ export default function WorkPage({
                   <style dangerouslySetInnerHTML={{
                     __html: `
                       .grid-image {
-                        border-radius: ${slug === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slug === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                        border-radius: ${slugString === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                       }
                     `
                   }} />
@@ -1585,7 +1586,7 @@ export default function WorkPage({
                         borderColor: 'var(--color-0-80)',
                         backdropFilter: 'blur(10px)',
                         WebkitBackdropFilter: 'blur(10px)',
-                        boxSizing: slug === 'vario' ? 'border-box' : 'content-box'
+                        boxSizing: slugString === 'vario' ? 'border-box' : 'content-box'
                       }}
                       initial="hidden"
                       whileInView="visible"
@@ -1624,11 +1625,11 @@ export default function WorkPage({
                 if (hasSpanningImage) {
                   gridClass = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[40px]";
                 } else if (firstRowCount === 4) {
-                  const mobileGap = slug === 'vario' ? '16px' : '40px';
+                  const mobileGap = slugString === 'vario' ? '16px' : '40px';
                   gridClass = hasNoBorderCards
                     ? `grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-4 gap-x-[${mobileGap}] md:gap-x-[40px] gap-y-[${mobileGap}] md:gap-y-[40px] lg:gap-x-[40px] lg:gap-y-[40px] 2xl:gap-x-[80px] 2xl:gap-y-[80px]`
                     : `grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-4 gap-x-[${mobileGap}] md:gap-x-[40px] gap-y-[${mobileGap}] md:gap-y-[40px] lg:gap-x-[40px] lg:gap-y-[40px] 2xl:gap-x-[80px] 2xl:gap-y-[80px]`;
-                } else if (slug === 'tenzir' && section.title && section.title.includes("From data chaos")) {
+                } else if (slugString === 'tenzir' && section.title && section.title.includes("From data chaos")) {
                   // Force 2 columns for Tenzir 'From data chaos to clarity' section images on all screens
                   gridClass = "grid grid-cols-2 lg:grid-cols-2 gap-[16px] md:gap-[60px] lg:gap-[40px] xl:gap-[40px]";
                 }
@@ -1670,7 +1671,7 @@ export default function WorkPage({
                     <style dangerouslySetInnerHTML={{
                       __html: `
                         .row-image {
-                          border-radius: ${slug === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slug === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                          border-radius: ${slugString === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                         }
                       `
                     }} />
@@ -1702,13 +1703,13 @@ export default function WorkPage({
                           }}
                         >
                           <motion.div
-                            className={`row-image relative overflow-hidden ${shouldHaveBorder ? (slug === 'vario' ? 'border-responsive' : 'border-4') : ''} ${img.spanRows ? 'lg:row-span-2' : ''}`}
+                            className={`row-image relative overflow-hidden ${shouldHaveBorder ? (slugString === 'vario' ? 'border-responsive' : 'border-4') : ''} ${img.spanRows ? 'lg:row-span-2' : ''}`}
                             style={shouldHaveBorder ? {
                               backgroundColor: 'transparent',
                               borderColor: 'var(--color-0-80)',
                               backdropFilter: 'blur(10px)',
                               WebkitBackdropFilter: 'blur(10px)',
-                              boxSizing: slug === 'vario' ? 'border-box' : 'content-box'
+                              boxSizing: slugString === 'vario' ? 'border-box' : 'content-box'
                             } : {}}
                           >
                             <div
@@ -1765,7 +1766,7 @@ export default function WorkPage({
                           <style dangerouslySetInnerHTML={{
                             __html: `
                               .full-width-image {
-                                border-radius: ${slug === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slug === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                                border-radius: ${slugString === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                               }
                             `
                           }} />
@@ -1894,7 +1895,7 @@ export default function WorkPage({
                             <style dangerouslySetInnerHTML={{
                               __html: `
                                 .row-image {
-                                  border-radius: ${slug === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slug === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                                  border-radius: ${slugString === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                                 }
                               `
                             }} />
@@ -1920,13 +1921,13 @@ export default function WorkPage({
                                   }}
                                 >
                                   <motion.div
-                                    className={`row-image relative overflow-hidden ${shouldHaveBorder ? (slug === 'vario' ? 'border-responsive' : 'border-4') : ''} ${img.spanRows ? 'lg:row-span-2' : ''}`}
+                                    className={`row-image relative overflow-hidden ${shouldHaveBorder ? (slugString === 'vario' ? 'border-responsive' : 'border-4') : ''} ${img.spanRows ? 'lg:row-span-2' : ''}`}
                                     style={shouldHaveBorder ? {
                                       backgroundColor: 'transparent',
                                       borderColor: 'var(--color-0-80)',
                                       backdropFilter: 'blur(10px)',
                                       WebkitBackdropFilter: 'blur(10px)',
-                                      boxSizing: slug === 'vario' ? 'border-box' : 'content-box'
+                                      boxSizing: slugString === 'vario' ? 'border-box' : 'content-box'
                                     } : {}}
                                   >
                                     <div
@@ -1969,7 +1970,7 @@ export default function WorkPage({
                   ) : (
                     /* Standard Layout: Headlines (left) + Text (right) - OR Text (left) + Images (right) for Vario */
                     (() => {
-                      const isVarioWithImages = slug === 'vario' && section.images && section.images.length > 0;
+                      const isVarioWithImages = slugString === 'vario' && section.images && section.images.length > 0;
 
                       if (isVarioWithImages) {
                         /* Vario Layout: Text (left) + Videos (right) */
@@ -2034,7 +2035,7 @@ export default function WorkPage({
                               <style dangerouslySetInnerHTML={{
                                 __html: `
                                   .text-image-app-screen {
-                                    border-radius: ${slug === 'vario' ? 'clamp(22px, 4.5vw, 48px)' : slug === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                                    border-radius: ${slugString === 'vario' ? 'clamp(22px, 4.5vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                                   }
                                 `
                               }} />
@@ -2042,7 +2043,7 @@ export default function WorkPage({
                                 {section.images?.map((img, imgIndex) => (
                                   <motion.div
                                     key={imgIndex}
-                                    className={`text-image-app-screen relative overflow-hidden ${slug === 'vario' ? 'border-responsive' : 'border-4'}`}
+                                    className={`text-image-app-screen relative overflow-hidden ${slugString === 'vario' ? 'border-responsive' : 'border-4'}`}
                                     style={{
                                       backgroundColor: 'transparent',
                                       borderColor: 'var(--color-0-80)',
@@ -2147,7 +2148,7 @@ export default function WorkPage({
                               <style dangerouslySetInnerHTML={{
                                 __html: `
                                   .row-image {
-                                    border-radius: ${slug === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slug === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                                    border-radius: ${slugString === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                                   }
                                 `
                               }} />
@@ -2173,13 +2174,13 @@ export default function WorkPage({
                                     }}
                                   >
                                     <motion.div
-                                      className={`row-image relative overflow-hidden ${shouldHaveBorder ? (slug === 'vario' ? 'border-responsive' : 'border-4') : ''} ${img.spanRows ? 'lg:row-span-2' : ''}`}
+                                      className={`row-image relative overflow-hidden ${shouldHaveBorder ? (slugString === 'vario' ? 'border-responsive' : 'border-4') : ''} ${img.spanRows ? 'lg:row-span-2' : ''}`}
                                       style={shouldHaveBorder ? {
                                         backgroundColor: 'transparent',
                                         borderColor: 'var(--color-0-80)',
                                         backdropFilter: 'blur(10px)',
                                         WebkitBackdropFilter: 'blur(10px)',
-                                        boxSizing: slug === 'vario' ? 'border-box' : 'content-box'
+                                        boxSizing: slugString === 'vario' ? 'border-box' : 'content-box'
                                       } : {}}
                                     >
                                       <div
@@ -2357,12 +2358,12 @@ export default function WorkPage({
                         </p>
                       )}
                     </motion.div>
-                  ) : section.images && section.images.length > 0 && !section.centeredLayout && !(slug === 'vario') && (
+                  ) : section.images && section.images.length > 0 && !section.centeredLayout && !(slugString === 'vario') && (
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-[16px] md:gap-[40px] lg:gap-[40px] 2xl:gap-[80px]">
                       <style dangerouslySetInnerHTML={{
                         __html: `
                         .text-image-container {
-                          border-radius: ${slug === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slug === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                          border-radius: ${slugString === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                         }
                       `
                       }} />
@@ -2389,7 +2390,7 @@ export default function WorkPage({
                             borderColor: 'var(--color-0-80)',
                             backdropFilter: 'blur(10px)',
                             WebkitBackdropFilter: 'blur(10px)',
-                            boxSizing: slug === 'vario' ? 'border-box' : 'content-box'
+                            boxSizing: slugString === 'vario' ? 'border-box' : 'content-box'
                           } : {}}>
                             <Image
                               src={theme === "dark" && img.srcDark ? img.srcDark : img.src}
@@ -2445,7 +2446,7 @@ export default function WorkPage({
                         <style dangerouslySetInnerHTML={{
                           __html: `
                             .row-image {
-                              border-radius: ${slug === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slug === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                              border-radius: ${slugString === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                             }
                           `
                         }} />
@@ -2460,13 +2461,13 @@ export default function WorkPage({
                               style={img.noBorder ? { borderRadius: 'clamp(12px, 0.8vw, 24px)' } : {}}
                             >
                               <motion.div
-                                className={`row-image relative overflow-hidden ${shouldHaveBorder ? (slug === 'vario' ? 'border-responsive' : 'border-4') : ''} ${img.spanRows ? 'lg:row-span-2' : ''}`}
+                                className={`row-image relative overflow-hidden ${shouldHaveBorder ? (slugString === 'vario' ? 'border-responsive' : 'border-4') : ''} ${img.spanRows ? 'lg:row-span-2' : ''}`}
                                 style={shouldHaveBorder ? {
                                   backgroundColor: 'transparent',
                                   borderColor: 'var(--color-0-80)',
                                   backdropFilter: 'blur(10px)',
                                   WebkitBackdropFilter: 'blur(10px)',
-                                  boxSizing: slug === 'vario' ? 'border-box' : 'content-box'
+                                  boxSizing: slugString === 'vario' ? 'border-box' : 'content-box'
                                 } : {}}
                                 initial="hidden"
                                 whileInView="visible"
@@ -2525,7 +2526,7 @@ export default function WorkPage({
                       <style dangerouslySetInnerHTML={{
                         __html: `
                           .full-width-image-multi {
-                            border-radius: ${slug === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slug === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                            border-radius: ${slugString === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                           }
                         `
                       }} />
@@ -2620,7 +2621,7 @@ export default function WorkPage({
                       <style dangerouslySetInnerHTML={{
                         __html: `
                           .full-width-image {
-                            border-radius: ${slug === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slug === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                            border-radius: ${slugString === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                           }
                         `
                       }} />
@@ -2726,7 +2727,7 @@ export default function WorkPage({
                             <style dangerouslySetInnerHTML={{
                               __html: `
                                 .row-image {
-                                  border-radius: ${slug === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slug === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                                  border-radius: ${slugString === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                                 }
                               `
                             }} />
@@ -2737,13 +2738,13 @@ export default function WorkPage({
                               return (
                                 <motion.div
                                   key={globalIdx}
-                                  className={`row-image relative overflow-hidden ${shouldHaveBorder ? (slug === 'vario' ? 'border-responsive' : 'border-4') : ''} ${img.spanRows ? 'lg:row-span-2' : ''}`}
+                                  className={`row-image relative overflow-hidden ${shouldHaveBorder ? (slugString === 'vario' ? 'border-responsive' : 'border-4') : ''} ${img.spanRows ? 'lg:row-span-2' : ''}`}
                                   style={shouldHaveBorder ? {
                                     backgroundColor: 'transparent',
                                     borderColor: 'var(--color-0-80)',
                                     backdropFilter: 'blur(10px)',
                                     WebkitBackdropFilter: 'blur(10px)',
-                                    boxSizing: slug === 'vario' ? 'border-box' : 'content-box'
+                                    boxSizing: slugString === 'vario' ? 'border-box' : 'content-box'
                                   } : {}}
                                   initial="hidden"
                                   whileInView="visible"
@@ -3192,7 +3193,7 @@ export default function WorkPage({
                       <style dangerouslySetInnerHTML={{
                         __html: `
                           .process-image {
-                            border-radius: ${slug === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slug === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                            border-radius: ${slugString === 'vario' ? 'clamp(22px, 2.5vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                           }
                         `
                       }} />
@@ -3327,7 +3328,7 @@ export default function WorkPage({
                       <style dangerouslySetInnerHTML={{
                         __html: `
                           .design-branding-image {
-                            border-radius: ${getBorderRadius(slug)};
+                            border-radius: ${getBorderRadius(slugString)};
                           }
                           .animated-scroll-container {
                             overflow: hidden;
@@ -3678,7 +3679,7 @@ export default function WorkPage({
             >
               You've reached the end. Thanks for watching!
             </motion.p>
-            {slug !== 'vw' && (
+            {slugString !== 'vw' && (
               <motion.div
                 initial="hidden"
                 whileInView="visible"

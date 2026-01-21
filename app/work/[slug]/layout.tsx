@@ -2,18 +2,13 @@ import { Metadata } from "next";
 import { PROJECTS } from "../../data";
 
 type Props = {
-    params: { slug: string };
+    params: Promise<{ slug: string }>;
     children: React.ReactNode;
 };
 
-export async function generateStaticParams() {
-    return PROJECTS.map((project) => ({
-        slug: project.id,
-    }));
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const project = PROJECTS.find((p) => p.id === params.slug);
+    const { slug } = await params;
+    const project = PROJECTS.find((p) => p.id === slug);
 
     if (!project) {
         return {
@@ -41,6 +36,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
-export default function ProjectLayout({ children }: Props) {
+export default async function ProjectLayout({ children }: Props) {
     return <>{children}</>;
 }
