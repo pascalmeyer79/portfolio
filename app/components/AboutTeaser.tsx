@@ -112,7 +112,7 @@ export const AboutTeaser: React.FC = () => {
                 transition: 'background-position 0.5s cubic-bezier(0.22, 0.61, 0.36, 1)',
               }}
             >
-              <span className="flex items-center justify-center px-[40px] py-[8px] rounded-[40px] bg-[var(--color-100)] backdrop-blur-sm backdrop-filter font-sans text-[14px] md:text-[16px] leading-[22px] md:leading-[26px] font-medium text-[var(--color-16)]">
+              <span className="flex items-center justify-center px-[40px] py-[8px] rounded-[40px] bg-[var(--color-100)] backdrop-blur-sm backdrop-filter font-sans text-[16px] leading-[26px] font-medium text-[var(--color-16)]">
                 <span className="md:hidden">About Me</span>
                 <span className="hidden md:inline">More About Me</span>
               </span>
