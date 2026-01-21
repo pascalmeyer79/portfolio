@@ -101,27 +101,30 @@ export const Navbar = ({ selection }: NavbarProps = {}) => {
   };
 
   return (
-    <header className="sticky top-0 z-[10] flex items-center justify-between pl-[16px] md:pl-[32px] pr-[20px] md:pr-[40px] pt-[max(24px,env(safe-area-inset-top))] pb-[24px] md:py-[24px] bg-transparent h-[82px]">
+    <header className="sticky top-0 z-[10] grid grid-cols-3 items-center pl-[16px] md:pl-[32px] pr-[20px] md:pr-[40px] pt-[max(24px,env(safe-area-inset-top))] pb-[24px] md:py-[24px] bg-transparent h-[82px]">
       {/* Left: Logo */}
-      <Link href="/" className="h-[28px] w-[48px] md:h-[34px] md:w-[58px] relative shrink-0">
-        <Image
-          src="/images/logo_pascalmeyer.svg"
-          alt="Pascal Meyer"
-          fill
-          className="object-contain"
-          style={{
-            filter: theme === "dark" ? "brightness(0) invert(1)" : "none",
-          }}
-          priority
-        />
-      </Link>
+      <div className="flex justify-start">
+        <Link href="/" className="h-[28px] w-[48px] md:h-[34px] md:w-[58px] relative shrink-0">
+          <Image
+            src="/images/logo_pascalmeyer.svg"
+            alt="Pascal Meyer"
+            fill
+            className="object-contain"
+            style={{
+              filter: theme === "dark" ? "brightness(0) invert(1)" : "none",
+            }}
+            priority
+          />
+        </Link>
+      </div>
 
-      {/* Center: Toggle Navigation - absolutely centered */}
-      <nav
-        ref={navRef}
-        className="absolute left-1/2 transform -translate-x-1/2 backdrop-blur-xl bg-[var(--color-96-50)] border-2 border-[var(--color-56-04)] flex items-center justify-center rounded-[50px] shrink-0 relative"
-        style={{ padding: '2px' }}
-      >
+      {/* Center: Toggle Navigation - centered */}
+      <div className="flex justify-center">
+        <nav
+          ref={navRef}
+          className="backdrop-blur-xl bg-[var(--color-96-50)] border-2 border-[var(--color-56-04)] flex items-center justify-center rounded-[50px] shrink-0 relative"
+          style={{ padding: '2px' }}
+        >
         <div
           className={`absolute rounded-[45px] bg-[var(--color-100)] ${shouldAnimate ? 'transition-all duration-300 ease-out' : ''}`}
           style={{
@@ -151,10 +154,12 @@ export const Navbar = ({ selection }: NavbarProps = {}) => {
             );
           })}
         </ul>
-      </nav>
+        </nav>
+      </div>
 
       {/* Right: Dark mode toggle */}
-      <button
+      <div className="flex justify-end">
+        <button
         type="button"
         onClick={toggleTheme}
         aria-label="Toggle Dark Mode"
@@ -174,6 +179,7 @@ export const Navbar = ({ selection }: NavbarProps = {}) => {
           />
         </div>
       </button>
+      </div>
     </header>
   );
 };
