@@ -147,7 +147,7 @@ export const ReferencesSection: React.FC = () => {
               custom={logoDelay}
             >
               <div
-                className="h-[40px] w-[100px] md:h-[56px] md:w-[140px] lg:h-[64px] lg:w-[160px] relative shrink-0"
+                className={`h-[40px] ${logo.id === 'bleeding' ? 'w-[90px]' : 'w-[100px]'} md:h-[56px] md:w-[140px] lg:h-[64px] lg:w-[160px] relative shrink-0`}
                 style={{
                   WebkitMaskImage: `url(${logo.path})`,
                   maskImage: `url(${logo.path})`,
