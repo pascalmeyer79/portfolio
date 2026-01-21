@@ -692,7 +692,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
 
   // Helper function to get border radius (avoids TypeScript type narrowing issues)
   const getBorderRadius = (projectSlug: string): string => {
-    if (projectSlug === 'vario') return 'clamp(12px, 1.5vw, 32px)';
+    if (projectSlug === 'vario') return 'clamp(22px, 4vw, 48px)';
     if (projectSlug === 'vw') return '8px';
     return 'clamp(16px, 1.5vw, 16px)';
   };
@@ -911,12 +911,12 @@ function WorkPageClient({ slug }: WorkPageProps) {
                 }
                 @media (min-width: 1920px) {
                   .hero-container {
-                    border-bottom-left-radius: ${slugString === 'vario' ? 'clamp(12px, 1.5vw, 32px)' : slugString === 'vw' ? '8px' : 'clamp(16px, 1.5vw, 16px)'};
-                    border-bottom-right-radius: ${slugString === 'vario' ? 'clamp(12px, 1.5vw, 32px)' : slugString === 'vw' ? '8px' : 'clamp(16px, 1.5vw, 16px)'};
+                    border-bottom-left-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(16px, 1.5vw, 16px)'};
+                    border-bottom-right-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(16px, 1.5vw, 16px)'};
                   }
                 }
                 .hero-image {
-                        border-radius: ${slugString === 'vario' ? 'clamp(12px, 1.5vw, 32px)' : slugString === 'vw' ? '8px' : 'clamp(16px, 1.5vw, 16px)'};
+                        border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(16px, 1.5vw, 16px)'};
                 }
               `
               }} />
@@ -981,7 +981,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                             <style dangerouslySetInnerHTML={{
                               __html: `
                             .${uniqueId} {
-                              border-radius: ${slugString === 'vario' ? 'clamp(12px, 1.5vw, 32px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                              border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                               aspect-ratio: ${widthRatio};
                               height: auto;
                               width: calc(((100% + ${totalOverlap}px) / ${totalScaleSum}) * ${sizeScale});
@@ -1267,7 +1267,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                   <style dangerouslySetInnerHTML={{
                     __html: `
                       .summary-row-image {
-                        border-radius: ${slugString === 'vario' ? 'clamp(12px, 1.5vw, 32px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                        border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                       }
                     `
                   }} />
@@ -1332,7 +1332,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
               <style dangerouslySetInnerHTML={{
                 __html: `
                   .summary-image {
-                    border-radius: ${slugString === 'vario' ? 'clamp(12px, 1.5vw, 32px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                    border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                   }
                 `
               }} />
@@ -1533,7 +1533,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                   <style dangerouslySetInnerHTML={{
                     __html: `
                       .content-image {
-                        border-radius: ${slugString === 'vario' ? 'clamp(12px, 1.5vw, 32px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                        border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                       }
                     `
                   }} />
@@ -1574,7 +1574,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                   <style dangerouslySetInnerHTML={{
                     __html: `
                       .grid-image {
-                        border-radius: ${slugString === 'vario' ? 'clamp(12px, 1.5vw, 32px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                        border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                       }
                     `
                   }} />
@@ -1672,7 +1672,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                     <style dangerouslySetInnerHTML={{
                       __html: `
                         .row-image {
-                          border-radius: ${slugString === 'vario' ? 'clamp(12px, 1.5vw, 32px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                          border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                         }
                       `
                     }} />
@@ -1767,7 +1767,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                           <style dangerouslySetInnerHTML={{
                             __html: `
                               .full-width-image {
-                                border-radius: ${slugString === 'vario' ? 'clamp(12px, 1.5vw, 32px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                                border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                               }
                             `
                           }} />
@@ -1896,7 +1896,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                             <style dangerouslySetInnerHTML={{
                               __html: `
                                 .row-image {
-                                  border-radius: ${slugString === 'vario' ? 'clamp(12px, 1.5vw, 32px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                                  border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                                 }
                               `
                             }} />
@@ -2036,7 +2036,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                               <style dangerouslySetInnerHTML={{
                                 __html: `
                                   .text-image-app-screen {
-                                    border-radius: ${slugString === 'vario' ? 'clamp(12px, 1.5vw, 32px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                                    border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                                   }
                                 `
                               }} />
@@ -2149,7 +2149,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                               <style dangerouslySetInnerHTML={{
                                 __html: `
                                   .row-image {
-                                    border-radius: ${slugString === 'vario' ? 'clamp(12px, 1.5vw, 32px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                                    border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                                   }
                                 `
                               }} />
@@ -2364,7 +2364,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                       <style dangerouslySetInnerHTML={{
                         __html: `
                         .text-image-container {
-                          border-radius: ${slugString === 'vario' ? 'clamp(12px, 1.5vw, 32px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                          border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                         }
                       `
                       }} />
@@ -2447,7 +2447,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                         <style dangerouslySetInnerHTML={{
                           __html: `
                             .row-image {
-                              border-radius: ${slugString === 'vario' ? 'clamp(12px, 1.5vw, 32px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                              border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                             }
                           `
                         }} />
@@ -2527,7 +2527,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                       <style dangerouslySetInnerHTML={{
                         __html: `
                           .full-width-image-multi {
-                            border-radius: ${slugString === 'vario' ? 'clamp(12px, 1.5vw, 32px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                            border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                           }
                         `
                       }} />
@@ -2622,7 +2622,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                       <style dangerouslySetInnerHTML={{
                         __html: `
                           .full-width-image {
-                            border-radius: ${slugString === 'vario' ? 'clamp(12px, 1.5vw, 32px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                            border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                           }
                         `
                       }} />
@@ -2728,7 +2728,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                             <style dangerouslySetInnerHTML={{
                               __html: `
                                 .row-image {
-                                  border-radius: ${slugString === 'vario' ? 'clamp(12px, 1.5vw, 32px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                                  border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                                 }
                               `
                             }} />
@@ -3194,7 +3194,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                       <style dangerouslySetInnerHTML={{
                         __html: `
                           .process-image {
-                            border-radius: ${slugString === 'vario' ? 'clamp(12px, 1.5vw, 32px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                            border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
                           }
                         `
                       }} />
