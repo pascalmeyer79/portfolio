@@ -109,6 +109,9 @@ type CursorPreview = {
 export default function AboutPage() {
   const [preview, setPreview] = useState<CursorPreview | null>(null);
   const { theme } = useTheme();
+  
+  // Calculate years of experience dynamically (started in 2009)
+  const yearsOfExperience = new Date().getFullYear() - 2009;
 
   const handleRowEnter = (exp: Experience) => (e: React.MouseEvent) => {
     if (!exp.image) return;
@@ -223,7 +226,7 @@ export default function AboutPage() {
             initial="hidden"
             animate="visible"
           >
-            True excellence is the synthesis of diverse disciplines. My 16-year
+            True excellence is the synthesis of diverse disciplines. My {yearsOfExperience}-year
             journey covers product ownership, frontend, consulting, marketing,
             mentoring, and entrepreneurship. This foundation allows me to bridge
             strategy, design, and execution for complex, end-to-end products.
@@ -310,7 +313,7 @@ export default function AboutPage() {
               initial="hidden"
               animate="visible"
             >
-              True excellence is the synthesis of diverse disciplines. My 16-year
+              True excellence is the synthesis of diverse disciplines. My {yearsOfExperience}-year
               journey covers product ownership, frontend, consulting, marketing,
               mentoring, and entrepreneurship. This foundation allows me to bridge
               strategy, design, and execution for complex, end-to-end products.
