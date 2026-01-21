@@ -6,6 +6,12 @@ type Props = {
     children: React.ReactNode;
 };
 
+export async function generateStaticParams() {
+    return PROJECTS.map((project) => ({
+        slug: project.id,
+    }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const project = PROJECTS.find((p) => p.id === params.slug);
 
