@@ -291,8 +291,7 @@ export const ProjectsPeek: React.FC = () => {
               }}
               variants={containerVariants}
               initial="hidden"
-              whileInView="visible"
-              viewport={getViewport()}
+              {...(isMobile ? { animate: "visible" } : { whileInView: "visible", viewport: getViewport() })}
               onMouseDown={handleDragStart}
               onMouseMove={handleDragMove}
               onMouseUp={handleDragEnd}
