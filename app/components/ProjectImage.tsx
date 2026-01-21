@@ -80,7 +80,9 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
               const baseWidth = 222;
               const offsetRatio = offset / baseHeight;
               const widthRatio = baseWidth / baseHeight;
-              const uniqueId = `project-image-${index}-${Date.now()}`;
+              // Use deterministic ID based on index and src to avoid hydration mismatch
+              const srcHash = typeof image.src === 'string' ? image.src.split('/').pop()?.replace(/[^a-zA-Z0-9]/g, '') || index : index;
+              const uniqueId = `project-image-${index}-${srcHash}`;
               
               return (
                 <React.Fragment key={index}>
