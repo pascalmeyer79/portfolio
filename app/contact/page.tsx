@@ -119,8 +119,8 @@ export default function ContactPage() {
     <main className="relative min-h-screen">
       {/* Hero Background wird im Layout gerendert */}
       
-      {/* Main content container with 100vh - 82px and space-between */}
-      <div className="min-h-[calc(100vh-82px)] md:h-[calc(100vh-82px)] flex flex-col md:justify-between px-0 lg:px-[60px] 2xl:px-[60px] max-w-[1920px] mx-auto w-full">
+      {/* Main content container - normal scroll on mobile, fixed height on desktop */}
+      <div className="flex flex-col md:h-[calc(100vh-82px)] md:justify-between px-0 lg:px-[60px] 2xl:px-[60px] max-w-[1920px] mx-auto w-full">
         {/* Spacer ganz oben */}
         <div style={{ height: 0 }} />
         
