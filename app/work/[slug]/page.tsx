@@ -891,7 +891,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
             }}
           >
             <motion.div
-              className={`relative w-full bg-[var(--color-94)] hero-container ${isStackedHero ? 'overflow-visible' : 'overflow-hidden'}`}
+              className={`relative w-full bg-[var(--color-94)] dark:bg-[var(--color-96)] hero-container ${isStackedHero ? 'overflow-visible' : 'overflow-hidden'}`}
               style={{
                 paddingLeft: isStackedHero ? containerPaddingX : (config.noBorder ? 0 : containerPaddingX),
                 paddingRight: isStackedHero ? containerPaddingX : (config.noBorder ? 0 : containerPaddingX),
