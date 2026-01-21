@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  html {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-96);
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+  }
+
+  /* Text selection color */
+  ::selection {
+    background-color: var(--color-satoshi);
+    color: var(--color-100);
+  }
+  
+  ::-moz-selection {
+    background-color: var(--color-satoshi);
+    color: var(--color-100);
+  }
+}
+
+:root {
+  /* Color tokens – Light mode */
+  --color-satoshi: #f7931a;
+
+  --color-0: #000000;
+  --color-0-80: rgba(0, 0, 0, 0.8);
+
+  --color-8: #121217;
+  --color-8-64: rgba(18, 18, 23, 0.64);
+
+  --color-16: #24242d;
+  --color-32: #49495b;
+  --color-44: #64647d;
+
+  --color-56: #82829b;
+  --color-56-04: rgba(130, 130, 155, 0.04);
+
+  --color-64: #9999ad;
+  --color-80: #c6c6d2;
+  --color-92: #e8e8ed;
+
+  --color-94: #eeeef1;
+  --color-94-50: rgba(238, 238, 241, 0.5);
+
+  /* 96 @50% uses #F4F4F6 in Light mode */
+  --color-96: #f5f5f7;
+  --color-96-50: rgba(244, 244, 246, 0.5);
+
+  --color-98: #f9f9fa;
+  --color-100: #ffffff;
+  --color-100-80: rgba(255, 255, 255, 0.8);
+}
+
+.dark {
+  /* Color tokens – Dark mode */
+  --color-satoshi: #f7931a;
+
+  --color-0: #ffffff;
+  --color-0-80: rgba(73, 73, 91, 0.8);
+
+  --color-8: #e8e8ed;
+  --color-8-64: rgba(232, 232, 237, 0.64);
+
+  --color-16: #c6c6d2;
+  --color-32: #9999ad;
+  --color-44: #82829b;
+
+  --color-56: #6d6d88;
+  --color-56-04: rgba(109, 109, 136, 0.04);
+
+  --color-64: #49495b;
+  --color-80: #2d2d39;
+  --color-92: #2d2d39;
+
+  --color-94: #0e0e11;
+  --color-94-50: rgba(14, 14, 17, 0.5);
+
+  --color-96: #09090b;
+  --color-96-50: rgba(9, 9, 11, 0.5);
+
+  --color-98: #050506;
+  --color-100: #17171d;
+  --color-100-80: rgba(23, 23, 29, 0.8);
+}
+
