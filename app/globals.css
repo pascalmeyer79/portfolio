@@ -36,14 +36,12 @@
     margin: 0;
     padding: 0;
     background-color: var(--color-96);
-    height: 100%;
   }
   
   body {
     margin: 0;
     padding: 0;
     background-color: transparent;
-    height: 100%;
     position: relative;
   }
 

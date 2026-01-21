@@ -101,7 +101,7 @@ export const Navbar = ({ selection }: NavbarProps = {}) => {
   };
 
   return (
-    <header className="sticky top-0 z-[10] flex items-center pl-[16px] md:pl-[32px] pr-[20px] md:pr-[40px] pt-[max(24px,env(safe-area-inset-top))] pb-[24px] md:py-[24px] bg-transparent h-[82px] relative">
+    <header className="sticky top-0 z-[10] flex items-center pl-[16px] md:pl-[32px] pr-[20px] md:pr-[40px] pt-[max(16px,env(safe-area-inset-top))] pb-[16px] md:py-[24px] bg-transparent h-auto md:h-[82px] relative">
       {/* Left: Logo */}
       <Link href="/" className="h-[28px] w-[48px] md:h-[34px] md:w-[58px] relative shrink-0 z-10">
         <Image

@@ -293,11 +293,11 @@ const buttonVariants = {
 };
 
 export const HeroSection = () => {
-  const [greeting, setGreeting] = useState('Hi'); // Default greeting
+  const [greeting, setGreeting] = useState('Grüezi'); // Default greeting
 
   useEffect(() => {
     // Fetch user's country from IP geolocation
-    fetch('http://ip-api.com/json/')
+    fetch('https://ip-api.com/json/')
       .then(response => response.json())
       .then(data => {
         console.log('Geolocation data:', data);
@@ -310,8 +310,8 @@ export const HeroSection = () => {
       })
       .catch((error) => {
         console.error('Geolocation failed:', error);
-        // If geolocation fails, keep default "Hi"
-        setGreeting('Hi');
+        // If geolocation fails, keep default "Grüezi"
+        setGreeting('Grüezi');
       });
   }, []);
 
