@@ -1219,7 +1219,9 @@ function WorkPageClient({ slug }: WorkPageProps) {
                           WebkitBackdropFilter: 'blur(10px)',
                           boxSizing: 'border-box',
                           gridColumn: `${img.colIdx + 1}`,
-                          gridRow: isSpanning ? '1 / 3' : `${img.rowIdx + 1}`
+                          gridRow: isSpanning ? '1 / 3' : `${img.rowIdx + 1}`,
+                          display: 'flex',
+                          alignItems: isSpanning ? 'flex-end' : 'stretch'
                         }}
                         initial="hidden"
                         whileInView="visible"
@@ -1240,7 +1242,11 @@ function WorkPageClient({ slug }: WorkPageProps) {
                           alt={`Summary image ${imgIndex + 1}`}
                           width={800}
                           height={600}
-                          className="w-full h-auto object-cover"
+                          className="w-full object-cover"
+                          style={{
+                            height: '100%',
+                            objectPosition: isSpanning ? 'center bottom' : 'center'
+                          }}
                           quality={100}
                           unoptimized={true}
                         />
