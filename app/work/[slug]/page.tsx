@@ -678,14 +678,13 @@ const fadeInUpVariants = {
   },
 };
 
-export default async function WorkPage({
-  params,
-}: {
-  params: Promise<{ slugString: string }>;
-}) {
-  const { slugString } = await params;
-  const slugStringString: string = slugString;
-  const config = WORKS[slugStringString];
+type WorkPageProps = {
+  slug: string;
+};
+
+function WorkPageClient({ slug }: WorkPageProps) {
+  const slugString: string = slug;
+  const config = WORKS[slugString];
   const { theme } = useTheme();
   const heroContainerRef = useRef<HTMLDivElement>(null);
 
@@ -697,7 +696,7 @@ export default async function WorkPage({
   };
 
   // Base border radius for Vario: 32px
-  const baseBorderRadius = slugStringString === 'vario' ? 32 : 16;
+  const baseBorderRadius = slugString === 'vario' ? 32 : 16;
 
   // Bei Screens über 1920px soll der border-radius bei 20px bleiben
   const [isLargeScreen, setIsLargeScreen] = useState(false);
@@ -3720,4 +3719,14 @@ export default async function WorkPage({
       </div>
     </>
   );
+}
+
+// Server Component Wrapper to resolve async params
+export default async function WorkPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  return <WorkPageClient slug={slug} />;
 }
