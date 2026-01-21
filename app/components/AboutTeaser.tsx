@@ -40,7 +40,7 @@ export const AboutTeaser: React.FC = () => {
             className="group h-[360px] md:h-[666px] max-h-[360px] md:max-h-[666px] max-w-[260px] md:max-w-[480px] relative rounded-[1000px] shrink-0 w-[260px] md:w-[480px] overflow-hidden cursor-pointer"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "0px 0px -100px 0px", amount: 0.3 }}
             transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1], delay: 0.2 }}
           >
             <Image
@@ -70,7 +70,7 @@ export const AboutTeaser: React.FC = () => {
             className="font-sans text-[18px] md:text-[20px] lg:text-[22px] text-[var(--color-8)] font-normal w-full"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "0px 0px -100px 0px", amount: 0.3 }}
             transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1], delay: 0.3 }}
           >
             My passion lies in turning complexity into simplicity. With a background in design, code, business, and strategy, I help teams build products that define their category. For the past {yearsSince2022} years, I have dedicated my time, energy, and research to AI.
@@ -79,7 +79,7 @@ export const AboutTeaser: React.FC = () => {
             className="font-sans text-[18px] md:text-[20px] lg:text-[22px] text-[var(--color-8)] font-medium w-full"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "0px 0px -100px 0px", amount: 0.3 }}
             transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1], delay: 0.4 }}
           >
             Let&apos;s build what&apos;s next.
@@ -89,7 +89,7 @@ export const AboutTeaser: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "0px 0px -100px 0px", amount: 0.3 }}
             transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1], delay: 0.4 }}
             className="flex-1 md:flex-none"
           >
@@ -98,7 +98,7 @@ export const AboutTeaser: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "0px 0px -100px 0px", amount: 0.3 }}
             transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1], delay: 0.5 }}
             className="flex-1 md:flex-none"
           >

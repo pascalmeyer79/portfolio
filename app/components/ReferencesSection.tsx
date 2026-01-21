@@ -143,7 +143,7 @@ export const ReferencesSection: React.FC = () => {
               variants={logoVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
               custom={logoDelay}
             >
               <div
@@ -188,7 +188,7 @@ export const ReferencesSection: React.FC = () => {
               className="font-serif text-[32px] sm:text-[36px] md:text-[40px] lg:text-[44px] xl:text-[48px] text-[var(--color-8)] tracking-[-0.16px] sm:tracking-[-0.18px] md:tracking-[-0.20px] lg:tracking-[-0.22px] xl:tracking-[-0.24px] leading-[40px] sm:leading-[45px] md:leading-[50px] lg:leading-[55px] xl:leading-[60px] whitespace-nowrap md:whitespace-normal text-center md:text-left"
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: "0px 0px -100px 0px", amount: 0.3 }}
               transition={{ staggerChildren: 0.06 }}
             >
               <motion.span variants={headlineWordVariants} className="inline-block">
@@ -265,7 +265,7 @@ export const ReferencesSection: React.FC = () => {
                 variants={verticalDividerVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                 custom={dividerDelay}
                 animate={{ rotate: 18 }}
               />
@@ -290,7 +290,7 @@ export const ReferencesSection: React.FC = () => {
                 variants={verticalDividerVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                 custom={dividerDelay}
                 animate={{ rotate: 18 }}
               />
@@ -315,7 +315,7 @@ export const ReferencesSection: React.FC = () => {
                 variants={verticalDividerVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ once: true, margin: "0px 0px -50px 0px", amount: 0.3 }}
                 custom={dividerDelay}
                 animate={{ rotate: 18 }}
               />
