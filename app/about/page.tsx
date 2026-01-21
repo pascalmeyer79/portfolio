@@ -52,7 +52,7 @@ const WORK_EXPERIENCE: Experience[] = [
   {
     id: "metro",
     company: "Metro",
-    role: "Lead UX/Product Designer",
+    role: "Lead UX/Product Designer (Freelance)",
     period: "2022",
     image: "/images/about/metro.jpg",
   },
@@ -72,7 +72,7 @@ const WORK_EXPERIENCE: Experience[] = [
   },
   {
     id: "ujam",
-    company: "UJAM",
+    company: "UJAM Music Technology",
     role: "Designer, Frontend Developer, and Product Owner",
     period: "2016 - 2020",
     image: "/images/about/ujam.jpg",
