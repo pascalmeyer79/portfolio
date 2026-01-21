@@ -16,14 +16,14 @@ export function CounterAnimation({ value, className }: CounterAnimationProps) {
   useEffect(() => {
     if (!isInView) return;
 
-    // Extract number from string
-    const match = value.match(/(\$?)(\d+\.?\d*)([xXmMkK]?)/);
+    // Extract number from string (supports >, $, %, x, M, k, K)
+    const match = value.match(/([>]?\s*)(\$?)(\d+\.?\d*)([%xXmMkK]?)/);
     if (!match) {
       setDisplayValue(value);
       return;
     }
 
-    const [, prefix, numberStr, suffix] = match;
+    const [, greaterThan, prefix, numberStr, suffix] = match;
     const targetNumber = parseFloat(numberStr);
     const duration = 3500; // 3.5 seconds
     const startTime = Date.now();
@@ -48,7 +48,7 @@ export function CounterAnimation({ value, className }: CounterAnimationProps) {
         formattedNumber = formattedNumber.replace(/\.?0+$/, '');
       }
 
-      setDisplayValue(`${prefix}${formattedNumber}${suffix}`);
+      setDisplayValue(`${greaterThan}${prefix}${formattedNumber}${suffix}`);
 
       if (progress < 1) {
         requestAnimationFrame(animate);

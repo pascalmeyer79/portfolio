@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .border-responsive {
+    border-width: 3px;
+  }
+  
+  @media (min-width: 600px) {
+    .border-responsive {
+      border-width: 4px;
+    }
+  }
+
+  img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+}
+
 @layer base {
   * {
     -webkit-font-smoothing: antialiased;

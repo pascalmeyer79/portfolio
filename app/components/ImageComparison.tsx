@@ -3,12 +3,14 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { getBorderRadius } from "../utils/borderRadius";
 
 interface ImageComparisonProps {
   beforeImage: string;
   afterImage: string;
   beforeLabel?: string;
   afterLabel?: string;
+  projectSlug?: string;
 }
 
 export function ImageComparison({
@@ -16,6 +18,7 @@ export function ImageComparison({
   afterImage,
   beforeLabel,
   afterLabel,
+  projectSlug = 'tenzir', // Default to tenzir for desktop screens
 }: ImageComparisonProps) {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
@@ -65,23 +68,13 @@ export function ImageComparison({
       <style dangerouslySetInnerHTML={{
         __html: `
           .comparison-container {
-            border-radius: 12px;
-          }
-          @media (min-width: 768px) {
-            .comparison-container {
-              border-radius: 16px;
-            }
-          }
-          @media (min-width: 1024px) {
-            .comparison-container {
-              border-radius: 20px;
-            }
+            border-radius: ${projectSlug === 'vario' ? 'clamp(12px, 1.5vw, 32px)' : 'clamp(6px, 0.75vw, 16px)'};
           }
         `
       }} />
       <div
         ref={containerRef}
-        className="comparison-container relative w-full overflow-hidden border-4 select-none cursor-ew-resize"
+        className="comparison-container relative w-full overflow-hidden border-responsive select-none cursor-ew-resize"
         style={{ 
           backgroundColor: 'transparent',
           borderColor: 'var(--color-0-80)',

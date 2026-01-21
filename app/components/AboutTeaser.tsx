@@ -12,6 +12,11 @@ export const AboutTeaser: React.FC = () => {
   const { theme } = useTheme();
   const [isSecondaryHovered, setIsSecondaryHovered] = useState(false);
 
+  // Calculate years since 2022
+  const startYear = 2022;
+  const currentYear = new Date().getFullYear();
+  const yearsSince2022 = currentYear - startYear;
+
   const sideSrc = theme === "dark"
     ? "/images/home/pascalmeyer_day_side.jpg"
     : "/images/home/pascalmeyer_night_side.jpg";
@@ -33,9 +38,6 @@ export const AboutTeaser: React.FC = () => {
         <Link href="/about" className="block">
           <motion.div 
             className="group h-[360px] md:h-[666px] max-h-[360px] md:max-h-[666px] max-w-[260px] md:max-w-[480px] relative rounded-[1000px] shrink-0 w-[260px] md:w-[480px] overflow-hidden cursor-pointer"
-            style={{ 
-              backgroundColor: theme === "dark" ? "var(--color-100)" : "var(--color-8)" 
-            }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -45,32 +47,36 @@ export const AboutTeaser: React.FC = () => {
               src={sideSrc}
               alt="Pascal Meyer"
               fill
-              className="object-cover transition-opacity duration-500 ease-out group-hover:opacity-0"
+              sizes="(max-width: 768px) 260px, 480px"
+              className="object-cover group-hover:opacity-0"
               quality={100}
               unoptimized={true}
+              priority
             />
             <Image
               src={frontSrc}
               alt="Pascal Meyer"
               fill
-              className="absolute inset-0 object-cover opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
+              sizes="(max-width: 768px) 260px, 480px"
+              className="absolute inset-0 object-cover opacity-0 group-hover:opacity-100"
               quality={100}
               unoptimized={true}
+              priority
             />
           </motion.div>
         </Link>
-        <div className="flex flex-col gap-[20px] items-start text-[16px] md:text-[22px] text-[var(--color-8)] text-center tracking-[-0.24px] md:tracking-[-0.44px] leading-[26px] md:leading-[36px] w-full">
+        <div className="flex flex-col gap-[20px] items-start text-[18px] md:text-[20px] lg:text-[22px] text-[var(--color-8)] text-center tracking-[-0.27px] md:tracking-[-0.35px] lg:tracking-[-0.44px] leading-[30px] md:leading-[33px] lg:leading-[36px] w-full">
           <motion.p 
-            className="font-sans text-[16px] md:text-[22px] text-[var(--color-8)] font-normal w-full"
+            className="font-sans text-[18px] md:text-[20px] lg:text-[22px] text-[var(--color-8)] font-normal w-full"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1], delay: 0.3 }}
           >
-            My passion lies in turning complexity into simplicity. With a background in design, code, business, and strategy, I help teams build products that define their category. For the past 3 years, I have dedicated my time, energy, and research to AI.
+            My passion lies in turning complexity into simplicity. With a background in design, code, business, and strategy, I help teams build products that define their category. For the past {yearsSince2022} years, I have dedicated my time, energy, and research to AI.
           </motion.p>
           <motion.p 
-            className="font-sans text-[16px] md:text-[22px] text-[var(--color-8)] font-medium w-full"
+            className="font-sans text-[18px] md:text-[20px] lg:text-[22px] text-[var(--color-8)] font-medium w-full"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}

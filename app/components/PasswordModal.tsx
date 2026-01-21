@@ -10,14 +10,50 @@ type PasswordModalProps = {
   open: boolean;
   slug: string | null;
   onClose: () => void;
+  onSuccess?: () => void;
 };
 
 const CORRECT_PASSWORD = "portfolio_2026";
+const AUTH_STORAGE_KEY = "portfolio_auth";
+const AUTH_DURATION = 7 * 24 * 60 * 60 * 1000; // 1 Woche in Millisekunden
+
+// Hilfsfunktion zum Speichern der Authentifizierung
+const saveAuth = () => {
+  const authData = {
+    authenticated: true,
+    timestamp: Date.now(),
+  };
+  localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(authData));
+};
+
+// Hilfsfunktion zum Prüfen der Authentifizierung
+export const checkAuth = (): boolean => {
+  if (typeof window === "undefined") return false;
+  
+  const authDataString = localStorage.getItem(AUTH_STORAGE_KEY);
+  if (!authDataString) return false;
+  
+  try {
+    const authData = JSON.parse(authDataString);
+    const timePassed = Date.now() - authData.timestamp;
+    
+    // Wenn mehr als eine Woche vergangen ist, entferne die Authentifizierung
+    if (timePassed > AUTH_DURATION) {
+      localStorage.removeItem(AUTH_STORAGE_KEY);
+      return false;
+    }
+    
+    return authData.authenticated === true;
+  } catch (e) {
+    return false;
+  }
+};
 
 export const PasswordModal: React.FC<PasswordModalProps> = ({
   open,
   slug,
   onClose,
+  onSuccess,
 }) => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -57,6 +93,10 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({
       setError(false);
       setErrorCount(0);
       setPassword("");
+      saveAuth(); // Speichere die Authentifizierung für eine Woche
+      if (onSuccess) {
+        onSuccess(); // Rufe den Erfolgs-Callback auf
+      }
       onClose();
       router.push(`/work/${slug}`);
     } else {

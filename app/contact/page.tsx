@@ -120,28 +120,29 @@ export default function ContactPage() {
       {/* Hero Background wird im Layout gerendert */}
       
       {/* Main content container with 100vh - 82px and space-between */}
-      <div className="h-[calc(100vh-82px)] flex flex-col justify-between px-[16px] sm:px-[40px] lg:px-[60px] max-w-[1920px] mx-auto w-full">
+      <div className="h-[calc(100vh-82px)] flex flex-col justify-between px-0 lg:px-[60px] 2xl:px-[60px] max-w-[1920px] mx-auto w-full">
         {/* Spacer ganz oben */}
         <div style={{ height: 0 }} />
         
         {/* Upper section with headline and quote */}
-        <div className="grid grid-cols-1 lg:grid-cols-6 gap-x-[20px] gap-y-[20px] px-0 md:px-[40px] py-[120px] h-fit">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-[12px] lg:gap-[40px] px-[16px] md:px-[40px] lg:px-0 2xl:px-[40px] py-[120px] h-fit max-w-full mx-auto w-full">
             {/* Headline - 3 columns with 40px padding-right */}
-            <div className="col-span-1 lg:col-span-3 lg:pr-[40px] w-full flex items-start justify-center lg:justify-start h-auto lg:h-[250px]">
+            <div className="col-span-1 lg:pr-[40px] w-full flex items-start justify-center lg:justify-start h-auto lg:h-[250px]">
               <AnimatedHeadline
                 className="font-serif text-[40px] sm:text-[48px] md:text-[56px] lg:text-[64px] xl:text-[72px] text-[var(--color-8)] tracking-[-0.2px] sm:tracking-[-0.48px] md:tracking-[-0.56px] lg:tracking-[-0.64px] xl:tracking-[-0.72px] leading-[50px] sm:leading-[60px] md:leading-[70px] lg:leading-[80px] xl:leading-[88px] text-center lg:text-left"
                 delay={0}
               >
                 Let&apos;s bring <span className="whitespace-nowrap">great&nbsp;ideas</span>{" "}
+                <br className="md:hidden" />
                 <br className="hidden lg:block" />
                 <span className="italic whitespace-nowrap">into reality</span>
               </AnimatedHeadline>
             </div>
             
             {/* Quote - 3 columns */}
-            <div className="col-span-1 lg:col-span-3 flex flex-col gap-[24px] w-full lg:max-w-[650px] items-center lg:items-start">
+            <div className="col-span-1 flex flex-col gap-[24px] w-full lg:max-w-[650px] items-center lg:items-start">
               <motion.p
-                className="font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px] text-center lg:text-left"
+                className="font-sans text-[18px] md:text-[20px] lg:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.27px] md:tracking-[-0.35px] lg:tracking-[-0.44px] leading-[30px] md:leading-[33px] lg:leading-[36px] text-center lg:text-left"
                 variants={quoteVariants}
                 initial="hidden"
                 animate="visible"
@@ -209,13 +210,18 @@ export default function ContactPage() {
         </div>
         
         {/* Contact info section - white background */}
-        <motion.div 
-          className="bg-[var(--color-100)] rounded-tl-[10px] rounded-tr-[10px] px-[20px] md:px-[24px] xl:px-[40px] pt-[32px] md:pt-[48px] pb-[40px] xl:pb-[80px] h-[278px] md:h-fit xl:h-auto min-h-[256px] xl:min-h-[256px] max-h-[278px] md:max-h-[330px] xl:max-h-none"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-            <div className="grid grid-cols-2 xl:grid-cols-6 gap-[40px] gap-y-[40px]">
+        <div className="px-[16px] sm:px-[40px] lg:px-[0px]">
+          <motion.div 
+            className="bg-[var(--color-100)] px-[20px] md:px-[32px] lg:px-[40px] pt-[32px] md:pt-[48px] xl:pt-[60px] pb-[40px] xl:pb-[80px] h-auto min-h-[256px] xl:min-h-[256px]"
+            style={{
+              borderTopLeftRadius: 'clamp(12px, 0.8vw, 24px)',
+              borderTopRightRadius: 'clamp(12px, 0.8vw, 24px)',
+            }}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <div className="grid grid-cols-2 xl:grid-cols-6 gap-x-[40px] gap-y-[40px] md:gap-y-[40px]">
               {/* Status - 1 column */}
               <motion.div 
                 className="flex flex-col gap-[8px] col-span-1 xl:col-span-1"
@@ -500,7 +506,9 @@ export default function ContactPage() {
                   Calendar
                 </p>
                 <a
-                  href="#"
+                  href="https://calendly.com/hi-pascalmey/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="font-sans text-[14px] sm:text-[15px] md:text-[16px] font-medium tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] leading-[22px] sm:leading-[24px] md:leading-[26px] inline-block relative transition-colors duration-200 ease-in-out"
                   style={{
                     width: 'fit-content',
@@ -613,6 +621,7 @@ export default function ContactPage() {
               </motion.div>
             </div>
           </motion.div>
+        </div>
       </div>
       
       {/* Footer */}

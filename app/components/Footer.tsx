@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useTheme } from "../theme-provider";
+import { FOOTER_LINKS, COMPANY_DETAILS, ADDRESSES } from "../data";
 
 type FooterProps = {
   version?: "Default" | "Contact" | "Portfolio" | "PortfolioContact";
@@ -29,50 +30,29 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
   const [linkAnimationState, setLinkAnimationState] = useState<Record<string, 'idle' | 'going-out' | 'coming-in'>>({});
   const textColor = "var(--color-8)";
   const linkGradient = "linear-gradient(to top right, var(--color-44), var(--color-64))";
-  
-  // Responsive border radius styles
+
+  // Responsive border radius styles - 12px for all
   const footerBorderRadiusStyle = `
     .footer-container {
-      border-radius: 6px;
-    }
-    @media (min-width: 768px) {
-      .footer-container {
-        border-radius: 8px;
-      }
-    }
-    @media (min-width: 1024px) {
-      .footer-container {
-        border-radius: 10px;
-      }
+      border-radius: 12px;
     }
   `;
-  
-  // Border radius for Contact versions (only bottom rounded)
+
+  // Border radius for Contact versions (only bottom rounded) - 12px for all
   const footerBorderRadiusBottomOnlyStyle = `
     .footer-container-bottom-only {
-      border-bottom-left-radius: 6px;
-      border-bottom-right-radius: 6px;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
     }
-    @media (min-width: 768px) {
-      .footer-container-bottom-only {
-        border-bottom-left-radius: 8px;
-        border-bottom-right-radius: 8px;
-      }
-    }
-    @media (min-width: 1024px) {
-      .footer-container-bottom-only {
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-      }
-    }
   `;
-  
+
   const firstRow = (
-    <div className="grid grid-cols-2 xl:grid-cols-6 gap-x-[16px] md:gap-x-[40px] gap-y-[40px] md:gap-y-[20px] items-start relative shrink-0 w-full">
-      <motion.div 
-        className="col-span-2 xl:col-span-2 flex flex-col gap-[8px] items-start py-0 relative shrink-0 whitespace-pre" 
+    <div className="grid grid-cols-2 xl:grid-cols-6 gap-x-[40px] gap-y-[40px] md:gap-y-[40px] items-start relative shrink-0 w-full">
+      {/* Email Column */}
+      <motion.div
+        className="col-span-2 xl:col-span-2 flex flex-col gap-[8px] items-start py-0 relative shrink-0 whitespace-pre"
         style={{ color: textColor }}
         variants={columnVariants}
         initial="hidden"
@@ -84,13 +64,13 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
           Say hi!
         </p>
         <Link
-          href="mailto:hi@pascalmey.com"
+          href={`mailto:${FOOTER_LINKS.email}`}
           className="font-serif text-[40px] md:text-[40px] leading-[50px] not-italic relative shrink-0 tracking-[-0.2px] inline-block"
           style={{ color: textColor }}
           onMouseEnter={() => setIsEmailHovered(true)}
           onMouseLeave={() => setIsEmailHovered(false)}
         >
-          hi@pascalmey.com
+          {FOOTER_LINKS.email}
           <span
             className={`absolute h-[1px] transition-all duration-[300ms] ease-out ${isEmailHovered ? 'left-0' : 'right-0'}`}
             style={{
@@ -102,7 +82,9 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
           />
         </Link>
       </motion.div>
-      <motion.div 
+
+      {/* Links Column */}
+      <motion.div
         className="col-span-1 xl:col-span-1 flex flex-col items-start relative text-[14px] sm:text-[15px] md:text-[16px] gap-[2px]"
         variants={columnVariants}
         initial="hidden"
@@ -110,147 +92,62 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
         viewport={{ once: true, margin: "-100px" }}
         custom={1}
       >
-            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-semibold tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] relative shrink-0 mb-[4px]" style={{ color: textColor }}>
-              Links
-            </p>
-            <Link
-              href="/"
-              className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-medium tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] relative shrink-0 inline-block transition-colors duration-200 ease-in-out"
+        <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-semibold tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] relative shrink-0 mb-[4px]" style={{ color: textColor }}>
+          Links
+        </p>
+        {FOOTER_LINKS.links.map((link) => (
+          <Link
+            key={link.id}
+            href={link.href}
+            className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-medium tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] relative shrink-0 inline-block transition-colors duration-200 ease-in-out"
+            style={{
+              background: linkGradient,
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              color: 'transparent',
+            }}
+            onMouseEnter={(e) => {
+              setHoveredLink(link.id);
+              setLinkAnimationState(prev => ({ ...prev, [link.id]: 'going-out' }));
+              setTimeout(() => {
+                setLinkAnimationState(prev => ({ ...prev, [link.id]: 'coming-in' }));
+              }, 300);
+              (e.currentTarget.style as any).WebkitTextFillColor = 'var(--color-44)';
+              e.currentTarget.style.color = 'var(--color-44)';
+              e.currentTarget.style.background = 'none';
+              (e.currentTarget.style as any).WebkitBackgroundClip = '';
+              e.currentTarget.style.backgroundClip = '';
+            }}
+            onMouseLeave={(e) => {
+              setHoveredLink(null);
+              setLinkAnimationState(prev => ({ ...prev, [link.id]: 'idle' }));
+              e.currentTarget.style.background = linkGradient;
+              (e.currentTarget.style as any).WebkitBackgroundClip = 'text';
+              e.currentTarget.style.backgroundClip = 'text';
+              (e.currentTarget.style as any).WebkitTextFillColor = 'transparent';
+              e.currentTarget.style.color = 'transparent';
+            }}
+          >
+            {link.label}
+            <span
+              className={`absolute h-[1px] transition-all duration-[300ms] ease-out ${linkAnimationState[link.id] === 'coming-in' ? 'left-0' : (hoveredLink === link.id || linkAnimationState[link.id] === 'going-out') ? 'right-0' : 'left-0'}`}
               style={{
-                background: linkGradient,
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                color: 'transparent',
+                bottom: '2px',
+                width: hoveredLink === link.id
+                  ? (linkAnimationState[link.id] === 'going-out' ? '0%' : '100%')
+                  : linkAnimationState[link.id] === 'going-out' ? '0%' : '100%',
+                background: linkAnimationState[link.id] === 'coming-in' ? 'var(--color-56)' : 'linear-gradient(to right, var(--color-64), var(--color-80))',
+                transformOrigin: linkAnimationState[link.id] === 'coming-in' ? 'left' : 'right',
               }}
-              onMouseEnter={(e) => {
-                setHoveredLink('work');
-                setLinkAnimationState(prev => ({ ...prev, work: 'going-out' }));
-                    setTimeout(() => {
-                      setLinkAnimationState(prev => ({ ...prev, work: 'coming-in' }));
-                    }, 300);
-                (e.currentTarget.style as any).WebkitTextFillColor = 'var(--color-44)';
-                e.currentTarget.style.color = 'var(--color-44)';
-                e.currentTarget.style.background = 'none';
-                (e.currentTarget.style as any).WebkitBackgroundClip = '';
-                e.currentTarget.style.backgroundClip = '';
-              }}
-              onMouseLeave={(e) => {
-                setHoveredLink(null);
-                setLinkAnimationState(prev => ({ ...prev, work: 'idle' }));
-                e.currentTarget.style.background = linkGradient;
-                (e.currentTarget.style as any).WebkitBackgroundClip = 'text';
-                e.currentTarget.style.backgroundClip = 'text';
-                (e.currentTarget.style as any).WebkitTextFillColor = 'transparent';
-                e.currentTarget.style.color = 'transparent';
-              }}
-            >
-              Work
-              <span
-                className={`absolute h-[1px] transition-all duration-[300ms] ease-out ${linkAnimationState.work === 'coming-in' ? 'left-0' : (hoveredLink === 'work' || linkAnimationState.work === 'going-out') ? 'right-0' : 'left-0'}`}
-                style={{
-                  bottom: '2px',
-                  width: hoveredLink === 'work' 
-                    ? (linkAnimationState.work === 'going-out' ? '0%' : '100%')
-                    : linkAnimationState.work === 'going-out' ? '0%' : '100%',
-                  background: linkAnimationState.work === 'coming-in' ? 'var(--color-56)' : 'linear-gradient(to right, var(--color-64), var(--color-80))',
-                  transformOrigin: linkAnimationState.work === 'coming-in' ? 'left' : 'right',
-                }}
-              />
-            </Link>
-            <Link
-              href="/about"
-              className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-medium tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] relative shrink-0 inline-block transition-colors duration-200 ease-in-out"
-              style={{
-                background: linkGradient,
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                color: 'transparent',
-              }}
-              onMouseEnter={(e) => {
-                setHoveredLink('about');
-                setLinkAnimationState(prev => ({ ...prev, about: 'going-out' }));
-                setTimeout(() => {
-                  setLinkAnimationState(prev => ({ ...prev, about: 'coming-in' }));
-                }, 300);
-                (e.currentTarget.style as any).WebkitTextFillColor = 'var(--color-44)';
-                e.currentTarget.style.color = 'var(--color-44)';
-                e.currentTarget.style.background = 'none';
-                (e.currentTarget.style as any).WebkitBackgroundClip = '';
-                e.currentTarget.style.backgroundClip = '';
-              }}
-              onMouseLeave={(e) => {
-                setHoveredLink(null);
-                setLinkAnimationState(prev => ({ ...prev, about: 'going-out' }));
-                e.currentTarget.style.background = linkGradient;
-                (e.currentTarget.style as any).WebkitBackgroundClip = 'text';
-                e.currentTarget.style.backgroundClip = 'text';
-                (e.currentTarget.style as any).WebkitTextFillColor = 'transparent';
-                e.currentTarget.style.color = 'transparent';
-              }}
-            >
-              About
-              <span
-                className={`absolute h-[1px] transition-all duration-[300ms] ease-out ${linkAnimationState.about === 'coming-in' ? 'left-0' : (hoveredLink === 'about' || linkAnimationState.about === 'going-out') ? 'right-0' : 'left-0'}`}
-                style={{
-                  bottom: '2px',
-                  width: hoveredLink === 'about' 
-                    ? (linkAnimationState.about === 'going-out' ? '0%' : '100%')
-                    : linkAnimationState.about === 'going-out' ? '0%' : '100%',
-                  background: linkAnimationState.about === 'coming-in' ? 'var(--color-56)' : 'linear-gradient(to right, var(--color-64), var(--color-80))',
-                  transformOrigin: linkAnimationState.about === 'coming-in' ? 'left' : 'right',
-                }}
-              />
-            </Link>
-            <Link
-              href="/contact"
-              className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-medium tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] relative shrink-0 inline-block transition-colors duration-200 ease-in-out"
-              style={{
-                background: linkGradient,
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                color: 'transparent',
-              }}
-              onMouseEnter={(e) => {
-                setHoveredLink('contact');
-                setLinkAnimationState(prev => ({ ...prev, contact: 'going-out' }));
-                setTimeout(() => {
-                  setLinkAnimationState(prev => ({ ...prev, contact: 'coming-in' }));
-                }, 300);
-                (e.currentTarget.style as any).WebkitTextFillColor = 'var(--color-44)';
-                e.currentTarget.style.color = 'var(--color-44)';
-                e.currentTarget.style.background = 'none';
-                (e.currentTarget.style as any).WebkitBackgroundClip = '';
-                e.currentTarget.style.backgroundClip = '';
-              }}
-              onMouseLeave={(e) => {
-                setHoveredLink(null);
-                setLinkAnimationState(prev => ({ ...prev, contact: 'going-out' }));
-                e.currentTarget.style.background = linkGradient;
-                (e.currentTarget.style as any).WebkitBackgroundClip = 'text';
-                e.currentTarget.style.backgroundClip = 'text';
-                (e.currentTarget.style as any).WebkitTextFillColor = 'transparent';
-                e.currentTarget.style.color = 'transparent';
-              }}
-            >
-              Contact
-              <span
-                className={`absolute h-[1px] transition-all duration-[300ms] ease-out ${linkAnimationState.contact === 'coming-in' ? 'left-0' : (hoveredLink === 'contact' || linkAnimationState.contact === 'going-out') ? 'right-0' : 'left-0'}`}
-                style={{
-                  bottom: '2px',
-                  width: hoveredLink === 'contact' 
-                    ? (linkAnimationState.contact === 'going-out' ? '0%' : '100%')
-                    : linkAnimationState.contact === 'going-out' ? '0%' : '100%',
-                  background: linkAnimationState.contact === 'coming-in' ? 'var(--color-56)' : 'linear-gradient(to right, var(--color-64), var(--color-80))',
-                  transformOrigin: linkAnimationState.contact === 'coming-in' ? 'left' : 'right',
-                }}
-              />
-            </Link>
+            />
+          </Link>
+        ))}
       </motion.div>
-      <motion.div 
-        className="col-span-1 xl:col-span-1 flex flex-col font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-medium relative tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.16px] gap-[2px]" 
+
+      {/* Company Details Column */}
+      <motion.div
+        className="col-span-1 xl:col-span-1 flex flex-col font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-medium relative tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.16px] gap-[2px]"
         style={{ color: textColor }}
         variants={columnVariants}
         initial="hidden"
@@ -258,63 +155,38 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
         viewport={{ once: true, margin: "-100px" }}
         custom={2}
       >
-            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-semibold tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] mb-[4px]">
-              Pascal Meyer GmbH
-            </p>
-            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
-              HRB 213189
-            </p>
-            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
-              DE359124851
-            </p>
-            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
-              CHE-231.531.352
-            </p>
+        <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-semibold tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] mb-[4px]">
+          {COMPANY_DETAILS[0]}
+        </p>
+        {COMPANY_DETAILS.slice(1).map((detail, idx) => (
+          <p key={idx} className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
+            {detail}
+          </p>
+        ))}
       </motion.div>
-      <motion.div 
-        className="col-span-1 xl:col-span-1 flex flex-col gap-[2px] relative text-[14px] sm:text-[15px] md:text-[16px] tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]" 
-        style={{ color: textColor }}
-        variants={columnVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        custom={3}
-      >
-            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-semibold tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] mb-[4px]">
-              🇨🇭 Switzerland
+
+      {/* Address Columns */}
+      {ADDRESSES.map((address, index) => (
+        <motion.div
+          key={address.country}
+          className="col-span-1 xl:col-span-1 flex flex-col gap-0 md:gap-[2px] relative text-[14px] sm:text-[15px] md:text-[16px] tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]"
+          style={{ color: textColor }}
+          variants={columnVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          custom={3 + index}
+        >
+          <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-semibold tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] mb-[4px]">
+            {address.country}
+          </p>
+          {address.lines.map((line, idx) => (
+            <p key={idx} className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
+              {line}
             </p>
-            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
-              Gerbestrasse 17
-            </p>
-            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
-              8805 Richterswil
-            </p>
-            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
-              +41 78 252 7919
-            </p>
-      </motion.div>
-      <motion.div 
-        className="col-span-1 xl:col-span-1 flex flex-col gap-[2px] relative text-[14px] sm:text-[15px] md:text-[16px] tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]" 
-        style={{ color: textColor }}
-        variants={columnVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        custom={4}
-      >
-            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-semibold tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px] mb-[4px]">
-              🇩🇪 Germany
-            </p>
-            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
-              Mohnblumenweg 26
-            </p>
-            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
-              28832 Achim
-            </p>
-            <p className="font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
-              +49 176 747 1337 8
-            </p>
-      </motion.div>
+          ))}
+        </motion.div>
+      ))}
     </div>
   );
 
@@ -333,7 +205,7 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
             © Copyright {new Date().getFullYear()}. All Rights reserved.
           </p>
           <Link
-            href="#"
+            href="/imprint"
             className="font-sans text-[12px] leading-[20px] font-medium relative shrink-0 text-right tracking-[-0.12px] inline-block whitespace-pre transition-colors duration-200 ease-in-out"
             style={{
               background: linkGradient,
@@ -369,7 +241,7 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
               className={`absolute h-[1px] transition-all duration-[250ms] ease-out ${linkAnimationState.imprint === 'coming-in' ? 'left-0' : (hoveredLink === 'imprint' || linkAnimationState.imprint === 'going-out') ? 'right-0' : 'left-0'}`}
               style={{
                 bottom: '0px',
-                width: hoveredLink === 'imprint' 
+                width: hoveredLink === 'imprint'
                   ? (linkAnimationState.imprint === 'going-out' ? '0%' : '100%')
                   : linkAnimationState.imprint === 'going-out' ? '0%' : '100%',
                 background: linkAnimationState.imprint === 'coming-in' ? 'var(--color-56)' : 'linear-gradient(to right, var(--color-56), var(--color-64))',
@@ -379,7 +251,7 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
           </Link>
         </div>
       </div>
-      
+
       {/* Desktop Layout (ab lg) */}
       <div className="hidden lg:grid grid-cols-3 items-center gap-0 relative shrink-0 w-full h-fit">
         <p className="font-sans text-[12px] leading-[20px] font-normal relative shrink-0 tracking-[-0.12px] whitespace-pre text-left" style={{
@@ -398,7 +270,7 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
         </p>
         <div className="flex justify-end">
           <Link
-            href="#"
+            href="/imprint"
             className="font-sans text-[12px] leading-[20px] font-medium relative shrink-0 text-right tracking-[-0.12px] inline-block whitespace-pre transition-colors duration-200 ease-in-out"
             style={{
               background: linkGradient,
@@ -434,7 +306,7 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
               className={`absolute h-[1px] transition-all duration-[250ms] ease-out ${linkAnimationState.imprint === 'coming-in' ? 'left-0' : (hoveredLink === 'imprint' || linkAnimationState.imprint === 'going-out') ? 'right-0' : 'left-0'}`}
               style={{
                 bottom: '0px',
-                width: hoveredLink === 'imprint' 
+                width: hoveredLink === 'imprint'
                   ? (linkAnimationState.imprint === 'going-out' ? '0%' : '100%')
                   : linkAnimationState.imprint === 'going-out' ? '0%' : '100%',
                 background: linkAnimationState.imprint === 'coming-in' ? 'var(--color-56)' : 'linear-gradient(to right, var(--color-56), var(--color-64))',
@@ -447,12 +319,11 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
     </>
   );
 
-  if (version === "Contact") {
+  if (version === "Contact" || version === "PortfolioContact") {
     return (
       <div className="relative flex flex-col items-start justify-end w-full z-[2]">
-        <style dangerouslySetInnerHTML={{ __html: footerBorderRadiusBottomOnlyStyle }} />
         <div className="flex flex-col items-start pt-0 px-[16px] sm:px-[40px] lg:px-[60px] relative shrink-0 w-full border-t border-[var(--color-96)]">
-          <div className="footer-container-bottom-only bg-[var(--color-100)] flex flex-col gap-[40px] md:gap-[80px] items-start pb-[16px] md:pb-[24px] pt-[40px] md:pt-[60px] px-[20px] md:px-[32px] lg:px-[40px] relative shrink-0 w-full mb-[16px] md:mb-[40px] lg:mb-[60px]">
+          <div className="bg-[var(--color-100)] flex flex-col gap-[40px] md:gap-[40px] lg:gap-[80px] items-start pb-[16px] md:pb-[24px] pt-[40px] md:pt-[60px] px-[20px] md:px-[32px] lg:px-[40px] relative shrink-0 w-full mb-[16px] md:mb-[40px] lg:mb-[60px] rounded-b-[12px] rounded-t-none">
             {firstRow}
             {secondaryRow}
           </div>
@@ -464,23 +335,8 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
   if (version === "Portfolio") {
     return (
       <div className="relative flex flex-col items-start justify-end w-full z-[2]">
-        <style dangerouslySetInnerHTML={{ __html: footerBorderRadiusStyle }} />
         <div className="flex flex-col items-start pt-[60px] px-[16px] sm:px-[40px] lg:px-[60px] relative shrink-0 w-full border-t border-[var(--color-96)]">
-          <div className="footer-container bg-[var(--color-100)] flex flex-col gap-[40px] md:gap-[80px] items-start pb-[16px] md:pb-[24px] pt-[40px] md:pt-[60px] px-[20px] md:px-[32px] lg:px-[40px] relative shrink-0 w-full mb-[16px] md:mb-[40px] lg:mb-[60px]">
-            {firstRow}
-            {secondaryRow}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (version === "PortfolioContact") {
-    return (
-      <div className="relative flex flex-col items-start justify-end w-full z-[2]">
-        <style dangerouslySetInnerHTML={{ __html: footerBorderRadiusBottomOnlyStyle }} />
-        <div className="flex flex-col items-start pt-0 px-[16px] sm:px-[40px] lg:px-[60px] relative shrink-0 w-full border-t border-[var(--color-96)]">
-          <div className="footer-container-bottom-only bg-[var(--color-100)] flex flex-col gap-[40px] md:gap-[80px] items-start pb-[16px] md:pb-[24px] pt-[40px] md:pt-[60px] px-[20px] md:px-[32px] lg:px-[40px] relative shrink-0 w-full mb-[16px] md:mb-[40px] lg:mb-[60px]">
+          <div className="bg-[var(--color-100)] flex flex-col gap-[40px] md:gap-[40px] lg:gap-[80px] items-start pb-[16px] md:pb-[24px] pt-[40px] md:pt-[60px] px-[20px] md:px-[32px] lg:px-[40px] relative shrink-0 w-full mb-[16px] md:mb-[40px] lg:mb-[60px] rounded-[12px]">
             {firstRow}
             {secondaryRow}
           </div>
@@ -492,9 +348,9 @@ export const Footer: React.FC<FooterProps> = ({ version = "Default" }) => {
   // Default version (Homepage)
   return (
     <div className="relative flex flex-col items-start justify-end w-full z-[2]">
-      <style dangerouslySetInnerHTML={{ __html: footerBorderRadiusStyle }} />
       <div className="flex flex-col items-start pt-[60px] px-[16px] sm:px-[40px] lg:px-[60px] relative shrink-0 w-full">
-        <div className="footer-container bg-[var(--color-98)] flex flex-col gap-[40px] md:gap-[80px] items-start pb-[16px] md:pb-[24px] pt-[40px] md:pt-[60px] px-[20px] md:px-[32px] lg:px-[40px] relative shrink-0 w-full mb-[16px] md:mb-[40px] lg:mb-[60px]">
+        {/* Note: default version had bg-[var(--color-98)] in original code */}
+        <div className="bg-[var(--color-98)] flex flex-col gap-[40px] md:gap-[40px] lg:gap-[80px] items-start pb-[16px] md:pb-[24px] pt-[40px] md:pt-[60px] px-[20px] md:px-[32px] lg:px-[40px] relative shrink-0 w-full mb-[16px] md:mb-[40px] lg:mb-[60px] rounded-[12px]">
           {firstRow}
           {secondaryRow}
         </div>

@@ -16,7 +16,35 @@ export const HeroBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [cursor, setCursor] = useState<Point | null>(null);
+  const [containerHeight, setContainerHeight] = useState<number | null>(null);
   const isDrawingRef = useRef(false);
+
+  // Measure hero section height on tablet (only for work detail pages)
+  useEffect(() => {
+    const updateHeight = () => {
+      const isWorkDetailPage = window.location.pathname.startsWith('/work/');
+      
+      if (isWorkDetailPage && window.innerWidth >= 768 && window.innerWidth < 1024) {
+        // Tablet on work detail pages: use hero section height
+        const heroSection = document.querySelector('section.relative.bg-transparent');
+        if (heroSection) {
+          setContainerHeight(heroSection.getBoundingClientRect().height);
+        } else {
+          setContainerHeight(window.innerHeight);
+        }
+      } else {
+        // All other cases: use viewport height
+        setContainerHeight(window.innerHeight);
+      }
+    };
+
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+    
+    return () => {
+      window.removeEventListener('resize', updateHeight);
+    };
+  }, []);
 
   // Track mouse position relative to container
   useEffect(() => {
@@ -61,8 +89,8 @@ export const HeroBackground: React.FC = () => {
     }
 
     const rect = container.getBoundingClientRect();
-    // Use viewport height (100vh) only
-    const viewportHeight = window.innerHeight;
+    // Use containerHeight state instead of viewport height
+    const viewportHeight = containerHeight || window.innerHeight;
     
     if (rect.width === 0) {
       isDrawingRef.current = false;
@@ -192,7 +220,7 @@ export const HeroBackground: React.FC = () => {
     ctx.globalAlpha = 1;
     
     isDrawingRef.current = false;
-  }, [cursor]);
+  }, [cursor, containerHeight]);
 
   // Container height is fixed to 100vh
 
@@ -244,7 +272,7 @@ export const HeroBackground: React.FC = () => {
     <div
       ref={containerRef}
       className="pointer-events-none absolute top-0 left-0 w-full overflow-hidden"
-      style={{ height: '100vh', width: '100%', zIndex: 0 }}
+      style={{ height: containerHeight ? `${containerHeight}px` : '100vh', width: '100%', zIndex: 0 }}
       aria-hidden="true"
     >
       <canvas

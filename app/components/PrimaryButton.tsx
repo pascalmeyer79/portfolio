@@ -9,6 +9,7 @@ type PrimaryButtonProps = {
   onClick?: () => void;
   type?: "button" | "submit";
   className?: string;
+  external?: boolean;
 };
 
 export const PrimaryButton = ({ 
@@ -16,12 +17,13 @@ export const PrimaryButton = ({
   href, 
   onClick, 
   type = "button",
-  className = ""
+  className = "",
+  external = false
 }: PrimaryButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const commonProps = {
-    className: `relative inline-flex items-center justify-center rounded-[40px] bg-transparent px-[40px] py-[8px] font-sans text-[14px] md:text-[16px] leading-[22px] md:leading-[26px] font-medium text-[var(--color-100)] shadow-sm overflow-visible ${className}`,
+    className: `relative inline-flex items-center justify-center rounded-[40px] bg-transparent px-[40px] py-[8px] font-sans text-[16px] leading-[26px] font-medium text-[var(--color-100)] shadow-sm overflow-visible ${className}`,
     onMouseEnter: () => setIsHovered(true),
     onMouseLeave: () => setIsHovered(false),
   };
@@ -42,6 +44,13 @@ export const PrimaryButton = ({
   );
 
   if (href) {
+    if (external) {
+      return (
+        <a {...commonProps} href={href} target="_blank" rel="noopener noreferrer">
+          {gradientSpan}
+        </a>
+      );
+    }
     return (
       <Link {...commonProps} href={href}>
         {gradientSpan}

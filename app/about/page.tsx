@@ -38,7 +38,7 @@ const WORK_EXPERIENCE: Experience[] = [
   {
     id: "porsche",
     company: "Porsche",
-    role: "Lead UX and Product Designer, UX Consultant (Freelance)",
+    role: "UX Consultant and Lead UX/Product Designer (Freelance)",
     period: "2022 - 2024",
     image: "/images/about/porsche.jpg",
   },
@@ -52,7 +52,7 @@ const WORK_EXPERIENCE: Experience[] = [
   {
     id: "metro",
     company: "Metro",
-    role: "Lead UX and Product Designer (Freelance)",
+    role: "Lead UX/Product Designer",
     period: "2022",
     image: "/images/about/metro.jpg",
   },
@@ -73,7 +73,7 @@ const WORK_EXPERIENCE: Experience[] = [
   {
     id: "ujam",
     company: "UJAM",
-    role: "Designer, Product Owner",
+    role: "Designer, Frontend Developer, and Product Owner",
     period: "2016 - 2020",
     image: "/images/about/ujam.jpg",
   },
@@ -197,11 +197,11 @@ export default function AboutPage() {
   return (
     <main className="relative min-h-screen">
       {/* Hero Section */}
-      <section className="relative z-[5] pb-[40px] xl:pb-[90px] pt-[120px] xl:pt-[70px]" style={{ minHeight: 'calc(100vh - 82px)' }}>
-        <div className="max-w-[1920px] mx-auto flex flex-col xl:flex-row items-center justify-center gap-0 xl:gap-[80px] 2xl:gap-[120px] px-[16px] sm:px-[40px] xl:px-[60px] 2xl:px-[100px] w-full">
+      <section className="relative z-[5] pb-[40px] xl:pb-[90px] pt-[120px] xl:pt-[70px] xl:min-h-[calc(100vh-82px)]">
+        <div className="max-w-[1920px] mx-auto flex flex-col xl:flex-row items-center justify-center gap-[12px] xl:gap-[80px] 2xl:gap-[120px] px-[16px] sm:px-[40px] xl:px-[60px] 2xl:px-[100px] w-full">
           {/* Left Column - Headline (under xl: centered and single line) */}
           <div 
-            className="flex flex-col items-center xl:items-start justify-center w-full xl:w-auto xl:max-w-[360px] xl:min-w-[300px] mb-[20px] xl:mb-0"
+            className="flex flex-col items-center xl:items-start justify-center w-full xl:w-auto xl:max-w-[360px] xl:min-w-[300px] mb-0 xl:mb-0"
             style={{ 
               maxWidth: '800px',
               height: 'auto'
@@ -217,7 +217,7 @@ export default function AboutPage() {
 
           {/* Description - under xl: below headline, centered */}
           <motion.p
-            className="xl:hidden font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px] text-center w-full mb-[60px] md:mb-[80px]"
+            className="xl:hidden font-sans text-[18px] md:text-[20px] lg:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.27px] md:tracking-[-0.35px] lg:tracking-[-0.44px] leading-[30px] md:leading-[33px] lg:leading-[36px] text-center w-full mb-[60px] md:mb-[80px]"
             style={{ maxWidth: '800px' }}
             variants={textVariants}
             initial="hidden"
@@ -246,7 +246,7 @@ export default function AboutPage() {
               alt="Portrait Pascal Meyer"
               width={720}
               height={960}
-              className="w-full h-auto transition-opacity duration-500 ease-out group-hover:opacity-0"
+              className="w-full h-auto group-hover:opacity-0"
               priority
               quality={100}
               unoptimized={true}
@@ -256,7 +256,7 @@ export default function AboutPage() {
               alt="Portrait Pascal Meyer"
               width={720}
               height={960}
-              className="absolute top-0 left-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
+              className="absolute top-0 left-0 w-full h-full object-cover opacity-0 group-hover:opacity-100"
               priority
               quality={100}
               unoptimized={true}
@@ -282,7 +282,7 @@ export default function AboutPage() {
                 src={portraitSideImage}
                 alt="Portrait Pascal Meyer"
                 fill
-                className="object-cover object-center transition-opacity duration-500 ease-out group-hover:opacity-0"
+                className="object-cover object-center group-hover:opacity-0"
                 priority
                 quality={100}
                 unoptimized={true}
@@ -291,7 +291,7 @@ export default function AboutPage() {
                 src={portraitFrontImage}
                 alt="Portrait Pascal Meyer"
                 fill
-                className="object-cover object-center opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
+                className="object-cover object-center opacity-0 group-hover:opacity-100"
                 priority
                 quality={100}
                 unoptimized={true}
@@ -305,7 +305,7 @@ export default function AboutPage() {
             maxHeight: '960px'
           }}>
             <motion.p
-              className="font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px]"
+              className="font-sans text-[18px] md:text-[20px] lg:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.27px] md:tracking-[-0.35px] lg:tracking-[-0.44px] leading-[30px] md:leading-[33px] lg:leading-[36px]"
               variants={textVariants}
               initial="hidden"
               animate="visible"
@@ -321,7 +321,7 @@ export default function AboutPage() {
 
       {/* Journey Section */}
       <section className="relative z-[4] pt-[40px] pb-[80px] md:py-[120px] xl:py-[160px]" style={{ background: 'linear-gradient(to bottom, var(--color-96) 0%, var(--color-98) 100%)' }}>
-        <div className="max-w-[800px] xl:max-w-[1920px] mx-auto flex flex-col xl:flex-row gap-[24px] xl:gap-[120px] px-[16px] sm:px-[40px] xl:px-[60px] 2xl:px-[100px] py-0 rounded-[10px]">
+        <div className="max-w-[880px] xl:max-w-[1920px] mx-auto flex flex-col xl:flex-row gap-[12px] xl:gap-[120px] px-[16px] sm:px-[40px] xl:px-[60px] 2xl:px-[100px] py-0 rounded-[10px]">
           <div className="flex flex-1 items-start">
             <AnimatedHeadlineFadeInBottom
               as="h2"
@@ -331,7 +331,7 @@ export default function AboutPage() {
             </AnimatedHeadlineFadeInBottom>
           </div>
           <div className="flex flex-1 flex-col gap-[24px] font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-normal tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px]">
-            <AnimatedParagraphFadeInBottom delay={0.3}>
+            <AnimatedParagraphFadeInBottom delay={0.2}>
               At the age of 13, I started learning Photoshop and landed my first
               freelance gigs shortly after. I studied communication design before
               joining a music software startup co-founded by Hans Zimmer and
@@ -340,7 +340,7 @@ export default function AboutPage() {
               Shortly after, I completed my Master of Design in London in Service
               Design and founded an e-commerce startup.
             </AnimatedParagraphFadeInBottom>
-            <AnimatedParagraphFadeInBottom delay={0.5}>
+            <AnimatedParagraphFadeInBottom delay={0.3}>
               In 2020, I took the step into full self employment and began
               working with world class brands as a freelance designer, teaching web
               design as a freelance lecturer at a design college, and running my e
@@ -358,14 +358,14 @@ export default function AboutPage() {
       <section className="relative z-[3] w-full py-0" style={{ background: 'var(--color-98)' }}>
         <div className="max-w-[1920px] mx-auto px-[16px] sm:px-[40px] xl:px-[60px] py-0">
           <motion.div 
-            className="bg-[var(--color-100)] rounded-[10px] flex flex-col gap-[32px] md:gap-[40px] px-0 py-[32px] md:py-[40px]"
+            className="bg-[var(--color-100)] rounded-[10px] flex flex-col gap-[32px] md:gap-[40px] px-[16px] md:px-0 py-[16px] md:py-[40px]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1] }}
           >
             {/* Work Experience */}
-            <div className="px-[24px] md:px-[40px] py-0">
+            <div className="px-0 md:px-[40px] py-0">
               <motion.div 
                 className="border-b flex items-center justify-center px-0 py-[24px]"
                 style={{ borderBottomColor: theme === 'dark' ? 'var(--color-98)' : 'var(--color-92)' }}
@@ -399,16 +399,16 @@ export default function AboutPage() {
                   <p className="font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px] mb-0">
                     {exp.company}
                   </p>
-                  <div className="flex items-start justify-between w-full font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[22px] sm:leading-[24px] md:leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
+                  <div className="flex items-start justify-between gap-[16px] w-full font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[22px] sm:leading-[24px] md:leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
                     <p className="text-[var(--color-8)]">{exp.role}</p>
-                    <p className="text-[var(--color-64)]">{exp.period}</p>
+                    <p className="text-[var(--color-64)] whitespace-nowrap">{exp.period}</p>
                   </div>
                 </motion.div>
               ))}
             </div>
 
             {/* Education */}
-            <div className="px-[24px] md:px-[40px] py-0">
+            <div className="px-0 md:px-[40px] py-0">
               <motion.div 
                 className="border-b flex items-center justify-center px-0 py-[24px]"
                 style={{ borderBottomColor: theme === 'dark' ? 'var(--color-98)' : 'var(--color-92)' }}
@@ -439,9 +439,9 @@ export default function AboutPage() {
                   <p className="font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px] mb-0">
                     {edu.title}
                   </p>
-                  <div className="flex items-start justify-between w-full font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[22px] sm:leading-[24px] md:leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
+                  <div className="flex items-start justify-between gap-[16px] w-full font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[22px] sm:leading-[24px] md:leading-[26px] font-normal tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]">
                     <p className="text-[var(--color-8)]">{edu.description}</p>
-                    <p className="text-[var(--color-64)]">{edu.period}</p>
+                    <p className="text-[var(--color-64)] whitespace-nowrap">{edu.period}</p>
                   </div>
                 </motion.div>
               ))}
@@ -452,7 +452,7 @@ export default function AboutPage() {
 
       {/* Personal Section */}
       <section className="relative z-[2] pt-[60px] md:pt-[120px] xl:pt-[160px] pb-[60px] md:pb-[80px] xl:pb-[120px]" style={{ background: 'linear-gradient(to bottom, var(--color-98) 0%, var(--color-100) 100%)' }}>
-        <div className="max-w-[800px] xl:max-w-[1920px] mx-auto flex flex-col xl:flex-row gap-[24px] xl:gap-[120px] px-[16px] sm:px-[40px] xl:px-[60px] 2xl:px-[100px] py-0 rounded-[10px]">
+        <div className="max-w-[880px] xl:max-w-[1920px] mx-auto flex flex-col xl:flex-row gap-[12px] xl:gap-[120px] px-[16px] sm:px-[40px] xl:px-[60px] 2xl:px-[100px] py-0 rounded-[10px]">
           <div className="flex flex-1 items-start">
             <AnimatedHeadlineFadeInBottom
               as="h2"
@@ -462,7 +462,7 @@ export default function AboutPage() {
             </AnimatedHeadlineFadeInBottom>
           </div>
           <div className="flex flex-1 flex-col gap-[24px] items-start justify-center font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-normal tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px]">
-            <AnimatedParagraphFadeInBottom delay={0.3}>
+            <AnimatedParagraphFadeInBottom delay={0.2}>
               My strength lies in bridging disciplines. I speak the language of
               developers, understand business strategy, prototype rapidly, and
               always keep the user at the absolute center. I thrive in complexity.
@@ -470,7 +470,7 @@ export default function AboutPage() {
               deadlines, and I will consistently create clarity, alignment, and
               measurable outcomes.
             </AnimatedParagraphFadeInBottom>
-            <AnimatedParagraphFadeInBottom delay={0.5}>
+            <AnimatedParagraphFadeInBottom delay={0.3}>
               When I'm not at work, you'll probably find me researching
               innovation, the financial markets, crypto, or biohacking. I am
               pretty much 24/7 listening to something to feed my curiosity. About
