@@ -3337,7 +3337,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                       <style dangerouslySetInnerHTML={{
                         __html: `
                           .design-branding-image {
-                            border-radius: ${getBorderRadius(slugString)};
+                            border-radius: 8px;
                           }
                           .animated-scroll-container {
                             overflow: hidden;
