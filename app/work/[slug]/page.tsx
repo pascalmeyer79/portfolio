@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { use } from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -3721,12 +3721,11 @@ function WorkPageClient({ slug }: WorkPageProps) {
   );
 }
 
-// Server Component Wrapper to resolve async params
-export default async function WorkPage({
+export default function WorkPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params;
+  const { slug } = use(params);
   return <WorkPageClient slug={slug} />;
 }
