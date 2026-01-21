@@ -22,8 +22,9 @@ export const PrimaryButton = ({
 }: PrimaryButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
+  const displayClass = className.includes('w-full') ? 'flex' : 'inline-flex';
   const commonProps = {
-    className: `relative inline-flex items-center justify-center rounded-[40px] bg-transparent px-[40px] py-[8px] font-sans text-[16px] leading-[26px] font-medium text-[var(--color-100)] shadow-sm overflow-visible ${className}`,
+    className: `relative ${displayClass} items-center justify-center rounded-[40px] bg-transparent px-[40px] py-[8px] font-sans text-[16px] leading-[26px] font-medium text-[var(--color-100)] shadow-sm overflow-visible ${className}`,
     onMouseEnter: () => setIsHovered(true),
     onMouseLeave: () => setIsHovered(false),
   };

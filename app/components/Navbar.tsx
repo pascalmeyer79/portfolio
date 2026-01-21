@@ -101,7 +101,7 @@ export const Navbar = ({ selection }: NavbarProps = {}) => {
   };
 
   return (
-    <header className="sticky top-0 z-[10] flex items-center justify-between pl-[16px] md:pl-[32px] pr-[20px] md:pr-[40px] pt-[max(24px,env(safe-area-inset-top))] pb-[24px] md:py-[24px] bg-transparent h-[82px] relative">
+    <header className="sticky top-0 z-[10] flex items-center pl-[16px] md:pl-[32px] pr-[20px] md:pr-[40px] pt-[max(24px,env(safe-area-inset-top))] pb-[24px] md:py-[24px] bg-transparent h-[82px] relative">
       {/* Left: Logo */}
       <Link href="/" className="h-[28px] w-[48px] md:h-[34px] md:w-[58px] relative shrink-0 z-10">
         <Image
@@ -116,49 +116,51 @@ export const Navbar = ({ selection }: NavbarProps = {}) => {
         />
       </Link>
 
-      {/* Center: Navigation - absolutely centered in viewport */}
-      <nav
-        ref={navRef}
-        className="absolute left-1/2 -translate-x-1/2 backdrop-blur-xl bg-[var(--color-96-50)] border-2 border-[var(--color-56-04)] flex items-center justify-center rounded-[50px] shrink-0 z-10"
-        style={{ padding: '2px' }}
-      >
-        <div
-          className={`absolute rounded-[45px] bg-[var(--color-100)] ${shouldAnimate ? 'transition-all duration-300 ease-out' : ''}`}
-          style={{
-            left: `${indicatorStyle.left}px`,
-            width: `${indicatorStyle.width}px`,
-            opacity: indicatorStyle.opacity,
-            height: "calc(100% - 4px)",
-            top: "2px",
-          }}
-        />
-        <ul className="flex items-center gap-0 relative z-10 m-0">
-          {NAV_ITEMS.map((item) => {
-            const isActive = item.href === activeItem.href;
-            return (
-              <li key={item.href} className="relative m-0">
-                <Link
-                  href={item.href}
-                  className={`relative block rounded-[45px] px-[16px] md:px-[24px] py-[6px] text-center font-sans transition-colors duration-150 ${
-                    isActive
-                      ? "text-[var(--color-8)] font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[22px] sm:leading-[24px] md:leading-[28px] font-semibold tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]"
-                      : "text-[var(--color-8-64)] font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[22px] sm:leading-[24px] md:leading-[26px] font-medium tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]"
-                  }`}
-                >
-                  <span className="relative z-10">{item.label}</span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
+      {/* Center: Navigation - centered with flex */}
+      <div className="flex-1 flex justify-center">
+        <nav
+          ref={navRef}
+          className="backdrop-blur-xl bg-[var(--color-96-50)] border-2 border-[var(--color-56-04)] flex items-center justify-center rounded-[50px] shrink-0 z-10"
+          style={{ padding: '2px' }}
+        >
+          <div
+            className={`absolute rounded-[45px] bg-[var(--color-100)] ${shouldAnimate ? 'transition-all duration-300 ease-out' : ''}`}
+            style={{
+              left: `${indicatorStyle.left}px`,
+              width: `${indicatorStyle.width}px`,
+              opacity: indicatorStyle.opacity,
+              height: "calc(100% - 4px)",
+              top: "2px",
+            }}
+          />
+          <ul className="flex items-center gap-0 relative z-10 m-0">
+            {NAV_ITEMS.map((item) => {
+              const isActive = item.href === activeItem.href;
+              return (
+                <li key={item.href} className="relative m-0">
+                  <Link
+                    href={item.href}
+                    className={`relative block rounded-[45px] px-[16px] md:px-[24px] py-[6px] text-center font-sans transition-colors duration-150 ${
+                      isActive
+                        ? "text-[var(--color-8)] font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[22px] sm:leading-[24px] md:leading-[28px] font-semibold tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]"
+                        : "text-[var(--color-8-64)] font-sans text-[14px] sm:text-[15px] md:text-[16px] leading-[22px] sm:leading-[24px] md:leading-[26px] font-medium tracking-[-0.21px] sm:tracking-[-0.225px] md:tracking-[-0.24px]"
+                    }`}
+                  >
+                    <span className="relative z-10">{item.label}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      </div>
 
       {/* Right: Dark mode toggle */}
       <button
         type="button"
         onClick={toggleTheme}
         aria-label="Toggle Dark Mode"
-        className="flex items-center pl-[18px] pr-0 py-0 relative shrink-0"
+        className="flex items-center pl-[4px] md:pl-[18px] pr-0 py-0 relative shrink-0"
       >
         <div className="backdrop-blur-md bg-[var(--color-94-50)] border-2 border-[var(--color-94-50)] flex items-center p-[8px] rounded-[43px] shrink-0">
           <Image

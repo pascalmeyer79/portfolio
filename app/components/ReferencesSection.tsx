@@ -121,7 +121,7 @@ export const ReferencesSection: React.FC = () => {
 
   const renderLogoRow = (logos: Logo[], paddingLeft: string, paddingRight: string, rowIndex: number) => {
     return (
-      <div className={`flex items-center ${paddingLeft} ${paddingRight} py-0 relative w-full h-[120px] md:h-[160px]`}>
+      <div className={`flex items-center gap-[16px] md:gap-0 ${paddingLeft} ${paddingRight} py-0 relative w-full h-[120px] md:h-[160px]`}>
         {logos.map((logo, index) => {
           const animationOrder = getLogoAnimationOrder(logo.id);
           const baseDelay = 0.2; // Start delay
@@ -141,7 +141,8 @@ export const ReferencesSection: React.FC = () => {
           return (
             <motion.div
               key={logo.id}
-              className={`flex flex-1 flex-col h-full items-center justify-center relative ${visibilityClass}`}
+              className={`flex flex-1 md:flex-1 flex-col h-full items-center justify-center relative ${visibilityClass}`}
+              style={{ flexBasis: 'calc(33.333% - 11px)' }}
               variants={logoVariants}
               initial="hidden"
               whileInView="visible"
@@ -227,7 +228,7 @@ export const ReferencesSection: React.FC = () => {
         {/* Logos Grid */}
         <div className="flex flex-col items-start relative w-full h-[273px] md:h-[353px]">
           {/* Upper Row */}
-          {renderLogoRow(LOGOS.slice(0, 5), "pl-[40px] md:pl-[20px]", "pr-0", 0)}
+          {renderLogoRow(LOGOS.slice(0, 5), "pl-0 md:pl-[20px]", "pr-0", 0)}
 
           {/* Horizontal Divider */}
           <motion.div
@@ -244,7 +245,7 @@ export const ReferencesSection: React.FC = () => {
           />
 
           {/* Lower Row */}
-          {renderLogoRow(LOGOS.slice(5, 10), "pl-0", "pr-[40px] md:pr-[20px]", 1)}
+          {renderLogoRow(LOGOS.slice(5, 10), "pl-0", "pr-0 md:pr-[20px]", 1)}
 
           {/* Durchgängige vertikale Divider - absolut positioniert im übergeordneten Container */}
           {/* 3 Logos pro Reihe für kleinere Breakpoints (bis 1023px) */}
@@ -257,7 +258,7 @@ export const ReferencesSection: React.FC = () => {
             return (
               <motion.div
                 key={`divider-mobile-${dividerIndex}`}
-                className="absolute top-0 lg:hidden"
+                className="absolute top-0 hidden md:block lg:hidden"
                 style={{
                   left: leftPosition,
                   width: "1px",

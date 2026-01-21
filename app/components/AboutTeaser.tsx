@@ -39,7 +39,7 @@ export const AboutTeaser: React.FC = () => {
         </AnimatedHeadlineFadeInBottom>
         <Link href="/about" className="block">
           <motion.div 
-            className="group h-[360px] md:h-[666px] max-h-[360px] md:max-h-[666px] max-w-[260px] md:max-w-[480px] relative rounded-[1000px] shrink-0 w-[260px] md:w-[480px] overflow-hidden cursor-pointer"
+            className="group h-[444px] md:h-[666px] max-h-[444px] md:max-h-[666px] max-w-[320px] md:max-w-[480px] relative rounded-[1000px] shrink-0 w-[320px] md:w-[480px] overflow-hidden cursor-pointer"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={getViewport()}
@@ -49,7 +49,7 @@ export const AboutTeaser: React.FC = () => {
               src={sideSrc}
               alt="Pascal Meyer"
               fill
-              sizes="(max-width: 768px) 260px, 480px"
+              sizes="(max-width: 768px) 320px, 480px"
               className="object-cover group-hover:opacity-0"
               quality={100}
               unoptimized={true}
@@ -59,7 +59,7 @@ export const AboutTeaser: React.FC = () => {
               src={frontSrc}
               alt="Pascal Meyer"
               fill
-              sizes="(max-width: 768px) 260px, 480px"
+              sizes="(max-width: 768px) 320px, 480px"
               className="absolute inset-0 object-cover opacity-0 group-hover:opacity-100"
               quality={100}
               unoptimized={true}
@@ -87,13 +87,13 @@ export const AboutTeaser: React.FC = () => {
             Let&apos;s build what&apos;s next.
           </motion.p>
         </div>
-        <div className="flex gap-[12px] items-start justify-center relative w-full">
+        <div className="flex gap-[12px] items-start md:justify-center relative w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={getViewport()}
             transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1], delay: 0.4 }}
-            className="flex-1 md:flex-none"
+            className="flex-1 md:flex-none min-w-0"
           >
             <PrimaryButton href="/contact" className="w-full md:w-auto">Get in Touch</PrimaryButton>
           </motion.div>
@@ -102,11 +102,11 @@ export const AboutTeaser: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={getViewport()}
             transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1], delay: 0.5 }}
-            className="flex-1 md:flex-none"
+            className="flex-1 md:flex-none min-w-0"
           >
             <Link
               href="/about"
-              className="relative inline-flex items-center justify-center rounded-[40px] p-[1px] w-full md:w-auto"
+              className="relative flex items-center justify-center rounded-[40px] p-[1px] w-full md:w-auto"
               onMouseEnter={() => setIsSecondaryHovered(true)}
               onMouseLeave={() => setIsSecondaryHovered(false)}
               style={{
