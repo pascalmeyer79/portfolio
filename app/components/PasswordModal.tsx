@@ -126,7 +126,7 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({
         <>
           {/* Dim overlay */}
           <motion.div
-            className="fixed inset-0 z-50 bg-[var(--color-0-80)] backdrop-blur-[25px]"
+            className="fixed inset-0 z-50 bg-[var(--color-0-80)] dark:bg-[rgba(0,0,0,0.85)] backdrop-blur-[25px]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
