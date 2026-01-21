@@ -91,18 +91,20 @@ export const AboutTeaser: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1], delay: 0.4 }}
+            className="flex-1 md:flex-none"
           >
-            <PrimaryButton href="/contact">Get in Touch</PrimaryButton>
+            <PrimaryButton href="/contact" className="w-full md:w-auto">Get in Touch</PrimaryButton>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1], delay: 0.5 }}
+            className="flex-1 md:flex-none"
           >
             <Link
               href="/about"
-              className="relative inline-flex items-center justify-center rounded-[40px] p-[1px]"
+              className="relative inline-flex items-center justify-center rounded-[40px] p-[1px] w-full md:w-auto"
               onMouseEnter={() => setIsSecondaryHovered(true)}
               onMouseLeave={() => setIsSecondaryHovered(false)}
               style={{
@@ -112,7 +114,7 @@ export const AboutTeaser: React.FC = () => {
                 transition: 'background-position 0.5s cubic-bezier(0.22, 0.61, 0.36, 1)',
               }}
             >
-              <span className="flex items-center justify-center px-[40px] py-[8px] rounded-[40px] bg-[var(--color-100)] backdrop-blur-sm backdrop-filter font-sans text-[16px] leading-[26px] font-medium text-[var(--color-16)]">
+              <span className="flex items-center justify-center px-[40px] py-[8px] rounded-[40px] bg-[var(--color-100)] backdrop-blur-sm backdrop-filter font-sans text-[16px] leading-[26px] font-medium text-[var(--color-16)] w-full md:w-auto">
                 <span className="md:hidden">About Me</span>
                 <span className="hidden md:inline">More About Me</span>
               </span>
