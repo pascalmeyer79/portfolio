@@ -1218,25 +1218,8 @@ function WorkPageClient({ slug }: WorkPageProps) {
                   <style dangerouslySetInnerHTML={{
                     __html: `
                       .summary-image {
-                        border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
+                        border-radius: clamp(8px, 1.5vw, 16px);
                       }
-                      ${slugString === 'vw' ? `
-                      @media (max-width: 639px) {
-                        .summary-image {
-                          border-radius: 8px;
-                        }
-                      }
-                      @media (min-width: 640px) and (max-width: 1023px) {
-                        .summary-image {
-                          border-radius: 10px;
-                        }
-                      }
-                      @media (min-width: 1024px) {
-                        .summary-image {
-                          border-radius: 12px;
-                        }
-                      }
-                      ` : ''}
                     `
                   }} />
                   {summaryImages.map((img, imgIndex) => (
@@ -1303,25 +1286,8 @@ function WorkPageClient({ slug }: WorkPageProps) {
                   <style dangerouslySetInnerHTML={{
                     __html: `
                       .summary-image {
-                        border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
+                        border-radius: clamp(8px, 1.5vw, 16px);
                       }
-                      ${slugString === 'vw' ? `
-                      @media (max-width: 639px) {
-                        .summary-image {
-                          border-radius: 8px;
-                        }
-                      }
-                      @media (min-width: 640px) and (max-width: 1023px) {
-                        .summary-image {
-                          border-radius: 10px;
-                        }
-                      }
-                      @media (min-width: 1024px) {
-                        .summary-image {
-                          border-radius: 12px;
-                        }
-                      }
-                      ` : ''}
                     `
                   }} />
                   {summaryImages.map((img, imgIndex) => {
@@ -1393,8 +1359,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                   <style dangerouslySetInnerHTML={{
                     __html: `
                       .summary-row-image {
-                        border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
-                        ${getVWBorderRadiusCSS('summary-row-image')}
+                        border-radius: clamp(22px, 4vw, 48px);
                       }
                     `
                   }} />
@@ -1568,7 +1533,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                         <style dangerouslySetInnerHTML={{
                           __html: `
                             .row-image {
-                              border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
+                              border-radius: 8px;
                             }
                             ${getVWBorderRadiusCSS('row-image')}
                           `
@@ -2197,33 +2162,16 @@ function WorkPageClient({ slug }: WorkPageProps) {
                                 )}
                                 {section.title && (
                                   <h2 className="font-serif text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] 2xl:text-[48px] text-[var(--color-8)] tracking-[-0.14px] sm:tracking-[-0.16px] md:tracking-[-0.18px] lg:tracking-[-0.20px] xl:tracking-[-0.22px] 2xl:tracking-[-0.24px] leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[55px] 2xl:leading-[60px]">
-                                    {slugString === 'vw' ? (
-                                      // For VW: on mobile, ignore \n and let text wrap naturally; on xl+, respect \n
-                                      <>
-                                        <span className="xl:hidden">{section.title.replace(/\n/g, ' ')}</span>
-                                        <span className="hidden xl:block">
-                                          {section.title.split('\n').map((line, idx, arr) => (
-                                            <span key={idx} className="xl:w-full xl:block">
-                                              {line}
-                                              {idx < arr.length - 1 && <br />}
-                                            </span>
-                                          ))}
+                                    {/* For Vario: on mobile, ignore \n and let text wrap naturally; on xl+, respect \n */}
+                                    <span className="xl:hidden">{section.title.replace(/\n/g, ' ')}</span>
+                                    <span className="hidden xl:block">
+                                      {section.title.split('\n').map((line, idx, arr) => (
+                                        <span key={idx} className="xl:w-full xl:block">
+                                          {line}
+                                          {idx < arr.length - 1 && <br />}
                                         </span>
-                                      </>
-                                    ) : (
-                                      // For other projects: on mobile, ignore \n and let text wrap naturally; on xl+, respect \n
-                                      <>
-                                        <span className="xl:hidden">{section.title.replace(/\n/g, ' ')}</span>
-                                        <span className="hidden xl:block">
-                                          {section.title.split('\n').map((line, idx, arr) => (
-                                            <span key={idx} className="xl:w-full xl:block">
-                                              {line}
-                                              {idx < arr.length - 1 && <br />}
-                                            </span>
-                                          ))}
-                                        </span>
-                                      </>
-                                    )}
+                                      ))}
+                                    </span>
                                   </h2>
                                 )}
                               </div>
