@@ -31,7 +31,7 @@ const WORK_EXPERIENCE: Experience[] = [
   },
   {
     id: "sony",
-    company: "Sony Music (Extreme Music)",
+    company: "Sony Music Publishing",
     role: "UX/UI Designer (Freelance)",
     period: "2017 - today",
     image: "/images/about/sony-music.jpg",
@@ -229,7 +229,7 @@ export default function AboutPage() {
             animate="visible"
           >
             True excellence is the synthesis of diverse disciplines. My {yearsOfExperience}-year
-            journey covers product ownership, frontend, consulting, marketing,
+            design journey covers product ownership, frontend, consulting, marketing,
             mentoring, and entrepreneurship. This foundation allows me to bridge
             strategy, design, and execution for complex, end-to-end products.
           </motion.p>
@@ -398,8 +398,8 @@ export default function AboutPage() {
                   onMouseLeave={handleRowLeave}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={getViewport()}
-                  transition={{ duration: 0.6, delay: 0.2 + (idx * 0.1), ease: [0.22, 0.61, 0.36, 1] }}
+                  viewport={{ once: true, margin: "-500px 0px 0px 0px", amount: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 + (idx * 0.05), ease: [0.22, 0.61, 0.36, 1] }}
                 >
                   <p className="font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px] mb-0">
                     {exp.company}
@@ -438,8 +438,8 @@ export default function AboutPage() {
                   style={idx === EDUCATION.length - 1 ? {} : { borderBottomColor: theme === 'dark' ? 'var(--color-94-50)' : 'var(--color-96)' }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={getViewport()}
-                  transition={{ duration: 0.6, delay: 1.1 + (idx * 0.1), ease: [0.22, 0.61, 0.36, 1] }}
+                  viewport={{ once: true, margin: "-500px 0px 0px 0px", amount: 0 }}
+                  transition={{ duration: 0.6, delay: 1.15 + (idx * 0.05), ease: [0.22, 0.61, 0.36, 1] }}
                 >
                   <p className="font-sans text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] xl:text-[22px] text-[var(--color-8)] font-medium tracking-[-0.24px] sm:tracking-[-0.255px] md:tracking-[-0.27px] lg:tracking-[-0.35px] xl:tracking-[-0.44px] leading-[26px] sm:leading-[28px] md:leading-[30px] lg:leading-[33px] xl:leading-[36px] mb-0">
                     {edu.title}

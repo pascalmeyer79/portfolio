@@ -68,8 +68,25 @@ export function ImageComparison({
       <style dangerouslySetInnerHTML={{
         __html: `
           .comparison-container {
-            border-radius: ${projectSlug === 'vario' ? 'clamp(22px, 4vw, 48px)' : 'clamp(6px, 0.75vw, 16px)'};
+            border-radius: ${projectSlug === 'vario' ? 'clamp(22px, 4vw, 48px)' : projectSlug === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
           }
+          ${projectSlug === 'vw' ? `
+          @media (max-width: 639px) {
+            .comparison-container {
+              border-radius: 8px;
+            }
+          }
+          @media (min-width: 640px) and (max-width: 1023px) {
+            .comparison-container {
+              border-radius: 10px;
+            }
+          }
+          @media (min-width: 1024px) {
+            .comparison-container {
+              border-radius: 12px;
+            }
+          }
+          ` : ''}
         `
       }} />
       <div

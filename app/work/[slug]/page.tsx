@@ -1,6 +1,6 @@
 "use client";
 
-import React, { use } from "react";
+import React, { use, useMemo } from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -693,8 +693,30 @@ function WorkPageClient({ slug }: WorkPageProps) {
   // Helper function to get border radius (avoids TypeScript type narrowing issues)
   const getBorderRadius = (projectSlug: string): string => {
     if (projectSlug === 'vario') return 'clamp(22px, 4vw, 48px)';
-    if (projectSlug === 'vw') return '8px';
-    return 'clamp(16px, 1.5vw, 16px)';
+    if (projectSlug === 'vw') return 'clamp(8px, 2vw + 2px, 12px)'; // Mobile: 8px, Tablet: ~10px, Desktop: 12px
+    return 'clamp(8px, 1.5vw, 16px)'; // Tenzir and Porsche: Mobile: 8px, Desktop: 16px
+  };
+
+  // Helper function to get VW-specific responsive border-radius CSS with media queries
+  const getVWBorderRadiusCSS = (className: string): string => {
+    if (slugString !== 'vw') return '';
+    return `
+      @media (max-width: 639px) {
+        .${className} {
+          border-radius: 8px;
+        }
+      }
+      @media (min-width: 640px) and (max-width: 1023px) {
+        .${className} {
+          border-radius: 10px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .${className} {
+          border-radius: 12px;
+        }
+      }
+    `;
   };
 
   // Base border radius for Vario: 32px
@@ -733,6 +755,13 @@ function WorkPageClient({ slug }: WorkPageProps) {
     offset: ["start end", "start start"]
   });
 
+  // For VW: animate bottom border-radius from 12px to 0 on scroll
+  // Initial values set via CSS (8px mobile, 10px tablet, 12px desktop)
+  // Animation will override CSS values when scrolling
+  const heroBorderRadiusBottom = slugString === 'vw' 
+    ? useTransform(scrollYProgress, [0, 1], [12, 0])
+    : undefined;
+
   // Get initial border radius based on screen size
   const getInitialBorderRadius = () => {
     return 20; // all screen sizes
@@ -755,9 +784,8 @@ function WorkPageClient({ slug }: WorkPageProps) {
 
   const getInitialPaddingY = () => {
     if (screenSize === 'mobile') {
-      // For Porsche and Tenzir, use 32px on mobile
-      if (slugString === 'porsche' || slugString === 'tenzir') return 32;
-      return 16;
+      // Use 32px on mobile for all projects
+      return 32;
     }
     if (screenSize === 'tablet') return 24;
     // For stacked hero (Vario), always use 120px
@@ -775,9 +803,8 @@ function WorkPageClient({ slug }: WorkPageProps) {
 
   const getFinalPaddingY = () => {
     if (screenSize === 'mobile') {
-      // For Porsche and Tenzir, use 32px on mobile
-      if (slugString === 'porsche' || slugString === 'tenzir') return 32;
-      return 16;
+      // Use 32px on mobile for all projects
+      return 32;
     }
     if (screenSize === 'tablet') return 40;
     if (screenSize === 'desktop') return 60;
@@ -831,7 +858,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative bg-transparent pt-[40px] pb-[40px] md:pt-[80px] md:pb-[80px] lg:pt-[160px] lg:pb-0">
+      <section className="relative bg-transparent pt-[40px] pb-0 md:pt-[80px] md:pb-[80px] lg:pt-[160px] lg:pb-0">
         <div className="max-w-[1920px] mx-auto px-0">
           <div className="w-full px-[16px] sm:px-[40px] lg:px-[60px] 2xl:px-[100px] mb-[60px] md:mb-[80px] lg:mb-[100px] grid grid-cols-1 lg:grid-cols-3 gap-[20px] md:gap-[40px] lg:gap-[40px] 2xl:gap-[80px] items-end">
             {/* Left side: Tenzir + Headline - 2 columns */}
@@ -911,13 +938,50 @@ function WorkPageClient({ slug }: WorkPageProps) {
                 }
                 @media (min-width: 1920px) {
                   .hero-container {
-                    border-bottom-left-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(16px, 1.5vw, 16px)'};
-                    border-bottom-right-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(16px, 1.5vw, 16px)'};
+                    border-bottom-left-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
+                    border-bottom-right-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
+                    ${slugString === 'vw' ? `
+                    @media (max-width: 639px) {
+                      .hero-container {
+                        border-bottom-left-radius: 8px;
+                        border-bottom-right-radius: 8px;
+                      }
+                    }
+                    @media (min-width: 640px) and (max-width: 1023px) {
+                      .hero-container {
+                        border-bottom-left-radius: 10px;
+                        border-bottom-right-radius: 10px;
+                      }
+                    }
+                    @media (min-width: 1024px) {
+                      .hero-container {
+                        border-bottom-left-radius: 12px;
+                        border-bottom-right-radius: 12px;
+                      }
+                    }
+                    ` : ''}
                   }
                 }
                 .hero-image {
-                        border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(16px, 1.5vw, 16px)'};
+                        border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
                 }
+                ${slugString === 'vw' ? `
+                @media (max-width: 639px) {
+                  .hero-image {
+                    border-radius: 8px;
+                  }
+                }
+                @media (min-width: 640px) and (max-width: 1023px) {
+                  .hero-image {
+                    border-radius: 10px;
+                  }
+                }
+                @media (min-width: 1024px) {
+                  .hero-image {
+                    border-radius: 12px;
+                  }
+                }
+                ` : ''}
               `
               }} />
               {isStackedHero ? (
@@ -981,7 +1045,8 @@ function WorkPageClient({ slug }: WorkPageProps) {
                             <style dangerouslySetInnerHTML={{
                               __html: `
                             .${uniqueId} {
-                              border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                              border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
+                              ${getVWBorderRadiusCSS(uniqueId)}
                               aspect-ratio: ${widthRatio};
                               height: auto;
                               width: calc(((100% + ${totalOverlap}px) / ${totalScaleSum}) * ${sizeScale});
@@ -1028,7 +1093,12 @@ function WorkPageClient({ slug }: WorkPageProps) {
                     borderColor: 'var(--color-0-80)',
                     backdropFilter: 'blur(10px)',
                     WebkitBackdropFilter: 'blur(10px)',
-                    boxSizing: 'border-box'
+                    boxSizing: 'border-box',
+                    ...(slugString === 'vw' && heroBorderRadiusBottom ? {
+                      // Top radius set via CSS media queries, bottom radius animated
+                      borderBottomLeftRadius: heroBorderRadiusBottom,
+                      borderBottomRightRadius: heroBorderRadiusBottom,
+                    } : {})
                   }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -1134,8 +1204,25 @@ function WorkPageClient({ slug }: WorkPageProps) {
                   <style dangerouslySetInnerHTML={{
                     __html: `
                       .summary-image {
-                        border-radius: clamp(16px, 1.5vw, 16px);
+                        border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
                       }
+                      ${slugString === 'vw' ? `
+                      @media (max-width: 639px) {
+                        .summary-image {
+                          border-radius: 8px;
+                        }
+                      }
+                      @media (min-width: 640px) and (max-width: 1023px) {
+                        .summary-image {
+                          border-radius: 10px;
+                        }
+                      }
+                      @media (min-width: 1024px) {
+                        .summary-image {
+                          border-radius: 12px;
+                        }
+                      }
+                      ` : ''}
                     `
                   }} />
                   {summaryImages.map((img, imgIndex) => (
@@ -1202,8 +1289,25 @@ function WorkPageClient({ slug }: WorkPageProps) {
                   <style dangerouslySetInnerHTML={{
                     __html: `
                       .summary-image {
-                        border-radius: clamp(16px, 1.5vw, 16px);
+                        border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
                       }
+                      ${slugString === 'vw' ? `
+                      @media (max-width: 639px) {
+                        .summary-image {
+                          border-radius: 8px;
+                        }
+                      }
+                      @media (min-width: 640px) and (max-width: 1023px) {
+                        .summary-image {
+                          border-radius: 10px;
+                        }
+                      }
+                      @media (min-width: 1024px) {
+                        .summary-image {
+                          border-radius: 12px;
+                        }
+                      }
+                      ` : ''}
                     `
                   }} />
                   {summaryImages.map((img, imgIndex) => {
@@ -1275,7 +1379,8 @@ function WorkPageClient({ slug }: WorkPageProps) {
                   <style dangerouslySetInnerHTML={{
                     __html: `
                       .summary-row-image {
-                        border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                        border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
+                        ${getVWBorderRadiusCSS('summary-row-image')}
                       }
                     `
                   }} />
@@ -1340,7 +1445,8 @@ function WorkPageClient({ slug }: WorkPageProps) {
               <style dangerouslySetInnerHTML={{
                 __html: `
                   .summary-image {
-                    border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                    border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
+                    ${getVWBorderRadiusCSS('summary-image')}
                   }
                 `
               }} />
@@ -1363,7 +1469,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
               <div className="mt-[60px] md:mt-[80px] lg:mt-[100px]">
                 <div className="flex flex-col gap-[60px] lg:gap-[120px]">
                   {section.type === "text-image" && !section.centeredLayout && (
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-[24px] md:gap-[24px] lg:gap-[40px] 2xl:gap-[80px] items-start">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-[24px] md:gap-[60px] lg:gap-[40px] 2xl:gap-[80px] items-start">
                       {/* Left: Overline + Title */}
                       <motion.div
                         className="flex flex-col gap-[12px] md:gap-[16px]"
@@ -1378,13 +1484,34 @@ function WorkPageClient({ slug }: WorkPageProps) {
                           </p>
                         )}
                         {section.title && (
-                          <h2 className="font-serif text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] 2xl:text-[48px] text-[var(--color-8)] tracking-[-0.14px] sm:tracking-[-0.16px] md:tracking-[-0.18px] lg:tracking-[-0.20px] xl:tracking-[-0.22px] 2xl:tracking-[-0.24px] leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[55px] 2xl:leading-[60px] ">
-                            {section.title.split('\n').map((line, idx, arr) => (
-                              <span key={idx} className="w-full block">
-                                {line}
-                                {idx < arr.length - 1 && <br className="hidden xl:block" />}
-                              </span>
-                            ))}
+                          <h2 className="font-serif text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] 2xl:text-[48px] text-[var(--color-8)] tracking-[-0.14px] sm:tracking-[-0.16px] md:tracking-[-0.18px] lg:tracking-[-0.20px] xl:tracking-[-0.22px] 2xl:tracking-[-0.24px] leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[55px] 2xl:leading-[60px]">
+                            {slugString === 'vw' ? (
+                              // For VW: on mobile, ignore \n and let text wrap naturally; on xl+, respect \n
+                              <>
+                                <span className="xl:hidden">{section.title.replace(/\n/g, ' ')}</span>
+                                <span className="hidden xl:block">
+                                  {section.title.split('\n').map((line, idx, arr) => (
+                                    <span key={idx} className="w-full block">
+                                      {line}
+                                      {idx < arr.length - 1 && <br />}
+                                    </span>
+                                  ))}
+                                </span>
+                              </>
+                            ) : (
+                              // For other projects: on mobile, ignore \n and let text wrap naturally; on xl+, respect \n
+                              <>
+                                <span className="xl:hidden">{section.title.replace(/\n/g, ' ')}</span>
+                                <span className="hidden xl:block">
+                                  {section.title.split('\n').map((line, idx, arr) => (
+                                    <span key={idx} className="w-full block">
+                                      {line}
+                                      {idx < arr.length - 1 && <br />}
+                                    </span>
+                                  ))}
+                                </span>
+                              </>
+                            )}
                           </h2>
                         )}
                       </motion.div>
@@ -1423,8 +1550,17 @@ function WorkPageClient({ slug }: WorkPageProps) {
                     );
 
                     return (
-                      <div className="grid grid-cols-2 lg:grid-cols-2 gap-[16px] md:gap-[40px] lg:gap-[40px] xl:gap-[40px]">
-                        {allImages.map((img, globalIdx) => {
+                      <>
+                        <style dangerouslySetInnerHTML={{
+                          __html: `
+                            .row-image {
+                              border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
+                            }
+                            ${getVWBorderRadiusCSS('row-image')}
+                          `
+                        }} />
+                        <div className={`grid ${slugString === 'vw' ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-2'} lg:grid-cols-2 gap-[24px] md:gap-[40px] lg:gap-[40px] xl:gap-[40px]`}>
+                          {allImages.map((img, globalIdx) => {
                           const shouldHaveBorder = img.noBorder === false || (!config.noBorder && img.noBorder !== true);
                           return (
                             <motion.div
@@ -1453,8 +1589,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                                     backdropFilter: 'blur(10px)',
                                     WebkitBackdropFilter: 'blur(10px)',
                                     boxSizing: (slugString as string) === 'vario' ? 'border-box' : 'content-box'
-                                  } : {}),
-                                  borderRadius: (slugString as string) === 'vario' ? 'clamp(18px, 2.2vw, 44px)' : '16px'
+                                  } : {})
                                 }}
                               >
                                 <Image
@@ -1475,7 +1610,8 @@ function WorkPageClient({ slug }: WorkPageProps) {
                             </motion.div>
                           );
                         })}
-                      </div>
+                        </div>
+                      </>
                     );
                   })()}
                 </div>
@@ -1541,8 +1677,10 @@ function WorkPageClient({ slug }: WorkPageProps) {
                   <style dangerouslySetInnerHTML={{
                     __html: `
                       .content-image {
-                        border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                        border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
+                        ${getVWBorderRadiusCSS('content-image')}
                       }
+                      ${getVWBorderRadiusCSS('content-image')}
                     `
                   }} />
                   <motion.div
@@ -1582,8 +1720,10 @@ function WorkPageClient({ slug }: WorkPageProps) {
                   <style dangerouslySetInnerHTML={{
                     __html: `
                       .grid-image {
-                        border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                        border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
+                        ${getVWBorderRadiusCSS('grid-image')}
                       }
+                      ${getVWBorderRadiusCSS('grid-image')}
                     `
                   }} />
                   {section.images.map((img, imgIndex) => (
@@ -1680,8 +1820,26 @@ function WorkPageClient({ slug }: WorkPageProps) {
                     <style dangerouslySetInnerHTML={{
                       __html: `
                         .row-image {
-                          border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                          border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
+                        ${getVWBorderRadiusCSS('row-image')}
                         }
+                        ${slugString === 'vw' ? `
+                        @media (max-width: 639px) {
+                          .row-image {
+                            border-radius: 8px;
+                          }
+                        }
+                        @media (min-width: 640px) and (max-width: 1023px) {
+                          .row-image {
+                            border-radius: 10px;
+                          }
+                        }
+                        @media (min-width: 1024px) {
+                          .row-image {
+                            border-radius: 12px;
+                          }
+                        }
+                        ` : ''}
                       `
                     }} />
                     {orderedImages.map(({ img, rowIdx, colIdx, actualColIdx }, globalIdx) => {
@@ -1775,8 +1933,9 @@ function WorkPageClient({ slug }: WorkPageProps) {
                           <style dangerouslySetInnerHTML={{
                             __html: `
                               .full-width-image {
-                                border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                                border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
                               }
+                              ${getVWBorderRadiusCSS('full-width-image')}
                             `
                           }} />
                           <motion.div
@@ -1831,13 +1990,34 @@ function WorkPageClient({ slug }: WorkPageProps) {
                             </p>
                           )}
                           {section.title && (
-                            <h2 className="font-serif text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] 2xl:text-[48px] text-[var(--color-8)] tracking-[-0.14px] sm:tracking-[-0.16px] md:tracking-[-0.18px] lg:tracking-[-0.20px] xl:tracking-[-0.22px] 2xl:tracking-[-0.24px] leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[55px] 2xl:leading-[60px] ">
-                              {section.title.split('\n').map((line, idx, arr) => (
-                                <span key={idx} className="xl:w-full xl:block">
-                                  {line}
-                                  {idx < arr.length - 1 && <br className="hidden xl:block" />}
-                                </span>
-                              ))}
+                            <h2 className="font-serif text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] 2xl:text-[48px] text-[var(--color-8)] tracking-[-0.14px] sm:tracking-[-0.16px] md:tracking-[-0.18px] lg:tracking-[-0.20px] xl:tracking-[-0.22px] 2xl:tracking-[-0.24px] leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[55px] 2xl:leading-[60px]">
+                              {slugString === 'vw' ? (
+                                // For VW: on mobile, ignore \n and let text wrap naturally; on xl+, respect \n
+                                <>
+                                  <span className="xl:hidden">{section.title.replace(/\n/g, ' ')}</span>
+                                  <span className="hidden xl:block">
+                                    {section.title.split('\n').map((line, idx, arr) => (
+                                      <span key={idx} className="xl:w-full xl:block">
+                                        {line}
+                                        {idx < arr.length - 1 && <br />}
+                                      </span>
+                                    ))}
+                                  </span>
+                                </>
+                              ) : (
+                                // For other projects: on mobile, ignore \n and let text wrap naturally; on xl+, respect \n
+                                <>
+                                  <span className="xl:hidden">{section.title.replace(/\n/g, ' ')}</span>
+                                  <span className="hidden xl:block">
+                                    {section.title.split('\n').map((line, idx, arr) => (
+                                      <span key={idx} className="xl:w-full xl:block">
+                                        {line}
+                                        {idx < arr.length - 1 && <br />}
+                                      </span>
+                                    ))}
+                                  </span>
+                                </>
+                              )}
                             </h2>
                           )}
                         </motion.div>
@@ -1904,8 +2084,9 @@ function WorkPageClient({ slug }: WorkPageProps) {
                             <style dangerouslySetInnerHTML={{
                               __html: `
                                 .row-image {
-                                  border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                                  border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
                                 }
+                                ${getVWBorderRadiusCSS('row-image')}
                               `
                             }} />
                             {allImages.map((img, globalIdx) => {
@@ -2001,13 +2182,34 @@ function WorkPageClient({ slug }: WorkPageProps) {
                                   </p>
                                 )}
                                 {section.title && (
-                                  <h2 className="font-serif text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] 2xl:text-[48px] text-[var(--color-8)] tracking-[-0.14px] sm:tracking-[-0.16px] md:tracking-[-0.18px] lg:tracking-[-0.20px] xl:tracking-[-0.22px] 2xl:tracking-[-0.24px] leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[55px] 2xl:leading-[60px] ">
-                                    {section.title.split('\n').map((line, idx, arr) => (
-                                      <span key={idx} className="xl:w-full xl:block">
-                                        {line}
-                                        {idx < arr.length - 1 && <br className="hidden xl:block" />}
-                                      </span>
-                                    ))}
+                                  <h2 className="font-serif text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] 2xl:text-[48px] text-[var(--color-8)] tracking-[-0.14px] sm:tracking-[-0.16px] md:tracking-[-0.18px] lg:tracking-[-0.20px] xl:tracking-[-0.22px] 2xl:tracking-[-0.24px] leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[55px] 2xl:leading-[60px]">
+                                    {slugString === 'vw' ? (
+                                      // For VW: on mobile, ignore \n and let text wrap naturally; on xl+, respect \n
+                                      <>
+                                        <span className="xl:hidden">{section.title.replace(/\n/g, ' ')}</span>
+                                        <span className="hidden xl:block">
+                                          {section.title.split('\n').map((line, idx, arr) => (
+                                            <span key={idx} className="xl:w-full xl:block">
+                                              {line}
+                                              {idx < arr.length - 1 && <br />}
+                                            </span>
+                                          ))}
+                                        </span>
+                                      </>
+                                    ) : (
+                                      // For other projects: on mobile, ignore \n and let text wrap naturally; on xl+, respect \n
+                                      <>
+                                        <span className="xl:hidden">{section.title.replace(/\n/g, ' ')}</span>
+                                        <span className="hidden xl:block">
+                                          {section.title.split('\n').map((line, idx, arr) => (
+                                            <span key={idx} className="xl:w-full xl:block">
+                                              {line}
+                                              {idx < arr.length - 1 && <br />}
+                                            </span>
+                                          ))}
+                                        </span>
+                                      </>
+                                    )}
                                   </h2>
                                 )}
                               </div>
@@ -2044,8 +2246,9 @@ function WorkPageClient({ slug }: WorkPageProps) {
                               <style dangerouslySetInnerHTML={{
                                 __html: `
                                   .text-image-app-screen {
-                                    border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                                    border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
                                   }
+                                  ${getVWBorderRadiusCSS('text-image-app-screen')}
                                 `
                               }} />
                               <div className="grid grid-cols-2 md:grid-cols-2 gap-[16px] md:gap-[40px] lg:gap-[40px] 2xl:gap-[80px]">
@@ -2137,7 +2340,10 @@ function WorkPageClient({ slug }: WorkPageProps) {
                         const hasSpanningImage = allImages.some(img => img.spanRows);
                         const hasNoBorderCards = allImages.every(img => img.noBorder);
                         const firstRowCount = section.imageRows[0]?.length || 0;
-                        let gridClass = "grid grid-cols-2 lg:grid-cols-2 gap-[16px] md:gap-[40px] lg:gap-[40px] 2xl:gap-[80px]";
+                        // For VW: 1 column on mobile, 2 columns on md+
+                        let gridClass = slugString === 'vw'
+                          ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-[24px] md:gap-[40px] lg:gap-[40px] 2xl:gap-[80px]"
+                          : "grid grid-cols-2 lg:grid-cols-2 gap-[16px] md:gap-[40px] lg:gap-[40px] 2xl:gap-[80px]";
 
                         if (hasSpanningImage) {
                           gridClass = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[40px]";
@@ -2157,8 +2363,25 @@ function WorkPageClient({ slug }: WorkPageProps) {
                               <style dangerouslySetInnerHTML={{
                                 __html: `
                                   .row-image {
-                                    border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                                    border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
                                   }
+                                  ${slugString === 'vw' ? `
+                                  @media (max-width: 639px) {
+                                    .row-image {
+                                      border-radius: 8px;
+                                    }
+                                  }
+                                  @media (min-width: 640px) and (max-width: 1023px) {
+                                    .row-image {
+                                      border-radius: 10px;
+                                    }
+                                  }
+                                  @media (min-width: 1024px) {
+                                    .row-image {
+                                      border-radius: 12px;
+                                    }
+                                  }
+                                  ` : ''}
                                 `
                               }} />
                               {allImages.map((img, globalIdx) => {
@@ -2242,13 +2465,34 @@ function WorkPageClient({ slug }: WorkPageProps) {
                                   </p>
                                 )}
                                 {section.title && (
-                                  <h2 className="font-serif text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] 2xl:text-[48px] text-[var(--color-8)] tracking-[-0.14px] sm:tracking-[-0.16px] md:tracking-[-0.18px] lg:tracking-[-0.20px] xl:tracking-[-0.22px] 2xl:tracking-[-0.24px] leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[55px] 2xl:leading-[60px] ">
-                                    {section.title.split('\n').map((line, idx, arr) => (
-                                      <span key={idx} className="xl:w-full xl:block">
-                                        {line}
-                                        {idx < arr.length - 1 && <br className="hidden xl:block" />}
-                                      </span>
-                                    ))}
+                                  <h2 className="font-serif text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] 2xl:text-[48px] text-[var(--color-8)] tracking-[-0.14px] sm:tracking-[-0.16px] md:tracking-[-0.18px] lg:tracking-[-0.20px] xl:tracking-[-0.22px] 2xl:tracking-[-0.24px] leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[55px] 2xl:leading-[60px]">
+                                    {slugString === 'vw' ? (
+                                      // For VW: on mobile, ignore \n and let text wrap naturally; on xl+, respect \n
+                                      <>
+                                        <span className="xl:hidden">{section.title.replace(/\n/g, ' ')}</span>
+                                        <span className="hidden xl:block">
+                                          {section.title.split('\n').map((line, idx, arr) => (
+                                            <span key={idx} className="xl:w-full xl:block">
+                                              {line}
+                                              {idx < arr.length - 1 && <br />}
+                                            </span>
+                                          ))}
+                                        </span>
+                                      </>
+                                    ) : (
+                                      // For other projects: on mobile, ignore \n and let text wrap naturally; on xl+, respect \n
+                                      <>
+                                        <span className="xl:hidden">{section.title.replace(/\n/g, ' ')}</span>
+                                        <span className="hidden xl:block">
+                                          {section.title.split('\n').map((line, idx, arr) => (
+                                            <span key={idx} className="xl:w-full xl:block">
+                                              {line}
+                                              {idx < arr.length - 1 && <br />}
+                                            </span>
+                                          ))}
+                                        </span>
+                                      </>
+                                    )}
                                   </h2>
                                 )}
                               </div>
@@ -2296,13 +2540,17 @@ function WorkPageClient({ slug }: WorkPageProps) {
                                 </p>
                               )}
                               {section.title && (
-                                <h2 className="font-serif text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] 2xl:text-[48px] text-[var(--color-8)] tracking-[-0.14px] sm:tracking-[-0.16px] md:tracking-[-0.18px] lg:tracking-[-0.20px] xl:tracking-[-0.22px] 2xl:tracking-[-0.24px] leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[55px] 2xl:leading-[60px] ">
-                                  {section.title.split('\n').map((line, idx, arr) => (
-                                    <span key={idx} className="xl:w-full xl:block">
-                                      {line}
-                                      {idx < arr.length - 1 && <br className="hidden xl:block" />}
-                                    </span>
-                                  ))}
+                                <h2 className="font-serif text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] 2xl:text-[48px] text-[var(--color-8)] tracking-[-0.14px] sm:tracking-[-0.16px] md:tracking-[-0.18px] lg:tracking-[-0.20px] xl:tracking-[-0.22px] 2xl:tracking-[-0.24px] leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[55px] 2xl:leading-[60px]">
+                                  {/* On mobile, ignore \n and let text wrap naturally; on xl+, respect \n */}
+                                  <span className="xl:hidden">{section.title.replace(/\n/g, ' ')}</span>
+                                  <span className="hidden xl:block">
+                                    {section.title.split('\n').map((line, idx, arr) => (
+                                      <span key={idx} className="xl:w-full xl:block">
+                                        {line}
+                                        {idx < arr.length - 1 && <br />}
+                                      </span>
+                                    ))}
+                                  </span>
                                 </h2>
                               )}
                             </motion.div>
@@ -2368,12 +2616,14 @@ function WorkPageClient({ slug }: WorkPageProps) {
                       )}
                     </motion.div>
                   ) : section.images && section.images.length > 0 && !section.centeredLayout && !(slugString === 'vario') && (
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-[16px] md:gap-[40px] lg:gap-[40px] 2xl:gap-[80px]">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-[24px] md:gap-[40px] lg:gap-[40px] 2xl:gap-[80px]">
                       <style dangerouslySetInnerHTML={{
                         __html: `
                         .text-image-container {
-                          border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                          border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
+                        ${getVWBorderRadiusCSS('text-image-container')}
                         }
+                        ${getVWBorderRadiusCSS('text-image-container')}
                       `
                       }} />
                       {section.images?.map((img, imgIndex) => (
@@ -2412,7 +2662,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                             />
                           </div>
                           {img.caption && (
-                            <p className="font-sans text-[14px] md:text-[15px] lg:text-[16px] text-[var(--color-8)] font-medium tracking-[-0.21px] md:tracking-[-0.225px] lg:tracking-[-0.24px] leading-[23px] md:leading-[25px] lg:leading-[26px] text-center">
+                            <p className="font-sans text-[14px] md:text-[15px] lg:text-[16px] text-[var(--color-8)] font-medium tracking-[-0.21px] md:tracking-[-0.225px] lg:tracking-[-0.24px] leading-[23px] md:leading-[25px] lg:leading-[26px] text-left md:text-center">
                               {img.caption}
                             </p>
                           )}
@@ -2434,7 +2684,10 @@ function WorkPageClient({ slug }: WorkPageProps) {
 
                     // Determine grid layout based on number of images in first row
                     const firstRowCount = section.imageRows[0]?.length || 0;
-                    let gridClass = "grid grid-cols-2 lg:grid-cols-2 gap-[16px] lg:gap-[40px] xl:gap-[40px]";
+                    // For VW: 1 column on mobile, 2 columns on md+
+                    let gridClass = slugString === 'vw' 
+                      ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-[16px] lg:gap-[40px] xl:gap-[40px]"
+                      : "grid grid-cols-2 lg:grid-cols-2 gap-[16px] lg:gap-[40px] xl:gap-[40px]";
 
                     if (hasSpanningImage) {
                       gridClass = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[40px]";
@@ -2455,8 +2708,9 @@ function WorkPageClient({ slug }: WorkPageProps) {
                         <style dangerouslySetInnerHTML={{
                           __html: `
                             .row-image {
-                              border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                              border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
                             }
+                            ${getVWBorderRadiusCSS('row-image')}
                           `
                         }} />
                         {allImages.map((img, globalIdx) => {
@@ -2531,12 +2785,14 @@ function WorkPageClient({ slug }: WorkPageProps) {
 
                   {/* Multiple Full Width Images */}
                   {section.fullWidthImages && section.fullWidthImages.length > 0 && (
-                    <div className="flex flex-col gap-[60px] lg:gap-[80px]">
+                    <div className="flex flex-col gap-[16px] lg:gap-[80px]">
                       <style dangerouslySetInnerHTML={{
                         __html: `
                           .full-width-image-multi {
-                            border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                            border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
+                        ${getVWBorderRadiusCSS('full-width-image-multi')}
                           }
+                          ${getVWBorderRadiusCSS('full-width-image-multi')}
                         `
                       }} />
                       {section.fullWidthImages.map((img, imgIndex) => (
@@ -2621,7 +2877,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                   {/* Full Width Image and Image Rows */}
                   {section.fullWidthImage && !section.imageFirst && (
                     <div
-                      className="flex flex-col gap-[60px] lg:gap-[80px]"
+                      className="flex flex-col gap-[16px] lg:gap-[80px]"
                       style={section.fullWidthImageMaxWidth ? {
                         maxWidth: section.fullWidthImageMaxWidth,
                         margin: '0 auto'
@@ -2630,7 +2886,8 @@ function WorkPageClient({ slug }: WorkPageProps) {
                       <style dangerouslySetInnerHTML={{
                         __html: `
                           .full-width-image {
-                            border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                            border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
+                        ${getVWBorderRadiusCSS('full-width-image')}
                           }
                         `
                       }} />
@@ -2722,8 +2979,8 @@ function WorkPageClient({ slug }: WorkPageProps) {
 
                         // Determine grid layout
                         const gridClass = hasSpanningImage
-                          ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[60px] lg:gap-[40px] 2xl:gap-[80px]"
-                          : "grid grid-cols-1 lg:grid-cols-2 gap-[60px] lg:gap-[40px] 2xl:gap-[80px]";
+                          ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[16px] lg:gap-[40px] 2xl:gap-[80px]"
+                          : "grid grid-cols-1 lg:grid-cols-2 gap-[16px] lg:gap-[40px] 2xl:gap-[80px]";
 
                         return (
                           <div
@@ -2736,8 +2993,9 @@ function WorkPageClient({ slug }: WorkPageProps) {
                             <style dangerouslySetInnerHTML={{
                               __html: `
                                 .row-image {
-                                  border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                                  border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
                                 }
+                                ${getVWBorderRadiusCSS('row-image')}
                               `
                             }} />
                             {allImages.map((img, globalIdx) => {
@@ -2893,7 +3151,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                               className="font-serif text-[48px] sm:text-[56px] md:text-[64px] lg:text-[72px] xl:text-[80px] text-[var(--color-8)] tracking-[-0.48px] sm:tracking-[-0.56px] md:tracking-[-0.64px] lg:tracking-[-0.72px] xl:tracking-[-0.8px] leading-[1]"
                             />
                             <div className="flex flex-col items-center gap-0">
-                              <p className="font-sans text-[20px] text-[var(--color-8)] font-medium tracking-[-0.3px] leading-[32px] text-center">
+                              <p className="font-sans text-[18px] md:text-[20px] text-[var(--color-8)] font-medium tracking-[-0.3px] leading-[32px] text-center">
                                 {metric.label}
                               </p>
                               {metric.sublabel && (
@@ -2927,7 +3185,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                               className="font-serif text-[48px] sm:text-[56px] md:text-[64px] lg:text-[72px] xl:text-[80px] text-[var(--color-8)] tracking-[-0.48px] sm:tracking-[-0.56px] md:tracking-[-0.64px] lg:tracking-[-0.72px] xl:tracking-[-0.8px] leading-[1]"
                             />
                             <div className="flex flex-col items-center gap-0">
-                              <p className="font-sans text-[20px] text-[var(--color-8)] font-medium tracking-[-0.3px] leading-[32px] text-center">
+                              <p className="font-sans text-[18px] md:text-[20px] text-[var(--color-8)] font-medium tracking-[-0.3px] leading-[32px] text-center">
                                 {section.metrics[2].label}
                               </p>
                               {section.metrics[2].sublabel && (
@@ -2962,7 +3220,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
                             className="font-serif text-[48px] sm:text-[56px] md:text-[64px] lg:text-[72px] xl:text-[80px] text-[var(--color-8)] tracking-[-0.48px] sm:tracking-[-0.56px] md:tracking-[-0.64px] lg:tracking-[-0.72px] xl:tracking-[-0.8px] leading-[1]"
                           />
                           <div className="flex flex-col items-center gap-[4px]">
-                            <p className="font-sans text-[16px] md:text-[17px] lg:text-[18px] text-[var(--color-8)] font-normal tracking-[-0.24px] md:tracking-[-0.255px] lg:tracking-[-0.27px] leading-[26px] md:leading-[28px] lg:leading-[30px] text-center">
+                            <p className="font-sans text-[18px] md:text-[20px] text-[var(--color-8)] font-medium tracking-[-0.3px] leading-[32px] text-center">
                               {section.metrics[2].label}
                             </p>
                             {section.metrics[2].sublabel && (
@@ -2999,13 +3257,17 @@ function WorkPageClient({ slug }: WorkPageProps) {
                             </p>
                           )}
                           {section.title && (
-                            <h2 className="font-serif text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] 2xl:text-[48px] text-[var(--color-8)] tracking-[-0.14px] sm:tracking-[-0.16px] md:tracking-[-0.18px] lg:tracking-[-0.20px] xl:tracking-[-0.22px] 2xl:tracking-[-0.24px] leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[55px] 2xl:leading-[60px] ">
-                              {section.title.split('\n').map((line, idx, arr) => (
-                                <span key={idx}>
-                                  {line}
-                                  {idx < arr.length - 1 && <br className="hidden xl:block" />}
-                                </span>
-                              ))}
+                            <h2 className="font-serif text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] 2xl:text-[48px] text-[var(--color-8)] tracking-[-0.14px] sm:tracking-[-0.16px] md:tracking-[-0.18px] lg:tracking-[-0.20px] xl:tracking-[-0.22px] 2xl:tracking-[-0.24px] leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[55px] 2xl:leading-[60px]">
+                              {/* On mobile, ignore \n and let text wrap naturally; on xl+, respect \n */}
+                              <span className="xl:hidden">{section.title.replace(/\n/g, ' ')}</span>
+                              <span className="hidden xl:block">
+                                {section.title.split('\n').map((line, idx, arr) => (
+                                  <span key={idx}>
+                                    {line}
+                                    {idx < arr.length - 1 && <br />}
+                                  </span>
+                                ))}
+                              </span>
                             </h2>
                           )}
                         </motion.div>
@@ -3159,13 +3421,17 @@ function WorkPageClient({ slug }: WorkPageProps) {
                         </p>
                       )}
                       {section.title && (
-                        <h2 className="font-serif text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] 2xl:text-[48px] text-[var(--color-8)] tracking-[-0.14px] sm:tracking-[-0.16px] md:tracking-[-0.18px] lg:tracking-[-0.20px] xl:tracking-[-0.22px] 2xl:tracking-[-0.24px] leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[55px] 2xl:leading-[60px] ">
-                          {section.title.split('\n').map((line, idx, arr) => (
-                            <span key={idx} className="w-full block">
-                              {line}
-                              {idx < arr.length - 1 && <br className="hidden xl:block" />}
-                            </span>
-                          ))}
+                        <h2 className="font-serif text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] 2xl:text-[48px] text-[var(--color-8)] tracking-[-0.14px] sm:tracking-[-0.16px] md:tracking-[-0.18px] lg:tracking-[-0.20px] xl:tracking-[-0.22px] 2xl:tracking-[-0.24px] leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[55px] 2xl:leading-[60px]">
+                          {/* On mobile, ignore \n and let text wrap naturally; on xl+, respect \n */}
+                          <span className="xl:hidden">{section.title.replace(/\n/g, ' ')}</span>
+                          <span className="hidden xl:block">
+                            {section.title.split('\n').map((line, idx, arr) => (
+                              <span key={idx} className="w-full block">
+                                {line}
+                                {idx < arr.length - 1 && <br />}
+                              </span>
+                            ))}
+                          </span>
                         </h2>
                       )}
                     </motion.div>
@@ -3202,7 +3468,8 @@ function WorkPageClient({ slug }: WorkPageProps) {
                       <style dangerouslySetInnerHTML={{
                         __html: `
                           .process-image {
-                            border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '12px' : 'clamp(16px, 1.5vw, 16px)'};
+                            border-radius: ${slugString === 'vario' ? 'clamp(22px, 4vw, 48px)' : slugString === 'vw' ? '8px' : 'clamp(8px, 1.5vw, 16px)'};
+                        ${getVWBorderRadiusCSS('summary-row-image')}
                           }
                         `
                       }} />
@@ -3294,13 +3561,17 @@ function WorkPageClient({ slug }: WorkPageProps) {
                         </p>
                       )}
                       {section.title && (
-                        <h2 className="font-serif text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] 2xl:text-[48px] text-[var(--color-8)] tracking-[-0.14px] sm:tracking-[-0.16px] md:tracking-[-0.18px] lg:tracking-[-0.20px] xl:tracking-[-0.22px] 2xl:tracking-[-0.24px] leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[55px] 2xl:leading-[60px] ">
-                          {section.title.split('\n').map((line, idx, arr) => (
-                            <span key={idx} className="xl:w-full xl:block">
-                              {line}
-                              {idx < arr.length - 1 && <br className="hidden xl:block" />}
-                            </span>
-                          ))}
+                        <h2 className="font-serif text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] 2xl:text-[48px] text-[var(--color-8)] tracking-[-0.14px] sm:tracking-[-0.16px] md:tracking-[-0.18px] lg:tracking-[-0.20px] xl:tracking-[-0.22px] 2xl:tracking-[-0.24px] leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[55px] 2xl:leading-[60px]">
+                          {/* On mobile, ignore \n and let text wrap naturally; on xl+, respect \n */}
+                          <span className="xl:hidden">{section.title.replace(/\n/g, ' ')}</span>
+                          <span className="hidden xl:block">
+                            {section.title.split('\n').map((line, idx, arr) => (
+                              <span key={idx} className="xl:w-full xl:block">
+                                {line}
+                                {idx < arr.length - 1 && <br />}
+                              </span>
+                            ))}
+                          </span>
                         </h2>
                       )}
                     </motion.div>
@@ -3337,7 +3608,17 @@ function WorkPageClient({ slug }: WorkPageProps) {
                       <style dangerouslySetInnerHTML={{
                         __html: `
                           .design-branding-image {
-                            border-radius: 12px;
+                            border-radius: 8px;
+                          }
+                          @media (min-width: 768px) {
+                            .design-branding-image {
+                              border-radius: 10px;
+                            }
+                          }
+                          @media (min-width: 1024px) {
+                            .design-branding-image {
+                              border-radius: 12px;
+                            }
                           }
                           .animated-scroll-container {
                             overflow: hidden;
@@ -3590,13 +3871,17 @@ function WorkPageClient({ slug }: WorkPageProps) {
                           </p>
                         )}
                         {section.title && (
-                          <h2 className="font-serif text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] 2xl:text-[48px] text-[var(--color-8)] tracking-[-0.14px] sm:tracking-[-0.16px] md:tracking-[-0.18px] lg:tracking-[-0.20px] xl:tracking-[-0.22px] 2xl:tracking-[-0.24px] leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[55px] 2xl:leading-[60px] ">
-                            {section.title.split('\n').map((line, idx, arr) => (
-                              <span key={idx} className="w-full block">
-                                {line}
-                                {idx < arr.length - 1 && <br className="hidden xl:block" />}
-                              </span>
-                            ))}
+                          <h2 className="font-serif text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] 2xl:text-[48px] text-[var(--color-8)] tracking-[-0.14px] sm:tracking-[-0.16px] md:tracking-[-0.18px] lg:tracking-[-0.20px] xl:tracking-[-0.22px] 2xl:tracking-[-0.24px] leading-[35px] sm:leading-[40px] md:leading-[45px] lg:leading-[50px] xl:leading-[55px] 2xl:leading-[60px]">
+                            {/* On mobile, ignore \n and let text wrap naturally; on xl+, respect \n */}
+                            <span className="xl:hidden">{section.title.replace(/\n/g, ' ')}</span>
+                            <span className="hidden xl:block">
+                              {section.title.split('\n').map((line, idx, arr) => (
+                                <span key={idx} className="w-full block">
+                                  {line}
+                                  {idx < arr.length - 1 && <br />}
+                                </span>
+                              ))}
+                            </span>
                           </h2>
                         )}
                       </div>

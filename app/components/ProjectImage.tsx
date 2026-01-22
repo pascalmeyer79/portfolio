@@ -93,6 +93,13 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
                         height: calc((240px - ${offset * (240 / baseHeight)}px));
                         width: calc((240px - ${offset * (240 / baseHeight)}px) * ${widthRatio});
                       }
+                      ${projectSlug === 'vw' && !isAppScreen ? `
+                      @media (max-width: 767px) {
+                        .${uniqueId} {
+                          border-radius: 3px;
+                        }
+                      }
+                      ` : ''}
                       @media (min-width: 768px) {
                         .${uniqueId} {
                           height: calc((320px - ${offset * (320 / baseHeight)}px));
@@ -147,6 +154,13 @@ export const ProjectImage: React.FC<ProjectImageProps> = ({
               .project-image-container {
                 border-radius: ${projectSlug === 'vario' ? 'clamp(22px, 4vw, 48px)' : (isAppScreen ? 'clamp(12px, 1.5vw, 32px)' : 'clamp(6px, 0.75vw, 16px)')};
               }
+              ${projectSlug === 'vw' && !isAppScreen ? `
+              @media (max-width: 767px) {
+                .project-image-container {
+                  border-radius: 3px;
+                }
+              }
+              ` : ''}
             `
           }} />
           <div

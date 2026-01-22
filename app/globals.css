@@ -30,6 +30,22 @@
     -moz-user-select: none;
     -ms-user-select: none;
   }
+
+  /* Ensure select elements are interactive */
+  select {
+    user-select: auto;
+    -webkit-user-select: auto;
+    -moz-user-select: auto;
+    -ms-user-select: auto;
+    pointer-events: auto;
+  }
+
+  select option {
+    user-select: auto;
+    -webkit-user-select: auto;
+    -moz-user-select: auto;
+    -ms-user-select: auto;
+  }
 }
 
 @layer base {
