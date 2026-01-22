@@ -1,6 +1,6 @@
 "use client";
 
-import React, { use, useMemo } from "react";
+import React, { use, useMemo, useCallback } from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -16,9 +16,22 @@ import { useViewport } from "../../utils/useViewport";
 
 const AnimatedScrollImage = ({ src, alt }: { src: string; alt: string }) => {
   const contentRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     if (!contentRef.current) return;
+    
+    // Disable animation on mobile for better performance
+    if (isMobile) return;
 
     const element = contentRef.current;
     let startTime: number | null = null;
@@ -63,7 +76,7 @@ const AnimatedScrollImage = ({ src, alt }: { src: string; alt: string }) => {
     return () => {
       cancelAnimationFrame(animationFrame);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <div className="animated-scroll-container">
@@ -666,12 +679,12 @@ const WORKS: Record<string, WorkConfig> = {
   },
 };
 
+// Removed blur filter for better mobile performance
 const fadeInUpVariants = {
-  hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: {
       duration: 0.6,
       ease: [0.22, 0.61, 0.36, 1],
@@ -698,7 +711,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
   };
 
   // Helper function to get VW-specific responsive border-radius CSS with media queries
-  const getVWBorderRadiusCSS = (className: string): string => {
+  const getVWBorderRadiusCSS = useCallback((className: string): string => {
     if (slugString !== 'vw') return '';
     return `
       @media (max-width: 639px) {
@@ -717,7 +730,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
         }
       }
     `;
-  };
+  }, [slugString]);
 
   // Base border radius for Vario: 32px
   const baseBorderRadius = slugString === 'vario' ? 32 : 16;
@@ -749,7 +762,7 @@ function WorkPageClient({ slug }: WorkPageProps) {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
-  // Scroll animation for hero container
+  // Scroll animation for hero container - disabled on mobile for better performance
   const { scrollYProgress } = useScroll({
     target: heroContainerRef,
     offset: ["start end", "start start"]
@@ -758,7 +771,8 @@ function WorkPageClient({ slug }: WorkPageProps) {
   // For VW: animate bottom border-radius from 12px to 0 on scroll
   // Initial values set via CSS (8px mobile, 10px tablet, 12px desktop)
   // Animation will override CSS values when scrolling
-  const heroBorderRadiusBottom = slugString === 'vw' 
+  // Disabled on mobile for better performance
+  const heroBorderRadiusBottom = slugString === 'vw' && screenSize !== 'mobile'
     ? useTransform(scrollYProgress, [0, 1], [12, 0])
     : undefined;
 

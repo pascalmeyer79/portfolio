@@ -5,23 +5,23 @@ import { ReactNode } from "react";
 import { useViewport } from "../utils/useViewport";
 
 // Headline word-by-word fade in from bottom
+// Removed blur filter for better mobile performance
 const headlineWordVariants = {
-  hidden: { y: 20, opacity: 0, filter: "blur(10px)" },
+  hidden: { y: 20, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
-    filter: "blur(0px)",
     transition: { duration: 0.6, ease: [0.22, 0.61, 0.36, 1] },
   },
 };
 
 // Paragraph fade in from bottom
+// Removed blur filter for better mobile performance
 const paragraphVariants = {
-  hidden: { y: 20, opacity: 0, filter: "blur(10px)" },
+  hidden: { y: 20, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
-    filter: "blur(0px)",
     transition: { duration: 0.6, ease: [0.22, 0.61, 0.36, 1] },
   },
 };

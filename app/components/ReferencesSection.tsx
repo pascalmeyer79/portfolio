@@ -65,21 +65,19 @@ const LOGOS: Logo[] = [
 
 // Animation variants
 const headlineWordVariants = {
-  hidden: { y: 20, opacity: 0, filter: "blur(10px)" },
+  hidden: { y: 20, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
-    filter: "blur(0px)",
     transition: { duration: 0.6, ease: [0.22, 0.61, 0.36, 1] },
   },
 };
 
 const paragraphVariants = {
-  hidden: { y: 20, opacity: 0, filter: "blur(10px)" },
+  hidden: { y: 20, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
-    filter: "blur(0px)",
     transition: { duration: 0.6, ease: [0.22, 0.61, 0.36, 1], delay: 0.1 },
   },
 };

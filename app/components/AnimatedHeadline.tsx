@@ -21,16 +21,15 @@ const containerVariants = (staggerDelay: number, delayChildren: number) => ({
   },
 });
 
+// Removed blur filter for better mobile performance
 const wordVariants = {
   hidden: {
     y: 20,
     opacity: 0,
-    filter: "blur(10px)",
   },
   visible: {
     y: 0,
     opacity: 1,
-    filter: "blur(0px)",
     transition: {
       duration: 0.6,
       ease: [0.22, 0.61, 0.36, 1],
